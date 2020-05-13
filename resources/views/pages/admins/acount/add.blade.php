@@ -11,9 +11,9 @@
                 </div>
                 <div class="form-group">
                     <label for="type" class="control-label">Loại Tk</label>
-                    <select id="type" name="type">
-                        <option value="0">DN</option>
-                        <option value="1" selected>SV</option>
+                    <select id="type" name="type" class="form-control pull-right">
+                        <option value="0" selected>Sinh viên</option>
+                        <option value="1">Doanh nghiệp</option>
                     </select>
                 </div>   
                 <div class="form-group">
