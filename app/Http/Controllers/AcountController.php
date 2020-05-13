@@ -26,7 +26,7 @@ class AcountController extends Controller
         $acount = new Acount();
         $acount->code = $request->get('code');
         $acount->type = $request->get('type');
-        $city->save();
+        $acount->save();
         return redirect('acount')->with('success', 'Thêm thành công');
     }
 

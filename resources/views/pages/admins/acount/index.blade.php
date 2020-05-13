@@ -7,7 +7,7 @@
 </style>
 <div id="page-wrapper">
     @if($message = Session::get('success'))
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success" role="alert" id="showMessage">
             <p>{{$message}}</p>
             <p class="mb-0"></p>
         </div>
