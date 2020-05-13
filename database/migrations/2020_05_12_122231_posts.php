@@ -39,6 +39,7 @@ class Posts extends Migration
                     ->nullable()
                     ->comment('ngày xóa tạm');
                     // Set ko trùng
+                    $table->unique(['code']);
                 });
             DB::statement("ALTER TABLE `acounts` comment 'Thông tin bảng tài khoản'");
         }

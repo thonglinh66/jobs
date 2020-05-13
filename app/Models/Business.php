@@ -6,19 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Business extends Model
 {
-    protected $table = 'posts';
+    protected $table = 'business';
 
-    protected $primaryKey = 'code';
+    protected $primaryKey = 'id';
 
-    protected $keyType = 'string';
+    protected $keyType = 'integer';
 
     protected $fillable = [
+        'id',
         'code',
         'name',
         'address',
+        'decription',
         'mail',
         'phone',
         'website',
+        'facebook',
+        'twitter',
         'image',
         'created_at',
         'updated_at',

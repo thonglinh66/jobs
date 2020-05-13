@@ -39,5 +39,5 @@ Route::prefix('business')->group(function () {
     // Route::post('/add_submit', 'AcountController@add_submit')->name('acount.add_submit');
     // Route::get('/edit/{id}', 'AcountController@edit')->name('acount.edit');
     Route::get('/upload', 'BusinessController@upload')->name('business.upload');
-    // Route::post('/upload', "BusinessController@store")->name('acount.delete');
+    Route::post('/uploadpost', 'BusinessController@store')->name('addinfor');
 });
