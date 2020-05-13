@@ -1,0 +1,64 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.view{
+    width: 80%;
+    margin-left: 9.8%;
+    background-color: white;
+    height: auto;
+    border: 1px solid grey;
+}
+.navigation  li a{
+    color: rgb(87, 82, 82);
+    font-weight: bold;
+}
+
+.navigation  li {
+    float: left;
+    padding: 10px 30px ;
+}
+ul li{
+    list-style-type: none;
+}
+.active_view{
+    background: white;
+    position: relative;
+    height: 63px;
+    margin-bottom: -10px;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    border-top: 2px solid green;
+    top: -5px;
+}
+.navigation  .active_view a{
+    color: green;
+}
+.full { 
+    display: inline-block;
+    width: 100%;
+    height: auto;   
+    background-color:rgba(197, 190, 190, 0.705) ;
+}
+ a:hover{
+    text-decoration: none;
+    color: none;
+}
+.headline ,.paragraph,.panel-title{
+    padding:15px 10px;
+}
+.employer-skills li{
+    display: inline;
+    padding: 5px 10px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    float: left;
+    margin-left:1%;
+}
+.employer-skills li:first-child{
+    margin-left: 0px;
+}
+.employer-skills {
+    padding: 15px 10px;
+}
