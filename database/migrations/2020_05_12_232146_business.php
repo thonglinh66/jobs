@@ -15,7 +15,8 @@ class Business extends Migration
     {
         if (!Schema::hasTable('business')) {
             Schema::create('business', function (Blueprint $table) {
-                $table->string('code')->comment('mã công ty');
+                $table->increments('id')->comment('id');
+                $table->string('code')->comment('mã công ty')->nullable();
                 $table->string('name')->comment('tên công ty');
                 $table->string('address')->comment('vị trí');
                 $table->string('decription')->comment('mô tả');

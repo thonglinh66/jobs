@@ -27,7 +27,6 @@ Route::prefix('acount')->group(function () {
 });
 Route::prefix('home')->group(function () {
     Route::get('/', 'HomeController@index')->name('post.index');
-    Route::get('/inforpost', "HomeController@post");
     // Route::get('/add', 'AcountController@add')->name('acount.add');
     // Route::post('/add_submit', 'AcountController@add_submit')->name('acount.add_submit');
     // Route::get('/edit/{id}', 'AcountController@edit')->name('acount.edit');
@@ -38,7 +37,9 @@ Route::prefix('business')->group(function () {
     Route::get('/', 'BusinessController@index')->name('business.index');
     // Route::get('/add', 'AcountController@add')->name('acount.add');
     // Route::post('/add_submit', 'AcountController@add_submit')->name('acount.add_submit');
-   // Route::get('/edit/{id}', 'AcountController@edit')->name('acount.edit');
+    Route::get('/login', 'BusinessController@login')->name('acount.edit');
     Route::get('/upload', 'BusinessController@upload')->name('business.upload');
-    Route::post('/uploadpost', "BusinessController@store")->name('addinfor');
+    Route::post('/uploadpost', 'BusinessController@store')->name('addinfor');
 });
+Route::get('/Login', 'LoginController@getAuthLogin');
+Route::post('/Login', 'LoginController@postAuthLogin')->name('login');

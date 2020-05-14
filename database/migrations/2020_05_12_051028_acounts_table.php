@@ -17,6 +17,7 @@ class AcountsTable extends Migration
             Schema::create('acounts', function (Blueprint $table) {
                 $table->increments('id')->comment('id');
                 $table->string('code')->comment('mã sinh viên');
+                $table->string('password')->comment('mật khẩu');
                 $table->integer('type')->comment('loại tài khoản');
 
                 // log time
