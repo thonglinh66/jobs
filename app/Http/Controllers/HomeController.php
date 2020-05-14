@@ -14,4 +14,11 @@ class HomeController extends Controller
 
         return view('pages.users.post.index', compact('data'));
     }
+    public function post ()
+    {
+        
+        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('*')->get();
+
+        return view('pages.users.post.infor_post', compact('data'));
+    }
 }
