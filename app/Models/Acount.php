@@ -15,6 +15,7 @@ class Acount extends Model
     protected $fillable = [
         'id',
         'code',
+        'password',
         'type',
         'created_at',
         'updated_at',
