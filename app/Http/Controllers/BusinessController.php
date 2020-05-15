@@ -11,8 +11,9 @@ class BusinessController extends Controller
 {
     public function index ($id)
     {
-        $data = DB::table('business')->where('code',$id);
-        return view('pages.business.infor.business', compact('data'));
+        $language = DB::table('business')->join('languages','business.code','=','languages.code')->where('business.code','=',$id)->get();
+        $data = Business::where('code',$id)->first();
+        return view('pages.business.infor.business', compact('data','language'));
     }
     public function upload ()
     {
