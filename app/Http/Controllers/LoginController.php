@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 
 
 class LoginController extends Controller
@@ -18,11 +18,18 @@ class LoginController extends Controller
         ];
         // dd(Auth::attempt($arr));
         if (Auth::attempt($arr)) {
-            return view('pages.business.infor.business');
+            $request->session()->put('user', $request->username);
+            $id = $request->session()->get('user');
+            return redirect('business/'.$id);
             //  
         }else{
-            return view('pages.login');  
+            return view('pages.login')->with('fails','Đăng nhập thất bại');  
             // dd('thất bại');   
         }
+    }
+    public function postAuthLogout(Request $request){
+        Auth::logout();
+        return redirect('login');
+        
     }
 }

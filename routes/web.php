@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,13 +35,18 @@ Route::prefix('home')->group(function () {
     // Route::post('/update/{id}', 'AcountController@update')->name('acount.update');
     // Route::post('/delete/{id}', "AcountController@delete")->name('acount.delete');
 });
-Route::prefix('business')->group(function () {
-    Route::get('/', 'BusinessController@index')->name('business.index');// maked 
-    // Route::get('/add', 'AcountController@add')->name('acount.add');
-    // Route::post('/add_submit', 'AcountController@add_submit')->name('acount.add_submit');
-    Route::get('/login', 'BusinessController@login')->name('acount.edit');
-    Route::get('/upload', 'BusinessController@upload')->name('business.upload');// maked 
-    Route::post('/uploadpost', 'BusinessController@store')->name('addinfor');
+Auth::routes();
+Route::group(['middleware' => ['checkLogin']], function () {
+    Route::prefix('business')->group(function () {
+        Route::get('/{id}', 'BusinessController@index')->name('business.index');
+        // Route::get('/add', 'AcountController@add')->name('acount.add');
+        // Route::post('/add_submit', 'AcountController@add_submit')->name('acount.add_submit');
+        Route::get('/upload', 'BusinessController@upload')->name('business.upload');
+        Route::post('/uploadpost', 'BusinessController@store')->name('addinfor');
+    });
 });
-Route::get('/Login', 'LoginController@getAuthLogin');// maked 
-Route::post('/Login', 'LoginController@postAuthLogin')->name('login');
+// Route::get('/business', 'BusinessController@index')->middleware('checkLogin');
+Auth::routes();
+Route::get('/login', 'LoginController@getAuthLogin')->middleware('checkUser');
+Route::post('/login', 'LoginController@postAuthLogin')->name('login');
+Route::get('/logout', 'LoginController@postAuthLogout')->name('logout');
