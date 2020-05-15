@@ -35,7 +35,14 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6">
+         
             <h2 class="mb-4">Đăng nhập</h2>
+            @if(isset($fails))
+              <div class="alert alert-success" role="alert" id="showMessage">
+                  <p>{{$fails}}</p>
+                  <p class="mb-0"></p>
+              </div>
+           @endif
             <form action="{{ route('login') }}" class="p-4 border rounded" method="post">
             @csrf
               <div class="row form-group">

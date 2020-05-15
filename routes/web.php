@@ -38,6 +38,7 @@ Route::prefix('home')->group(function () {
 Auth::routes();
 Route::group(['middleware' => ['checkLogin']], function () {
     Route::prefix('business')->group(function () {
+        Route::get('/', 'BusinessController@index')->middleware('checkUser');
         Route::get('/{id}', 'BusinessController@index')->name('business.index');
         // Route::get('/add', 'AcountController@add')->name('acount.add');
         // Route::post('/add_submit', 'AcountController@add_submit')->name('acount.add_submit');
