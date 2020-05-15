@@ -5,14 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Business;
 use Illuminate\Support\Str;
+use DB;
 
 class BusinessController extends Controller
 {
-    public function index ()
+    public function index ($id)
     {
-        
-        $data = Business::all();
-
+        $data = DB::table('business')->where('code',$id);
         return view('pages.business.infor.business', compact('data'));
     }
     public function upload ()
