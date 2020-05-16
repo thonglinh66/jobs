@@ -15,12 +15,11 @@ class BusinessController extends Controller
         $data = Business::where('code',$id)->first();
         return view('pages.business.infor.business', compact('data','language'));
     }
-    public function upload ()
-    {
-
-        return view('pages.business.infor.upload') ;
+    public function upload ($id)
+    {    $data = Business::where('code',$id)->first();
+        return view('pages.business.infor.upload',compact('data')) ;
     }
-    public function store (Request $request)
+    public function store (Request $request,$id)
     {
         $img = $request->file('Img');
         $path = public_path('UserView/images');
@@ -28,6 +27,7 @@ class BusinessController extends Controller
         $img->move($path,$name);
 
         $business = new Business();
+        $business->code = $id;
         $business->name = $request->get('name');
         $business->address = $request->get('adress');
         $business->decription= $request->get('description');
