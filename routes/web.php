@@ -28,7 +28,7 @@ Route::prefix('home')->group(function () {
     Route::get('/', 'HomeController@index')->name('post.index');// maked 
     Route::get('/inforpost', 'HomeController@post')->name('home.inforpost');// maked 
     Route::get('/about', 'HomeController@about')->name('home.about');
-    Route::get('/jobsingle', 'HomeController@job-single')->name('home.jobsingle');
+    Route::get('/jobsingle/{id}', 'HomeController@jobsingle')->name('home.jobsingle');
     Route::get('/contact', 'HomeController@contact')->name('home.contact');
     // Route::post('/add_submit', 'AcountController@add_submit')->name('acount.add_submit');
     // Route::get('/edit/{id}', 'AcountController@edit')->name('acount.edit');
