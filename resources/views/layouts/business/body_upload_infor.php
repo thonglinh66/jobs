@@ -12,7 +12,7 @@
         </div>
         <div class="row mb-5">
           <div class="col-lg-12">
-            <form action="{{route('addinfor')}}" class="p-4 p-md-5 border rounded" method="post" enctype="multipart/form-data">
+            <form action="{{route('addinfor'),$data->code}}" class="p-4 p-md-5 border rounded" method="post" enctype="multipart/form-data">
               @csrf
               <h3 class="text-black my-5 border-bottom pb-2">Thông tin</h3>
               <div class="form-group">

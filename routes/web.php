@@ -42,8 +42,8 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/{id}', 'BusinessController@index')->name('business.index');
         // Route::get('/add', 'AcountController@add')->name('acount.add');
         // Route::post('/add_submit', 'AcountController@add_submit')->name('acount.add_submit');
-        Route::get('/upload', 'BusinessController@upload')->name('business.upload');
-        Route::post('/uploadpost', 'BusinessController@store')->name('addinfor');
+        Route::get('/upload/{id}', 'BusinessController@upload')->name('business.upload');
+        Route::post('/upload/{id}', 'BusinessController@store')->name('addinfor');
     });
 });
 // Route::get('/business', 'BusinessController@index')->middleware('checkLogin');

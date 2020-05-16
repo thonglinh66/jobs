@@ -8,7 +8,7 @@
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
               <li><a href="{{route('business.index', $data->code)}}" class="nav-link active">Trang Chủ</a></li>
               <li><a href="{{route('home.about')}}">Đăng bài</a></li>
-              <li><a href="{{route('business.upload')}}">Cập nhật thông tin</a></li>
+              <li><a href="{{route('business.upload',$data->code)}}">Cập nhật thông tin</a></li>
               <!-- <li class="has-children">
                 <a href="job-listings.html">Job Listings</a>
                 <ul class="dropdown">
