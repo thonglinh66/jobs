@@ -13,7 +13,9 @@ class BusinessController extends Controller
     {
         $language = DB::table('business')->join('languages','business.code','=','languages.code')->where('business.code','=',$id)->get();
         $data = Business::where('code',$id)->first();
-        return view('pages.business.infor.business', compact('data','language'));
+        $datacount = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->get();
+        $datapost = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->paginate(5);
+        return view('pages.business.infor.business', compact('data','language','datapost','datacount'));
     }
     public function upload ($id)
     {    $data = Business::where('code',$id)->first();
