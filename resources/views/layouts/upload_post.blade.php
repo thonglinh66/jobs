@@ -1,7 +1,6 @@
-	
 <!doctype html>
 <html lang="en">
-@include('layouts/blade_index_user/head')
+ @include('layouts/blade_index_user/head')
   <body id="top">
 
   @include('layouts/blade_index_user/load')
@@ -9,11 +8,10 @@
 
 <div class="site-wrap">
 
-@include('layouts/blade_index_user/mobile')
+  @include('layouts/blade_index_user/mobile')
     
 
     <!-- NAVBAR -->
-    
     @include('layouts/business/navbar_business')
 
     <!-- HOME -->

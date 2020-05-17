@@ -51,16 +51,19 @@
               <!-- </div> -->
             </div>
           </div>
-          <div class="col-lg-4">
-            <div class="row">
-              <div class="col-6">
-                <a href="#" class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>Thích</a>
-              </div>
-              <div class="col-6">
-                <a href="#" class="btn btn-block btn-primary btn-md">Ứng tuyển</a>
-              </div>
-            </div>
-          </div>
+          @yield('button_like')
+          <!-- <div class="col-lg-4">
+            <div class="row"> -->
+           
+              <!-- <div class="col-6">
+              
+                  <a href="#" class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>Thích</a>
+                </div>
+                <div class="col-6">
+                  <a href="#" class="btn btn-block btn-primary btn-md">Ứng tuyển</a>
+              </div> -->
+            <!-- </div>
+          </div> -->
         </div>
         <div class="row">
           <div class="col-lg-8">
@@ -84,15 +87,15 @@
                 
               </ul>
             </div>
-
-            <div class="row mb-5">
+          @yield('button_Apply')
+            <!-- <div class="row mb-5">
               <div class="col-6">
                 <a href="#" class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>Thích</a>
               </div>
               <div class="col-6">
                 <a href="#" class="btn btn-block btn-primary btn-md">Ứng tuyển</a>
               </div>
-            </div>
+            </div> -->
 
           </div>
           <div class="col-lg-4">

@@ -2,6 +2,25 @@
 @section('header')
 @include('layouts/business/navbar_business')
 @endsection
+
+@section('button_Apply')
+<form method="POST" action="{{route('business.post.delete',$data->id)}}" onsubmit="return ConfirmDelete( this )">
+@method('DELETE')
+@csrf
+<div class="row mb-5">
+<div class="col-6">
+<button  type="submit" name="delete" class="btn btn-block btn-light btn-md">Xóa bài</button>
+</div>
+</form>
+<div class="col-6">
+<a href="{{route('business.post.update.post', $data->id)}}" class="btn btn-block btn-primary btn-md">Cập nhật bài đăng</a>
+</div>
+</div>
+
+
+  
+
+@endsection
 @section('head')
  <div class="border p-2 d-inline-block mr-3 rounded">
                 <img src="{{asset('UserView/images/'. $data->image)}}" alt="Image">
