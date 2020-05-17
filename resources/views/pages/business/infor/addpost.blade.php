@@ -1,6 +1,6 @@
 @extends('layouts.upload_post')
 @section('title')
- <li><a href="{{route('business.upload',$data->id)}}">Cập nhật Bài Đăng</a></li>
+ <li><a href="{{route('business.upload',$data->id)}}">Đăng Bài</a></li>
 @endsection
 @section('form')
 <div class="container">
@@ -9,14 +9,14 @@
           <div class="col-lg-8 mb-4 mb-lg-0">
             <div class="d-flex align-items-center">
               <div>
-                <h2>Cập nhập bài đăng</h2>
+                <h2>Đăng bài</h2>
               </div>
             </div>
           </div>  
         </div>
         <div class="row mb-5">
           <div class="col-lg-12">
-        <form  action="{{route('business.post.update.post',$data->id)}} " class="p-4 p-md-5 border rounded" method="post" enctype="multipart/form-data">
+        <form  action="{{route('business.post.add.post',$data->id)}} " class="p-4 p-md-5 border rounded" method="post" enctype="multipart/form-data">
             @csrf
               <h3 class="text-black my-5 border-bottom pb-2">Thông tin</h3>
               <div class="form-group">
@@ -42,6 +42,10 @@
                 <input type="text" name="lang" class="form-control" id="company-website" placeholder="C,C#">
               </div>
 
+              <div class="form-group">
+                <label for="company-website">Số lượng tuyển dụng</label>
+                <input type="text" name="member" class="form-control" id="company-website" placeholder="20">
+              </div>
               <div class="form-group">
                 <label for="job-description">Mức lương</label>
                     <label for="job-description">Thấp nhất</label>
