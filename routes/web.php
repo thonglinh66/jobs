@@ -30,6 +30,7 @@ Route::prefix('home')->group(function () {
     Route::get('/about', 'HomeController@about')->name('home.about');
     Route::get('/jobsingle/{id}', 'HomeController@jobsingle')->name('home.jobsingle');
     Route::get('/contact', 'HomeController@contact')->name('home.contact');
+    Route::get('/joblistings', 'HomeController@joblistings')->name('home.joblistings');
     // Route::post('/add_submit', 'AcountController@add_submit')->name('acount.add_submit');
     // Route::get('/edit/{id}', 'AcountController@edit')->name('acount.edit');
     // Route::post('/update/{id}', 'AcountController@update')->name('acount.update');

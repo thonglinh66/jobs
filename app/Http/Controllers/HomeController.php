@@ -33,4 +33,8 @@ class HomeController extends Controller
     {
         return view('pages.users.post.contact');
     }
+    public function joblistings ()
+    {
+        return view('pages.users.post.joblistings');
+    }
 }

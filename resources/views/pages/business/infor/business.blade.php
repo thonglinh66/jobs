@@ -7,7 +7,7 @@
 
 <div class="row mb-5 justify-content-center">
           <div class="col-md-7 text-center">
-            <h2 class="section-title mb-2">Showing {{count($datacount)}} Posts</h2>
+            <h2 class="section-title mb-2">Bao gồm {{count($datacount)}} bài đăng</h2>
           </div>
         </div>
 <ul class="job-listings mb-5">

@@ -17,14 +17,15 @@ class Posts extends Migration
             Schema::create('posts', function (Blueprint $table) {
                 $table->increments('id')->comment('id');
                 $table->string('code')->comment('mã công ty');
+                $table->integer('member')->comment('Số lượng tuyển dụng');
                 $table->string('title')->comment('Tiêu đề');
-                $table->string('decription')->comment('Mô tả');
-                $table->string('location')->comment('vị trí công ty');
+                $table->string('pdecription')->comment('Mô tả');
+               // $table->string('location')->comment('vị trí công ty');
                 $table->integer('type')->comment('loai');
                 $table->integer('min_salary')->comment('lương thấp nhất');
                 $table->integer('max_salary')->comment('lương cao nhất');
-                $table->string('language')->comment('ngôn ngữ');
-                $table->timestamp('deadline')->comment('Hạn chót');
+                //$table->string('language')->comment('ngôn ngữ');
+                $table->timestamp('deadline')->comment('Hạn chót')->nullable();
                 
                 // log time
                 $table->timestamp('created_at')

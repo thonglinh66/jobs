@@ -28,9 +28,9 @@
 @endsection
 @section('sumary')
     <div class="bg-light p-3 border rounded mb-4">
-        <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Job Summary</h3>
+        <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Tóm tắt công việc</h3>
         <ul class="list-unstyled pl-3 mb-0">
-            <li class="mb-2"><strong class="text-black">ngày đăng:</strong> {{ date('d-m-Y', strtotime($data->created_at)) }}</li>
+            <li class="mb-2"><strong class="text-black">Ngày đăng:</strong> {{ date('d-m-Y', strtotime($data->created_at)) }}</li>
             <li class="mb-2"><strong class="text-black">Số lượng tuyển dụng:</strong> {{$data->member}}</li>
             <li class="mb-2"><strong class="text-black">Loại:</strong>  @if($data->type == 1)
                      tuyển dụng
