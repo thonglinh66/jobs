@@ -14,16 +14,15 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-4">
-            <div class="row">
-              <div class="col-6">
+          @yield('button_like')
+          
+           
+              <!-- <div class="col-6">
                 <a href="#" class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"> Theo dõi</span></a>
               </div>
               <div class="col-6">
                 <a href="#" class="btn btn-block btn-primary btn-md">Nhận xét</a>
-              </div>
-            </div>
-          </div>
+              </div> -->
         </div>
       </div>
       <div class="view">

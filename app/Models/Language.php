@@ -22,4 +22,5 @@ class Language extends Model
         'deleted_at',
     ];
     public $timestamps = true;
+
 }

@@ -6,7 +6,7 @@
 
           <nav class="mx-auto site-navigation">
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
-              <li><a href="{{route('post.index')}}" class="nav-link active">Trang chủ</a></li>
+            @yield('navbar')
               <li><a href="{{route('home.about')}}">Giới thiệu</a></li>
               <li><a href="{{route('home.joblistings')}}">Danh sách công việc</a></li>
               <!-- <li class="has-children">
