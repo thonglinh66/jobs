@@ -47,7 +47,11 @@ Route::group(['middleware' => ['checkLogin']], function () {
         // Route::post('/add_submit', 'AcountController@add_submit')->name('acount.add_submit');
         Route::get('/{id}/upload', 'BusinessController@upload')->name('business.upload');
         Route::post('/upload', 'BusinessController@post')->name('business.post.upload');
+        Route::delete('/delete/{id}', 'BusinessController@destroy')->name('business.post.delete');;
         Route::get('/jobsingle/{id}', 'BusinessController@jobsingle')->name('business.jobsingle');
+        Route::get('/update/{id}', 'BusinessController@update')->name('business.post.update');
+        Route::get('/updatepost/{id}', 'BusinessController@updatepost')->name('business.post.update.post');
+        Route::post('/updatepost/{id}', 'BusinessController@postupdatepost')->name('business.post.update.post');
     });
 });
 // Route::get('/business', 'BusinessController@index')->middleware('checkLogin');
