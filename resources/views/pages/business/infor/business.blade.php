@@ -3,17 +3,26 @@
  <a href="{{route('business.upload',$data->code)}}" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Post a Job</a>
 <a href="{{route('logout')}}" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Log Out</a>
 @endsection
+@section('button_like')
+<div class="col-lg-4" style="max-width:50%">
+<div class="row">
+<div class="col-6" style="max-width:70%;width:70%;flex:60%;height:100%">
+<a href="{{route('business.upload',$data->code)}}" class="btn btn-block btn-primary btn-md">Cập nhật thông tin</a>
+</div> 
+</div> 
+</div> 
+@endsection
 @section('Conten_Post')
 
 <div class="row mb-5 justify-content-center">
           <div class="col-md-7 text-center">
-            <h2 class="section-title mb-2">Showing {{count($datacount)}} Posts</h2>
+            <h2 class="section-title mb-2">Bao gồm {{count($datacount)}} bài đăng</h2>
           </div>
         </div>
 <ul class="job-listings mb-5">
     @foreach($datapost as $d)
     <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
-        <a href="{{route('home.jobsingle',$d->id)}}"></a>
+        <a href="{{route('business.jobsingle',$d->id)}}"></a>
         <div class="job-listing-logo">
             <img src="{{asset('UserView/images/'.$d->image)}}" alt="Free Website Template by Free-Template.co" class="img-fluid">
         </div>

@@ -17,7 +17,8 @@ Route::get('/', function () {
 });
 
 Route::prefix('acount')->group(function () {
-    Route::get('/', 'AcountController@index')->name('acount.index');// maked    
+    Route::get('/', 'AcountController@index')->middleware('checkUser');// maked    
+    Route::get('/{id}', 'AcountController@index')->name('acount.index');// maked    
     Route::get('/add', 'AcountController@add')->name('acount.add');// maked     
     Route::post('/add_submit', 'AcountController@add_submit')->name('acount.add_submit');
     Route::get('/edit/{id}', 'AcountController@edit')->name('acount.edit');
@@ -25,11 +26,13 @@ Route::prefix('acount')->group(function () {
     Route::post('/delete/{id}', "AcountController@delete")->name('acount.delete');
 });
 Route::prefix('home')->group(function () {
-    Route::get('/', 'HomeController@index')->name('post.index');// maked 
+    Route::get('/', 'HomeController@index')->middleware('checkUser');// maked 
+    Route::get('/{id}', 'HomeController@index')->name('post.index');// maked 
     Route::get('/inforpost', 'HomeController@post')->name('home.inforpost');// maked 
     Route::get('/about', 'HomeController@about')->name('home.about');
     Route::get('/jobsingle/{id}', 'HomeController@jobsingle')->name('home.jobsingle');
     Route::get('/contact', 'HomeController@contact')->name('home.contact');
+    Route::get('/joblistings', 'HomeController@joblistings')->name('home.joblistings');
     // Route::post('/add_submit', 'AcountController@add_submit')->name('acount.add_submit');
     // Route::get('/edit/{id}', 'AcountController@edit')->name('acount.edit');
     // Route::post('/update/{id}', 'AcountController@update')->name('acount.update');
@@ -42,8 +45,9 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/{id}', 'BusinessController@index')->name('business.index');
         // Route::get('/add', 'AcountController@add')->name('acount.add');
         // Route::post('/add_submit', 'AcountController@add_submit')->name('acount.add_submit');
-        Route::get('/upload/{id}', 'BusinessController@upload')->name('business.upload');
-        Route::post('/upload/{id}', 'BusinessController@store')->name('addinfor');
+        Route::get('/{id}/upload', 'BusinessController@upload')->name('business.upload');
+        Route::post('/upload', 'BusinessController@post')->name('business.post.upload');
+        Route::get('/jobsingle/{id}', 'BusinessController@jobsingle')->name('business.jobsingle');
     });
 });
 // Route::get('/business', 'BusinessController@index')->middleware('checkLogin');

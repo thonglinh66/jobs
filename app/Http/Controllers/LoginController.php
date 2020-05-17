@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use DB;
 
 
 class LoginController extends Controller
@@ -20,7 +21,16 @@ class LoginController extends Controller
         if (Auth::attempt($arr)) {
             $request->session()->put('user', $request->username);
             $id = $request->session()->get('user');
-            return redirect('business/'.$id);
+            $puttype = DB::table('acounts')->where('code','=',$id)->select('type')->first();
+            $request->session()->put('type', $puttype->type);
+            $type = $request->session()->get('type');
+            if($type == '0'){
+                return redirect('home/'.$id);
+            }else if($type == '1'){
+                return redirect('business/'.$id);
+            }else if($type == '2'){
+                return redirect('acount/'.$id);
+            }
             //  
         }else{
             return view('pages.login')->with('fails','Đăng nhập thất bại');  

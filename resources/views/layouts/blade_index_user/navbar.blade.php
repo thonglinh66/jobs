@@ -2,13 +2,13 @@
 <header class="site-navbar mt-3">
       <div class="container-fluid">
         <div class="row align-items-center">
-          <div class="site-logo col-6"><a href="index.html">JobBoard</a></div>
+          <div class="site-logo col-6"><a href="index.html">Cơ hội việc làm</a></div>
 
           <nav class="mx-auto site-navigation">
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
-              <li><a href="{{route('post.index')}}" class="nav-link active">Home</a></li>
-              <li><a href="{{route('home.about')}}">About</a></li>
-              <li><a href="{{route('home.about')}}">Job Single</a></li>
+            @yield('navbar')
+              <li><a href="{{route('home.about')}}">Giới thiệu</a></li>
+              <li><a href="{{route('home.joblistings')}}">Danh sách công việc</a></li>
               <!-- <li class="has-children">
                 <a href="job-listings.html">Job Listings</a>
                 <ul class="dropdown">
@@ -30,10 +30,10 @@
                 </ul>
               </li> -->
               <!-- <li><a href="blog.html">Blog</a></li> -->
-              <li><a href="{{route('home.contact')}}">Contact</a></li>
-              <li class="d-lg-none"><a href="post-job.html"><span class="mr-2">+</span> Post a Job</a></li>
+              <li><a href="{{route('home.contact')}}">Liên hệ</a></li>
+              <li class="d-lg-none"><a href="post-job.html"><span class="mr-2">+</span>Đăng tuyển</a></li>
               
-              <li class="d-lg-none"><a href="login.html">Log In</a></li>
+              <li class="d-lg-none"><a href="login.html">Đăng nhập</a></li>
             </ul>
           </nav>
           
