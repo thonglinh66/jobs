@@ -8,7 +8,7 @@ use App\Models\Acount;
 class AcountController extends Controller
 {
     // Hàm đỗ dữ liệu của một Khoa ra trang index
-    public function index ()
+    public function index ($id)
     {
         
         $data = Acount::all();

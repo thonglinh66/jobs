@@ -7,11 +7,12 @@ use DB;
 
 class HomeController extends Controller
 {
-    public function index ()
+    public function index ($id)
     {
+        $acount = DB::table('acounts')->where('code','=',$id)->first();
         $alldata = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->get();
         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->paginate(5);
-        return view('pages.users.post.index', compact('data','alldata'));
+        return view('pages.users.post.index', compact('data','alldata','acount'));
     }
     public function post ()
     {       

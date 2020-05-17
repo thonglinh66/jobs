@@ -14,19 +14,22 @@
 
     <!-- NAVBAR -->
     
-    @include('layouts/blade_index_user/navbar')
+    <!-- NAVBAR -->
+<header class="site-navbar mt-3">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="site-logo col-6"><a href="index.html">Cơ hội việc làm</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
 
     <!-- HOME -->
     <section class="section-hero overlay inner-page bg-image" style="background-image: url('images/hero_1.jpg');" id="home-section">
       <div class="container">
         <div class="row">
-          <div class="col-md-7">
-            <h1 class="text-white font-weight-bold">Đăng nhập</h1>
-            <div class="custom-breadcrumbs">
-              <a href="#">Trang Chủ</a> <span class="mx-2 slash">/</span>
-              <span class="text-white"><strong>Đăng nhập</strong></span>
-            </div>
-          </div>
+          
         </div>
       </div>
     </section>

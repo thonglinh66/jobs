@@ -1,4 +1,10 @@
 @extends('layouts.home')
+@section('navbar')
+<li><a href="{{route('post.index',$acount->code)}}" class="nav-link active">Trang chủ</a></li>
+@endsection
+@section('Login')
+<a href="{{route('logout')}}" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Log Out</a>
+@endsection
 @section('Conten_Post')
 
 <div class="row mb-5 justify-content-center">
