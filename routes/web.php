@@ -45,13 +45,15 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/{id}', 'BusinessController@index')->name('business.index');
         // Route::get('/add', 'AcountController@add')->name('acount.add');
         // Route::post('/add_submit', 'AcountController@add_submit')->name('acount.add_submit');
-        Route::get('/{id}/upload', 'BusinessController@upload')->name('business.upload');
+        Route::get('/upload/{id}', 'BusinessController@upload')->name('business.upload');
         Route::post('/upload', 'BusinessController@post')->name('business.post.upload');
         Route::delete('/delete/{id}', 'BusinessController@destroy')->name('business.post.delete');;
         Route::get('/jobsingle/{id}', 'BusinessController@jobsingle')->name('business.jobsingle');
         Route::get('/update/{id}', 'BusinessController@update')->name('business.post.update');
-        Route::get('/updatepost/{id}', 'BusinessController@updatepost')->name('business.post.update.post');
+        Route::get('/updatepost/{id}', 'BusinessController@updatepost')->name('business.update.post');
         Route::post('/updatepost/{id}', 'BusinessController@postupdatepost')->name('business.post.update.post');
+        Route::get('/addpost/{id}', 'BusinessController@addpost')->name('business.add.post');
+        Route::post('/addpost/{id}', 'BusinessController@postaddpost')->name('business.post.add.post');
     });
 });
 // Route::get('/business', 'BusinessController@index')->middleware('checkLogin');

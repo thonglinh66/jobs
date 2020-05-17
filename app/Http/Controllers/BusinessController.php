@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Business;
 use App\Models\Language;
+use App\Models\Post;
 use Illuminate\Support\Str;
 use DB;
 
@@ -15,7 +16,7 @@ class BusinessController extends Controller
         $language = DB::table('business')->join('languages','business.code','=','languages.code')->where('business.code','=',$id)->get();
         $data = Business::where('code',$id)->first();
         $datacount = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->get();
-        $datapost = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->paginate(5);
+        $datapost = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->orderBy('posts.id', 'DESC')->paginate(5);
         return view('pages.business.infor.business', compact('data','language','datapost','datacount'));
     }
     public function jobsingle ($id)
@@ -78,30 +79,59 @@ class BusinessController extends Controller
         return view('pages.business.infor.upload_post',compact('data'));
     }
     
-    public function postupdatepost($id){
+    public function postupdatepost(Request $request,$id){
         $user = $request->session()->get('user');
-        $business = Business::where('code','=',$user)->first();
-        $business->code = $user;
-        $business->name = $request->get('name');
-        $drop_lang = DB::table('languages')->where('code','=',$user)->delete();
+        $Post = Post::where('id','=',$id)->first();
+        $Post->code = $user;
+        $Post->title = $request->get('name');
+        $drop_lang = DB::table('languages')->where('PostID','=',$id)->delete();
         $lang =  $request->lang;
         foreach(array_map("trim",explode(',', $lang)) as $l){
             $table_lang = new Language();
             $table_lang->name = $l;
-            $table_lang->code = $user;
+            $table_lang->PostID = $id;
             $table_lang->save();
         }
-        $business->address = $request->get('adress');
-        $business->decription= $request->get('description');
-        $business->website = $request->get('website');
-        $business->facebook = $request->get('face');
-        $business->twitter = $request->get('twtter');
-        $business->mail = $request->get('mail');
-        $business->phone = $request->get('phone');
-        $business->image = $name;
+        $Post->type = $request->get('type');
+        $Post->pdecription= $request->get('description');
+        $Post->min_salary = $request->get('min-sala');
+        $Post->max_salary = $request->get('max-sala');
+        $Post->deadline = $request->get('date');
         
        
-        $business->save();
-        return redirect('business/'.$user)->with('success', 'Thêm thành công');
+        $Post->save();
+        return redirect('business/updatepost/'.$id)->with('success', 'Thêm thành công');
+    }
+
+    public function addpost (Request $request,$id)
+    {
+        $user = $request->session()->get('user');
+        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('member','posts.created_at','name','posts.id','posts.code','title','name','deadline','image','pdecription','address','type','min_salary','max_salary')->where('posts.code','=',$user)->first()    ;
+        // dd($id);
+        return view('pages.business.infor.addpost',compact('data'));
+    }
+    public function postaddpost(Request $request,$id){
+        $user = $request->session()->get('user');
+        $Post = new Post();
+        $Post->code = $user;
+        $Post->title = $request->get('name');
+        $drop_lang = DB::table('languages')->where('PostID','=',$id)->delete();
+        $lang =  $request->lang;
+        foreach(array_map("trim",explode(',', $lang)) as $l){
+            $table_lang = new Language();
+            $table_lang->name = $l;
+            $table_lang->PostID = $id;
+            $table_lang->save();
+        }
+        $Post->member = $request->get('member');
+        $Post->type = $request->get('type');
+        $Post->pdecription= $request->get('description');
+        $Post->min_salary = $request->get('min-sala');
+        $Post->max_salary = $request->get('max-sala');
+        $Post->deadline = $request->get('date');
+        
+       
+        $Post->save();
+        return redirect('business/addpost/'.$id)->with('success', 'Thêm thành công');
     }
 }

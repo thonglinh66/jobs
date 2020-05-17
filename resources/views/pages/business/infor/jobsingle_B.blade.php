@@ -1,7 +1,11 @@
 @extends('layouts.job_single')
+@section('title')
+ <li><a href="{{route('business.upload',$data->id)}}">Cập nhật bài đăng</a></li>
+@endsection
 @section('header')
 @include('layouts/business/navbar_business')
 @endsection
+
 @section('head')
  <div class="border p-2 d-inline-block mr-3 rounded">
                 <img src="{{asset('UserView/images/'. $data->image)}}" alt="Image">

@@ -1,4 +1,7 @@
 @extends('layouts.job_single')
+@section('title')
+ <li><a href="{{route('business.upload',$data->id)}}">Cập nhật bài đăng</a></li>
+@endsection
 @section('header')
 @include('layouts/business/navbar_business')
 @endsection
@@ -32,7 +35,8 @@
                   <span class="m-2"><span class="icon-room mr-2"></span>{{$data->address}}</span>
                   @if($data->type == 1)
                      <span class="m-2"><span class="icon-clock-o mr-2"></span><span class="text-primary">tuyển dụng</span></span>
-                  @else
+                  @endif  
+                  @if ($data->type == 0)
                      <span class="m-2"><span class="icon-clock-o mr-2"></span><span class="text-primary">thực tập</span></span>
                   @endif  
 

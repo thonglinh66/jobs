@@ -34,7 +34,7 @@
             @if($d->type == 1)
                 Tuyển dụng 
             @endif
-            @if($d->type == 2)
+            @if($d->type == 0)
                 Thực tập
             @endif
             </span>
