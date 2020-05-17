@@ -16,14 +16,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('acount')->group(function () {
-    Route::get('/', 'AcountController@index')->middleware('checkUser');// maked    
-    Route::get('/{id}', 'AcountController@index')->name('acount.index');// maked    
-    Route::get('/add', 'AcountController@add')->name('acount.add');// maked     
-    Route::post('/add_submit', 'AcountController@add_submit')->name('acount.add_submit');
-    Route::get('/edit/{id}', 'AcountController@edit')->name('acount.edit');
-    Route::post('/update/{id}', 'AcountController@update')->name('acount.update');
-    Route::post('/delete/{id}', "AcountController@delete")->name('acount.delete');
+Route::prefix('account')->group(function () {
+    Route::get('/', 'AccountController@index')->name('account.index');// maked    
+    Route::get('/add', 'AccountController@add')->name('account.add');// maked     
+    Route::post('/add_submit', 'AccountController@add_submit')->name('account.add_submit');
+    Route::get('/edit/{id}', 'AccountController@edit')->name('account.edit');
+    Route::post('/update/{id}', 'AccountController@update')->name('account.update');
+    Route::post('/delete/{id}', "AccountController@delete")->name('account.delete');
 });
 Route::prefix('home')->group(function () {
     Route::get('/', 'HomeController@index')->middleware('checkUser');// maked 
