@@ -39,6 +39,7 @@ class LoginController extends Controller
     }
     public function postAuthLogout(Request $request){
         Auth::logout();
+        $request->session()->flush();
         return redirect('login');
         
     }

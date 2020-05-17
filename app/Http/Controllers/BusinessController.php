@@ -60,4 +60,48 @@ class BusinessController extends Controller
         $business->save();
         return redirect('business/'.$user)->with('success', 'Thêm thành công');
     }
+    public function destroy (Request $request, $post){
+        $user = $request->session()->get('user');
+        $drop_post = DB::table('posts')->where('id','=',$post)->delete();
+        return redirect('business/'.$user);    
+    }  
+    public function update (Request $request, $id){
+        $user = $request->session()->get('user');
+        $post = DB::table('posts')->where('id','=',$id)->first();
+        return redirect('business/'.$user);    
+    }  
+    public function updatepost ($id)
+    {
+
+        $lang = DB::table('languages')->where('languages.PostID','=',$id)->get();
+        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('member','posts.created_at','name','posts.id','posts.code','title','name','deadline','image','pdecription','address','type','min_salary','max_salary')->where('posts.id','=',$id)->first()    ;
+        return view('pages.business.infor.upload_post',compact('data'));
+    }
+    
+    public function postupdatepost($id){
+        $user = $request->session()->get('user');
+        $business = Business::where('code','=',$user)->first();
+        $business->code = $user;
+        $business->name = $request->get('name');
+        $drop_lang = DB::table('languages')->where('code','=',$user)->delete();
+        $lang =  $request->lang;
+        foreach(array_map("trim",explode(',', $lang)) as $l){
+            $table_lang = new Language();
+            $table_lang->name = $l;
+            $table_lang->code = $user;
+            $table_lang->save();
+        }
+        $business->address = $request->get('adress');
+        $business->decription= $request->get('description');
+        $business->website = $request->get('website');
+        $business->facebook = $request->get('face');
+        $business->twitter = $request->get('twtter');
+        $business->mail = $request->get('mail');
+        $business->phone = $request->get('phone');
+        $business->image = $name;
+        
+       
+        $business->save();
+        return redirect('business/'.$user)->with('success', 'Thêm thành công');
+    }
 }

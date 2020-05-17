@@ -1,6 +1,22 @@
 @extends('layouts.upload')
+@section('title')
+ <li><a href="{{route('business.upload',$data->code)}}">Cập nhật thông tin</a></li>
+@endsection
 @section('form')
-<form  action="{{route('business.post.upload')}} " class="p-4 p-md-5 border rounded" method="post" enctype="multipart/form-data">
+<div class="container">
+
+        <div class="row align-items-center mb-5">
+          <div class="col-lg-8 mb-4 mb-lg-0">
+            <div class="d-flex align-items-center">
+              <div>
+                <h2>Cập nhập thông tin</h2>
+              </div>
+            </div>
+          </div>  
+        </div>
+        <div class="row mb-5">
+          <div class="col-lg-12">
+        <form  action="{{route('business.post.upload')}} " class="p-4 p-md-5 border rounded" method="post" enctype="multipart/form-data">
             @csrf
               <h3 class="text-black my-5 border-bottom pb-2">Thông tin</h3>
               <div class="form-group">
@@ -68,4 +84,11 @@
           </div>
         </div>
             </form>
+            </div>
+
+         
+</div>
+
+</div>
+</section>
 @endsection
