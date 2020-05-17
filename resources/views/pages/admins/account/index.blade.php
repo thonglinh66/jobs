@@ -1,4 +1,19 @@
 @extends('layouts.admin')
+
+@section('content-header')
+<div class="row mb-2">
+    <div class="col-sm-6">
+      <h1 class="m-0 text-dark">Tài khoản</h1>
+    </div><!-- /.col -->
+    <div class="col-sm-6">
+      <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a href="#">admin</a></li>
+        <li class="breadcrumb-item"><a href="{{route('account.index')}}">account</a></li>
+      </ol>
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+@endsection
+
 @section('content')
 <style>
     body{
@@ -17,10 +32,9 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
-                            <h3 class="box-title">Tài Khoản</h3>
                             <br>
                             {{-- @if (Auth::user()->hasRole('Admin')) --}}
-                                <a style="width:80px" href="{{route('acount.add')}}" class="btn btn-success waves-effect waves-light m-r-10">Thêm</a>
+                                <a style="width:80px" href="{{route('account.add')}}" class="btn btn-success waves-effect waves-light m-r-10">Thêm</a>
                             {{-- @endif --}}
                             <br>
                             <br>
@@ -51,8 +65,8 @@
                                                 @endif
                                                 {{-- @if (Auth::user()->hasRole('Admin')) --}}
                                                     <td>
-                                                        <form action="{{ route('acount.delete', $item->id) }}" method="post" class="delete_form">
-                                                            <a  href="{{ action('AcountController@edit',$item->id) }}" data-toggle="toolytip" data-placement="top" title="Chỉnh sửa">&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil text-inverse m-r-10 fa-lg"></i></a>
+                                                        <form action="{{ route('account.delete', $item->id) }}" method="post" class="delete_form">
+                                                            <a  href="{{ action('AccountController@edit',$item->id) }}" data-toggle="toolytip" data-placement="top" title="Chỉnh sửa">&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil text-inverse m-r-10 fa-lg"></i></a>
                                                             @csrf
                                                             <button type="submit" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fal fa-trash-alt fa-lg"></i></button>
                                                         </form>
