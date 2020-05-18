@@ -24,7 +24,7 @@ class User
             }else if($type == '1'){
                 return redirect('business/'.$id);
             }else if($type == '2'){
-                return redirect('acount/'.$id);
+                return redirect('account');
             }
             return redirect('business/'.$id);
         }

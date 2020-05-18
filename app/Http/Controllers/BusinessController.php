@@ -24,7 +24,7 @@ class BusinessController extends Controller
 
         $lang = DB::table('languages')->where('languages.PostID','=',$id)->get();
         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('member','posts.created_at','name','posts.id','posts.code','title','name','deadline','image','pdecription','address','type','min_salary','max_salary')->where('posts.id','=',$id)->first()    ;
-        return view('pages.users.post.jobsingle',compact('data','lang'));
+        return view('pages.business.infor.jobsingle',compact('data','lang'));
     }
     public function upload ($id)
     {    $data = DB::table('business')->where('code','=',$id)->first();
@@ -32,21 +32,27 @@ class BusinessController extends Controller
     }
     public function post (Request $request)
     {  
+        
         $img = $request->file('Img');
+        if(isset($img)){
         $path = public_path('UserView/images');
         $name = Str::random(5).'_'.$img->getClientOriginalName();
         $img->move($path,$name);
+        }
         $user = $request->session()->get('user');
         $business = Business::where('code','=',$user)->first();
         $business->code = $user;
         $business->name = $request->get('name');
-        $drop_lang = DB::table('languages')->where('code','=',$user)->delete();
+       
         $lang =  $request->lang;
-        foreach(array_map("trim",explode(',', $lang)) as $l){
-            $table_lang = new Language();
-            $table_lang->name = $l;
-            $table_lang->code = $user;
-            $table_lang->save();
+        if(isset($lang)){
+            $drop_lang = DB::table('languages')->where('code','=',$user)->delete();
+            foreach(array_map("trim",explode(',', $lang)) as $l){
+                $table_lang = new Language();
+                $table_lang->name_l = $l;
+                $table_lang->code = $user;
+                $table_lang->save();
+            }
         }
         $business->address = $request->get('adress');
         $business->decription= $request->get('description');
@@ -55,7 +61,7 @@ class BusinessController extends Controller
         $business->twitter = $request->get('twtter');
         $business->mail = $request->get('mail');
         $business->phone = $request->get('phone');
-        $business->image = $name;
+        
         
        
         $business->save();
