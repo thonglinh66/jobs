@@ -10,14 +10,13 @@
   @include('layouts/blade_index_user/mobile')
   @include('layouts/blade_index_user/navbar')
     <!-- HOME -->
-    <section class="home-section section-hero overlay bg-image" style="background-image: url('images/hero_1.jpg');" id="home-section">
-
-      <div class="container">
+    <section class="home-section section-hero overlay bg-image" style="background-image: url({{asset('UserView/images/hero_1.jpg')}});" id="home-section">
+  @yield('search')
+      <!-- <div class="container">
         <div class="row align-items-center justify-content-center">
           <div class="col-md-12">
             <div class="mb-5 text-center">
               <h1 class="text-white font-weight-bold">Cách tốt nhất để tiếp cận đến công việc của bạn</h1>
-             <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate est, consequuntur perferendis.</p>-->
             </div>
             <form method="post" class="search-jobs-form">
               <div class="row mb-5">
@@ -64,11 +63,10 @@
 
       <a href="#next" class="scroll-button smoothscroll">
         <span class=" icon-keyboard_arrow_down"></span>
-      </a>
+      </a> -->
 
     </section>
     @include('layouts/blade_index_user/post')
-    @include('layouts/blade_index_user/introduce')
     @include('layouts/blade_index_user/helpedCP')
     @include('layouts/blade_index_user/talk')
     @include('layouts/blade_index_user/bottom')

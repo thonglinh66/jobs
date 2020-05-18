@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::group(['middleware' => ['checkLogin']], function () {
 Route::prefix('account')->group(function () {
     Route::get('/', 'AccountController@index')->name('account.index');// maked    
     Route::get('/add', 'AccountController@add')->name('account.add');// maked     
@@ -32,13 +32,16 @@ Route::prefix('home')->group(function () {
     Route::get('/jobsingle/{id}', 'HomeController@jobsingle')->name('home.jobsingle');
     Route::get('/contact', 'HomeController@contact')->name('home.contact');
     Route::get('/joblistings', 'HomeController@joblistings')->name('home.joblistings');
+    Route::post('/{id}', 'HomeController@search')->name('search');
+
+    
     // Route::post('/add_submit', 'AcountController@add_submit')->name('acount.add_submit');
     // Route::get('/edit/{id}', 'AcountController@edit')->name('acount.edit');
     // Route::post('/update/{id}', 'AcountController@update')->name('acount.update');
     // Route::post('/delete/{id}', "AcountController@delete")->name('acount.delete');
 });
 Auth::routes();
-Route::group(['middleware' => ['checkLogin']], function () {
+
     Route::prefix('business')->group(function () {
         Route::get('/', 'BusinessController@index')->middleware('checkUser');
         Route::get('/{id}', 'BusinessController@index')->name('business.index');

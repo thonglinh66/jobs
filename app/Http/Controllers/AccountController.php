@@ -26,6 +26,7 @@ class AccountController extends Controller
         $account = new Account();
         $account->code = $request->get('code');
         $account->type = $request->get('type');
+        $account->password = bcrypt($request->get('code'));
         $account->save();
         return redirect('account')->with('success', 'Thêm thành công');
     }

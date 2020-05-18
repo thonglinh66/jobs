@@ -60,7 +60,7 @@
             <h3 class="panel-title">Chuyên:</h3>
             <ul class="employer-skills">
               @foreach($language as $lg)
-                <li class="employer-skills__item"><a target="_blank" data-controller="utm-tracking" href="/it-jobs/c++">{{$lg->name}}</a></li>
+                <li class="employer-skills__item"><a target="_blank" data-controller="utm-tracking" href="/it-jobs/c++">{{$lg->name_l}}</a></li>
                 @endforeach
             </ul>
             <div class="paragraph">

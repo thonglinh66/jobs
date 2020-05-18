@@ -36,6 +36,10 @@
                     </select>                     
                 </div>
                 <div class="form-group">
+                        <label for="password" class="control-label">Mật khẩu</label>
+                        <input type="text" class="form-control" id="password" name="password" placeholder="@ps!">
+                </div>
+                <div class="form-group">
                         <button type="submit" class="btn btn-primary">Lưu</button>
                         <a href="{{route('account.index')}}" class="btn btn-default">Trờ lại</a>
                     </div>  

@@ -60,8 +60,10 @@
                                                 <td>{{$item->code}}</td>
                                                 @if($item->type == 0) 
                                                 <td>Sinh viên</td>
-                                                @else
+                                                @elseif ($item->type == 1) 
                                                 <td>Doanh nghiệp</td>
+                                                @else 
+                                                <td>Admin</td>
                                                 @endif
                                                 {{-- @if (Auth::user()->hasRole('Admin')) --}}
                                                     <td>
