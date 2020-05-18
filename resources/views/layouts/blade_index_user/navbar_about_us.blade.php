@@ -4,7 +4,7 @@
           <div class="col-md-7">
             <h1 class="text-white font-weight-bold">Giới thiệu</h1>
             <div class="custom-breadcrumbs">
-              <a href="{{route('post.index')}}">Trang chủ</a> <span class="mx-2 slash">/</span>
+              <a href="{{route('post.index.home')}}">Trang chủ</a> <span class="mx-2 slash">/</span>
               <span class="text-white"><strong>Giới thiệu</strong></span>
             </div>
           </div>

@@ -22,6 +22,7 @@ class Posts extends Migration
                 $table->string('pdecription')->comment('Mô tả');
                // $table->string('location')->comment('vị trí công ty');
                 $table->integer('type')->comment('loai');
+                $table->integer('like')->comment('luot thich')->nullable();
                 $table->integer('min_salary')->comment('lương thấp nhất');
                 $table->integer('max_salary')->comment('lương cao nhất');
                 //$table->string('language')->comment('ngôn ngữ');

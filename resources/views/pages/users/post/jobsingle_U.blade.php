@@ -35,6 +35,12 @@
     <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>{{$data->pdecription}}</span></li>
 
 @endsection
+@section('active')
+<li><a href="{{route('post.index.home')}}" class="nav-link active" >Trang chủ</a></li>
+              <li><a href="{{route('home.about',$acount->code)}}">Giới thiệu</a></li>
+              <li><a href="{{route('home.joblistings',$acount->code)}}" >Danh sách công việc</a></li>
+              <li><a href="{{route('home.contact',$acount->code)}}" >Liên hệ</a></li>    
+@endsection
 @section('sumary')
     <div class="bg-light p-3 border rounded mb-4">
         <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Tóm tắt công việc</h3>
@@ -51,4 +57,15 @@
         </ul>
     </div>
 @endsection
+@section('button_Apply')
+<div class="row mb-5">
+              <div class="col-6">
+                <a href="#" class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>Thích</a>
+              </div>
+              <div class="col-6">
+                <a href="#" class="btn btn-block btn-primary btn-md">Ứng tuyển</a>
+              </div>
+            </div>
+@endsection
+
  

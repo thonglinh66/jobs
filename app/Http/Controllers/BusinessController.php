@@ -32,18 +32,22 @@ class BusinessController extends Controller
     }
     public function post (Request $request)
     {  
-        
+        $user = $request->session()->get('user');
+        $business = Business::where('code','=',$user)->first();
         $img = $request->file('Img');
         if(isset($img)){
         $path = public_path('UserView/images');
         $name = Str::random(5).'_'.$img->getClientOriginalName();
+        $business->image = $name;
         $img->move($path,$name);
+       
+        
         }
-        $user = $request->session()->get('user');
-        $business = Business::where('code','=',$user)->first();
+        
+        
         $business->code = $user;
         $business->name = $request->get('name');
-       
+        $business->type = $request->get('type');
         $lang =  $request->lang;
         if(isset($lang)){
             $drop_lang = DB::table('languages')->where('code','=',$user)->delete();
@@ -54,6 +58,7 @@ class BusinessController extends Controller
                 $table_lang->save();
             }
         }
+        
         $business->address = $request->get('adress');
         $business->decription= $request->get('description');
         $business->website = $request->get('website');
@@ -109,11 +114,10 @@ class BusinessController extends Controller
         return redirect('business/updatepost/'.$id)->with('success', 'Thêm thành công');
     }
 
-    public function addpost (Request $request,$id)
+    public function addpost ($id)
     {
-        $user = $request->session()->get('user');
-        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('member','posts.created_at','name','posts.id','posts.code','title','name','deadline','image','pdecription','address','type','min_salary','max_salary')->where('posts.code','=',$user)->first()    ;
-        // dd($id);
+        $data = DB::table('business')->where('code','=',$id)->first();
+            // dd($id);
         return view('pages.business.infor.addpost',compact('data'));
     }
     public function postaddpost(Request $request,$id){
@@ -121,23 +125,23 @@ class BusinessController extends Controller
         $Post = new Post();
         $Post->code = $user;
         $Post->title = $request->get('name');
-        $drop_lang = DB::table('languages')->where('PostID','=',$id)->delete();
-        $lang =  $request->lang;
-        foreach(array_map("trim",explode(',', $lang)) as $l){
-            $table_lang = new Language();
-            $table_lang->name = $l;
-            $table_lang->PostID = $id;
-            $table_lang->save();
-        }
+       
         $Post->member = $request->get('member');
         $Post->type = $request->get('type');
         $Post->pdecription= $request->get('description');
         $Post->min_salary = $request->get('min-sala');
         $Post->max_salary = $request->get('max-sala');
         $Post->deadline = $request->get('date');
-        
-       
         $Post->save();
+        
+        $idpost  = $Post->id;
+        $lang =  $request->lang;
+        foreach(array_map("trim",explode(',', $lang)) as $l){
+            $table_lang = new Language();
+            $table_lang->name_l = $l;
+            $table_lang->PostID = $idpost;
+            $table_lang->save();
+        }
         return redirect('business/addpost/'.$id)->with('success', 'Thêm thành công');
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.upload_post')
 @section('title')
- <li><a href="{{route('business.upload',$data->id)}}">Đăng Bài</a></li>
+ <li><a href="{{route('business.add.post',$data->code)}}">Đăng Bài</a></li>
 @endsection
 @section('form')
 <div class="container">
@@ -16,7 +16,7 @@
         </div>
         <div class="row mb-5">
           <div class="col-lg-12">
-        <form  action="{{route('business.post.add.post',$data->id)}} " class="p-4 p-md-5 border rounded" method="post" enctype="multipart/form-data">
+        <form  action="{{route('business.post.add.post',$data->code)}} " class="p-4 p-md-5 border rounded" method="post" enctype="multipart/form-data">
             @csrf
               <h3 class="text-black my-5 border-bottom pb-2">Thông tin</h3>
               <div class="form-group">
@@ -32,8 +32,8 @@
               <div class="form-group">
                 <label for="company-website">loại tuyển dụng</label>
                 <select name="type" class="browser-default custom-select">
-                    <option selected value="0">Tuyển dụng</option>
-                    <option value="1">Thực tập</option>
+                    <option selected value="1">Tuyển dụng</option>
+                    <option value="0">Thực tập</option>
                 </select>
               </div>
 
