@@ -25,13 +25,14 @@ Route::prefix('account')->group(function () {
     Route::post('/delete/{id}', "AccountController@delete")->name('account.delete');
 });
 Route::prefix('home')->group(function () {
-    Route::get('/', 'HomeController@index')->middleware('checkUser');// maked 
+    Route::get('/', 'HomeController@index')->middleware('checkUser')->name('post.index.home');// maked 
     Route::get('/{id}', 'HomeController@index')->name('post.index');// maked 
     Route::get('/inforpost', 'HomeController@post')->name('home.inforpost');// maked 
-    Route::get('/about', 'HomeController@about')->name('home.about');
+    Route::get('/about/{id}', 'HomeController@about')->name('home.about');
     Route::get('/jobsingle/{id}', 'HomeController@jobsingle')->name('home.jobsingle');
-    Route::get('/contact', 'HomeController@contact')->name('home.contact');
-    Route::get('/joblistings', 'HomeController@joblistings')->name('home.joblistings');
+    Route::get('/contact/{id}', 'HomeController@contact')->name('home.contact');
+    Route::get('/joblistings/{id}', 'HomeController@joblistings')->name('home.joblistings');
+    Route::post('/joblistings/{id}', 'HomeController@search_list')->name('home.joblistings.search');
     Route::post('/{id}', 'HomeController@search')->name('search');
 
     

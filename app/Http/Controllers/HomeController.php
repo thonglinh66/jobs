@@ -20,24 +20,33 @@ class HomeController extends Controller
         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->get();
         return view('pages.users.post.infor_post', compact('data'));
     }
-    public function about ()
+    public function about ($id)
     {
-        return view('pages.users.post.about');
+        $acount = DB::table('acounts')->where('code','=',$id)->first();
+        return view('pages.users.post.about',compact('acount'));
     }
-    public function jobsingle ($id)
+    public function jobsingle (Request $request, $id)
     {
+        $user = $request->session()->get('user');
+        $acount = DB::table('acounts')->where('code','=',$user)->first();
         $lang = DB::table('languages')->where('languages.PostID','=',$id)->get();
         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')->where('posts.id','=',$id)->first()    ;
         // dd($data);
-        return view('pages.users.post.jobsingle_U',compact('data','lang'));
+        return view('pages.users.post.jobsingle_U',compact('data','lang','acount'));
     }
-    public function contact ()
+    public function contact ($id)
     {
-        return view('pages.users.post.contact');
+        $acount = DB::table('acounts')->where('code','=',$id)->first();
+        return view('pages.users.post.contact',compact('acount'));
     }
-    public function joblistings ()
+    public function joblistings ($id)
     {
-        return view('pages.users.post.joblistings');
+        
+        $acount = DB::table('acounts')->where('code','=',$id)->first();
+        $business = DB::table('business')->get();
+        $alldata = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->get();
+        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->orderBy('posts.id', 'DESC')->paginate(10);
+        return view('pages.users.post.joblistings', compact('data','alldata','acount','business'));
     }
     public function search (Request $request)
     {
@@ -193,6 +202,161 @@ class HomeController extends Controller
         
        
             return view('pages.users.post.index', compact('data','alldata','acount','business'));
+    }
+    public function search_list (Request $request)
+    {
+        $user = $request->session()->get('user');
+        $text = $request->get('searchtext');
+        $acount = DB::table('acounts')->where('code','=',$user)->first();
+        $business = DB::table('business')->get();
+        $alldata = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->get();
+        $checked = $request->get('searchcheck');
+        $type = $request->get('type');
+        $text = '%'.$text.'%';
+        $checked = $checked.'%';
+        if($type != 2 ){
+            
+            if($checked != 'Null%'){
+                if($text == '%%'){
+                    $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->join('languages', 'languages.PostID','=', 'posts.id')->select('member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')
+                    ->where('name_l','like',$checked)
+                    // dd($text)  ;
+                    ->where('type','=',$type)
+                    ->orderBy('posts.id', 'DESC')->paginate(10);
+                    
+                }else{
+                    $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')
+                    ->where('type','=',$type)
+                    ->where(
+                        'member', 'like', $text
+                    )
+                    ->orWhere( 
+                        'name', 'like', $text
+                    )
+                    ->orWhere( 
+                        'title', 'like', $text
+                    )
+                    ->orWhere( 
+                        'pdecription', 'like', $text
+                    )
+                    ->orWhere(
+                        'address', 'like', $text
+                    )
+                    ->orWhere(
+                        'min_salary', 'like', $text
+                    )
+                    ->orWhere( 
+                        'max_salary', 'like', $text
+                    )
+                    ->orderBy('posts.id', 'DESC')->paginate(10);
+                }
+                
+            }
+            // !dd($checked);
+            if($checked == 'Null%'){
+                if($text == '%%'){
+                    // dd($type);
+                    $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')
+                    ->where('type','=',$type)->orderBy('posts.id', 'DESC')->paginate(10);
+                }else{
+                    $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')
+                    ->where('type','=',$type)
+                    ->where(
+                        'member', 'like', $text
+                    )
+                    ->orWhere( 
+                        'name', 'like', $text
+                    )
+                    ->orWhere( 
+                        'title', 'like', $text
+                    )
+                    ->orWhere( 
+                        'pdecription', 'like', $text
+                    )
+                    ->orWhere(
+                        'address', 'like', $text
+                    )
+                    ->orWhere(
+                        'min_salary', 'like', $text
+                    )
+                    ->orWhere( 
+                        'max_salary', 'like', $text
+                    )
+                    ->orderBy('posts.id', 'DESC')->paginate(10);
+                }  
+            } 
+            }else {
+                if($checked != 'Null%'){
+                    if($text == '%%'){
+                        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->join('languages', 'languages.PostID','=', 'posts.id')->select('member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')
+                        ->where('name_l','like',$checked)->orderBy('posts.id', 'DESC')->paginate(10);
+                        // dd($text)  ;
+                    
+                        
+                        
+                    }else{
+                        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')
+                    
+                        ->where(
+                            'member', 'like', $text
+                        )
+                        ->orWhere( 
+                            'name', 'like', $text
+                        )
+                        ->orWhere( 
+                            'title', 'like', $text
+                        )
+                        ->orWhere( 
+                            'pdecription', 'like', $text
+                        )
+                        ->orWhere(
+                            'address', 'like', $text
+                        )
+                        ->orWhere(
+                            'min_salary', 'like', $text
+                        )
+                        ->orWhere( 
+                            'max_salary', 'like', $text
+                        )
+                        ->orderBy('posts.id', 'DESC')->paginate(10);
+                    }
+                    
+                }
+                // !dd($checked);
+                if($checked == 'Null%'){
+                    if($text == '%%'){
+                        // dd($type);
+                        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')->orderBy('posts.id', 'DESC')->paginate(5);
+                    }else{
+                        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')
+                        ->where(
+                            'member', 'like', $text
+                        )
+                        ->orWhere( 
+                            'name', 'like', $text
+                        )
+                        ->orWhere( 
+                            'title', 'like', $text
+                        )
+                        ->orWhere( 
+                            'pdecription', 'like', $text
+                        )
+                        ->orWhere(
+                            'address', 'like', $text
+                        )
+                        ->orWhere(
+                            'min_salary', 'like', $text
+                        )
+                        ->orWhere( 
+                            'max_salary', 'like', $text
+                        )
+                        ->orderBy('posts.id', 'DESC')->paginate(10);
+                    }  
+                }
+        }
+        
+       
+            return view('pages.users.post.joblistings', compact('data','alldata','acount','business'));
     }
     
 }

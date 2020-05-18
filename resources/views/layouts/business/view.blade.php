@@ -50,7 +50,7 @@
             <div class="panel panel-default">
             <div class="panel-heading">
             <h3 class="panel-title headline">
-            Tổng quan sơ lượt về công ty :  {{$data->name}}
+            Tổng quan sơ lượt về công ty :
             </h3>
             </div>
             <div class="panel-body">

@@ -1,9 +1,12 @@
 @extends('layouts.home')
-@section('navbar')
-<li><a href="{{route('post.index',$acount->code)}}" class="nav-link active">Trang chủ</a></li>
-@endsection
 @section('Login')
 <a href="{{route('logout')}}" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Log Out</a>
+@endsection
+@section('active')
+<li><a href="{{route('post.index.home')}}" class="nav-link active" >Trang chủ</a></li>
+              <li><a href="{{route('home.about',$acount->code)}}">Giới thiệu</a></li>
+              <li><a href="{{route('home.joblistings',$acount->code)}}" >Danh sách công việc</a></li>
+              <li><a href="{{route('home.contact',$acount->code)}}" >Liên hệ</a></li>    
 @endsection
 @section('Conten_Post')
 
@@ -66,9 +69,7 @@
  @endforeach
 
 @endsection
-@section('Login')
-<li class="d-lg-none"><a href="login.html">Log in</a></li>
-@endsection
+
 
 @section('search')
 <div class="container">
@@ -95,14 +96,14 @@
                     <option value="Php">Php</option>
                     <option value="Asp.Net">Asp.Net</option>
                     <option value="Python">Python</option>
-                    <option  selected value="Null">Khác</option>
+                    <option  selected value="Null">Chọn ngôn ngữ</option>
                   </select>
                 </div>
                 <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                   <select name="type" class="selectpicker" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="Loại tuyển dụng">
                     <option  value="1">Tuyển dụng</option>
                     <option value="0">Thực tập</option>
-                    <option selected value="2">Cả 2</option>
+                    <option selected value="2">Tuyển dụng - Thực tập</option>
                   </select>
                 </div>
                 <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
