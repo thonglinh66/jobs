@@ -13,9 +13,10 @@
 @endsection
 
 @section('head')
- <div class="border p-2 d-inline-block mr-3 rounded">
+                <a href="{{route('business.id',$data->code)}}" class="border p-2 d-inline-block mr-3 rounded">
+
                 <img src="{{asset('UserView/images/'. $data->image)}}" alt="Image">
-              </div>
+              </a>
               <div>
                 <h2>{{$data->title}}</h2>
                 <div>
@@ -26,7 +27,7 @@
                   @else
                      <span class="m-2"><span class="icon-clock-o mr-2"></span><span class="text-primary">thực tập</span></span>
                   @endif  
-
+                  <span class="m-2"><span class="icon-heart text-danger mr-2"></span>{{$count}}</span>
                 </div>
                </div>
 @endsection
@@ -63,14 +64,15 @@
     </div>
 @endsection
 @section('button_Apply')
-<div class="row mb-5">
-              <div class="col-6">
-                <a href="#" class="btn btn-block btn-light btn-md"><span class="icon-heart-o mr-2 text-danger"></span>Thích</a>
-              </div>
-              <div class="col-6">
-                <a href="#" class="btn btn-block btn-primary btn-md">Ứng tuyển</a>
-              </div>
-            </div>
+<form action="{{route('home.jobsingle.like',$data->id)}}" class="row mb-5" method="post">
+@csrf
+    <div class="col-6">
+      <button type="submit" class="btn btn-block border-danger {{$color}} btn-md"><span class="  icon-heart-o mr-2 {{$colortext}}"></span>Thích</button>
+    </div>
+    <div class="col-6">
+      <a href="#" class="btn btn-block btn-primary btn-md">Ứng tuyển</a>
+    </div>
+  </form>
 @endsection
 
  

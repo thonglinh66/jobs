@@ -90,7 +90,7 @@
                     <option value="C++">C++</option>
                     <option value="C#">C#</option>
                     <option value="Java">Java</option>
-                    <option value="JavaScript">JavaScript</option>
+                    <option value="Javascript">JavaScript</option>
                     <option value="Html">Html</option>
                     <option value="Css">Css</option> 
                     <option value="Php">Php</option>
@@ -115,9 +115,11 @@
                   <h3>Từ khóa phổ biến:</h3>
                   <ul class="keywords list-unstyled m-0 p-0">
                   @yield('trending')
-                    <!-- <li><a href="#" class="">UI Designer</a></li>
-                    <li><a href="#" class="">Python</a></li>
+                  @foreach($trending as $tr)
+                    <li><a href="{{route('search.trend',$tr->keyname)}}" class="">{{$tr->keyname}}</a></li>
+                    <!-- <li><a href="#" class="">Python</a></li>
                     <li><a href="#" class="">Developer</a></li> -->
+                    @endforeach
                   </ul>
                 </div>
               </div>

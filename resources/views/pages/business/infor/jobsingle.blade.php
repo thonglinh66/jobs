@@ -32,9 +32,10 @@
 @endsection
 
 @section('head')
- <div class="border p-2 d-inline-block mr-3 rounded">
-                <img src="{{asset('UserView/images/'. $data->image)}}" alt="Image">
-              </div>
+              <a href="{{route('business.index', $data->code)}}" class="border p-2 d-inline-block mr-3 rounded">
+
+              <img src="{{asset('UserView/images/'. $data->image)}}" alt="Image">
+              </a>
               <div>
                 <h2>{{$data->title}}</h2>
                 <div>
@@ -46,7 +47,7 @@
                   @if ($data->type == 0)
                      <span class="m-2"><span class="icon-clock-o mr-2"></span><span class="text-primary">thực tập</span></span>
                   @endif  
-
+                    <span class="m-2"><span class="icon-heart mr-2"></span>{{$count}}</span>
                 </div>
                </div>
 @endsection
