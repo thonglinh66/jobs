@@ -18,7 +18,7 @@
 <header class="site-navbar mt-3">
       <div class="container-fluid">
         <div class="row align-items-center">
-          <div class="site-logo col-6"><a href="index.html">Cơ hội việc làm</a>
+          <div class="site-logo col-6"><a href="index.html">TMT</a>
           </div>
         </div>
       </div>

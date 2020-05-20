@@ -11,9 +11,8 @@
 @include('layouts/blade_index_user/mobile')
     
 
-    <!-- NAVBAR -->
-    @include('layouts/blade_index_user/navbar_list')
-    <!-- HOME -->
+
+    @yield('header')
     <section class="section-hero overlay inner-page bg-image" style="background-image: url({{asset('UserView/images/hero_1.jpg')}});" id="home-section">
       <div class="container">
         <div class="row">

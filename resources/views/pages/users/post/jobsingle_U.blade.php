@@ -3,8 +3,13 @@
 
 
 @section('header')
-@include('layouts/blade_index_user/navbar')
-
+@extends('layouts/blade_index_user/navbar')
+@section('active')
+<li><a href="{{route('post.index.home')}}" >Trang chủ</a></li>
+              <li><a href="{{route('home.about',$acount->code)}}">Giới thiệu</a></li>
+              <li><a href="{{route('home.joblistings',$acount->code)}}" class="nav-link active">Danh sách công việc</a></li>
+              <li><a href="{{route('home.contact',$acount->code)}}" >Liên hệ</a></li>    
+@endsection
 @endsection
 
 @section('head')
