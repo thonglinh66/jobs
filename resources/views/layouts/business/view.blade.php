@@ -32,8 +32,7 @@
             <ul class="navigation">
             <li class="active_view navigation__item" id="Checke_1" onclick="Tranfer('Checke_1')">	
             <a data-controller="utm-tracking" href="#">Overview</a>
-            <div class="corner-bottom-right-overlay"></div>
-            <div class="corner-bottom-right-curve"></div>
+            <div class="corner-bottom-right-overlay d-none" ></div>
             </li>
             <li class="navigation__item review-tab" id="Checke_2" onclick="Tranfer('Checke_2')">
             <a data-controller="utm-tracking" href="#">1 Review</a>
@@ -47,8 +46,8 @@
             
             <!-- Description - Tech stack -->
             <!-- Last updated: "2020-05-13 02:07:48 +0700"-->
-            <div class="panel panel-default">
-            <div class="panel-heading">
+            <div class="panel panel-default " id="over">
+            <div class="panel-heading ">
             <h3 class="panel-title headline">
             Tổng quan sơ lượt về công ty :
             </h3>
@@ -66,6 +65,21 @@
             <div class="paragraph">
             <p></p>
             </div>
+            </div>
+            </div>
+            <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
+            <div class="panel panel-default d-none" id="re">
+            
+            <div class="card" style="margin:0 10px 10px 10px">
+            <div class="card-body">
+                <h5 class="card-title text-dark">Card title</h5>
+                <p class="card-text"  style="
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;" >  Facebook Messenger là một dịch vụ và ứng dụng phần mềm tin nhắn tức thời chia sẻ giao tiếp bằng ký tự và giọng nói. Được tích hợp trên ứng dụng Chat của Facebook và được xây dựng trên giao thức MQTT, Messenger cho phép người dùng Facebook trò chuyện với bạn bè trên cả di động và trang web chính</p>
+            </div>
+            </div>
+
             </div>
             </div>
         </div>

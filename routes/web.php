@@ -30,10 +30,16 @@ Route::prefix('home')->group(function () {
     Route::get('/inforpost', 'HomeController@post')->name('home.inforpost');// maked 
     Route::get('/about/{id}', 'HomeController@about')->name('home.about');
     Route::get('/jobsingle/{id}', 'HomeController@jobsingle')->name('home.jobsingle');
+    Route::post ('/jobsingle/{id}', 'HomeController@buttonlike')->name('home.jobsingle.like');
     Route::get('/contact/{id}', 'HomeController@contact')->name('home.contact');
     Route::get('/joblistings/{id}', 'HomeController@joblistings')->name('home.joblistings');
     Route::post('/joblistings/{id}', 'HomeController@search_list')->name('home.joblistings.search');
     Route::post('/{id}', 'HomeController@search')->name('search');
+    Route::get('/trend/{id}', 'HomeController@searchtrend')->name('search.trend');
+    Route::get('/business/{id}', 'HomeController@business')->name('business.id');
+    Route::post('/overview/{id}', 'HomeController@overview')->name('post.overview');
+    Route::post('/review/{id}', 'HomeController@review')->name('post.review');
+
 
     
     // Route::post('/add_submit', 'AcountController@add_submit')->name('acount.add_submit');
@@ -57,6 +63,9 @@ Auth::routes();
         Route::post('/updatepost/{id}', 'BusinessController@postupdatepost')->name('business.post.update.post');
         Route::get('/addpost/{id}', 'BusinessController@addpost')->name('business.add.post');
         Route::post('/addpost/{id}', 'BusinessController@postaddpost')->name('business.post.add.post');
+        Route::post('/overview/{id}', 'BusinessController@overview')->name('post.overview');
+        Route::post('/review/{id}', 'BusinessController@review')->name('post.review');
+        
     });
 });
 // Route::get('/business', 'BusinessController@index')->middleware('checkLogin');
