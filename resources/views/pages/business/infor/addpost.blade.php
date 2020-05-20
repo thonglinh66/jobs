@@ -1,6 +1,9 @@
 @extends('layouts.upload_post')
-@section('title')
- <li><a href="{{route('business.add.post',$data->code)}}">Đăng Bài</a></li>
+
+@section('clicked')
+<li><a href="{{route('business.index', $data->code)}}" >Trang Chủ</a></li>
+              <li><a href="{{route('business.add.post',$data->code)}}" class="nav-link active" >Đăng bài</a></li>
+              <li><a href="{{route('business.upload',$data->code)}}" >Cập nhập thông tin</a></li>
 @endsection
 @section('form')
 <div class="container">

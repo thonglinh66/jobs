@@ -2,10 +2,16 @@
 @section('title')
  <li><a href="{{route('business.upload',$data->id)}}">Cập nhật bài đăng</a></li>
 @endsection
-  @section('header')
-  @include('layouts/business/navbar_business')
-  @endsection
 
+ 
+@section('header')
+@extends('layouts/business/navbar_business')
+@section('clicked')
+<li><a href="{{route('business.index', $data->code)}}" class="nav-link active">Trang Chủ</a></li>
+            <li><a href="{{route('business.add.post',$data->code)}}">Đăng bài</a></li>
+            <li><a href="{{route('business.upload',$data->code)}}">Cập nhập thông tin</a></li>
+@endsection
+@endsection
 @section('button_Apply')
 <form method="POST" action="{{route('business.post.delete',$data->id)}}" onsubmit="return ConfirmDelete( this )">
 @method('DELETE')
@@ -24,6 +30,7 @@
   
 
 @endsection
+
 @section('head')
  <div class="border p-2 d-inline-block mr-3 rounded">
                 <img src="{{asset('UserView/images/'. $data->image)}}" alt="Image">
