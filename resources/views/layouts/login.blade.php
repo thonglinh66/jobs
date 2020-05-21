@@ -18,8 +18,7 @@
 <header class="site-navbar mt-3">
       <div class="container-fluid">
         <div class="row align-items-center">
-          <div class="site-logo col-6"><a href="index.html">TMT</a>
-          </div>
+          <a href="login"><img src="{{asset('UserView/images/logoctu.png')}}" class="img-shadow" style="width:50%; height:50%; margin:5%" alt="Girl in a jacket"></a>
         </div>
       </div>
     </header>

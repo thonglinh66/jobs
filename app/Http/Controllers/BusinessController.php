@@ -13,18 +13,22 @@ class BusinessController extends Controller
 {
     public function index ($id)
     {
+        $comment_count = DB::table('comments')->where('code_BS','=',$id)->count();
+        $comment = DB::table('comments')->join('students','students.code','=','comments.code_SV')->where('code_BS','=',$id)->paginate(5);
         $language = DB::table('business')->join('languages','business.code','=','languages.code')->where('business.code','=',$id)->get();
         $data = Business::where('code',$id)->first();
         $datacount = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->get();
         $datapost = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->orderBy('posts.id', 'DESC')->paginate(5);
-        return view('pages.business.infor.business', compact('data','language','datapost','datacount'));
+        return view('pages.business.infor.business', compact('data','language','datapost','datacount','comment','comment_count'));
     }
-    public function jobsingle ($id)
+    public function jobsingle (Request $request,$id)
     {
-
+        $count =  DB::table('likes')->where('PostID','=',$id)->count();
+        $user = $request->session()->get('user');
+        $acount = DB::table('acounts')->where('code','=',$user)->first();
         $lang = DB::table('languages')->where('languages.PostID','=',$id)->get();
         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('member','posts.created_at','name','posts.id','posts.code','title','name','deadline','image','pdecription','address','type','min_salary','max_salary')->where('posts.id','=',$id)->first()    ;
-        return view('pages.business.infor.jobsingle',compact('data','lang'));
+        return view('pages.business.infor.jobsingle',compact('data','lang','acount'))->with('count',$count);
     }
     public function upload ($id)
     {    $data = DB::table('business')->where('code','=',$id)->first();
@@ -47,7 +51,6 @@ class BusinessController extends Controller
         
         $business->code = $user;
         $business->name = $request->get('name');
-        $business->type = $request->get('type');
         $lang =  $request->lang;
         if(isset($lang)){
             $drop_lang = DB::table('languages')->where('code','=',$user)->delete();

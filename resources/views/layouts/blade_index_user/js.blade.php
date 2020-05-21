@@ -13,3 +13,4 @@
     <script src="{{asset('UserView/js/bootstrap-select.min.js')}}"></script>
     
     <script src="{{asset('UserView/js/custom.js')}}"></script>
+    <script src="{{asset('UserView/js/open.js')}}"></script>

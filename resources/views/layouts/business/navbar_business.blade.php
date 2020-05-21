@@ -2,9 +2,9 @@
 <header class="site-navbar mt-3">
       <div class="container-fluid">
         <div class="row align-items-center">
-          <div class="site-logo col-6"><a href="{{route('business.index', $data->code)}}">TMT</a></div>
+          <a href="{{route('business.index', $data->code)}}"><img src="{{asset('UserView/images/logoctu.png')}}" class="img-shadow" style="width:60%; height:60%; margin:5%" alt="Girl in a jacket"></a>
 
-          <nav class="mx-auto site-navigation">
+          <nav class="mx-auto site-navigation" style="font-size:150%">
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
             @yield('clicked')
               <!-- <li><a href="{{route('business.index', $data->code)}}" class="nav-link active">Trang Chủ</a></li>

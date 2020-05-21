@@ -35,7 +35,7 @@
             <div class="corner-bottom-right-overlay d-none" ></div>
             </li>
             <li class="navigation__item review-tab" id="Checke_2" onclick="Tranfer('Checke_2')">
-            <a data-controller="utm-tracking" href="#">1 Review</a>
+            <a data-controller="utm-tracking" href="#">{{$comment_count}} Review</a>
             <div class="corner-bottom-right-overlay"></div>
             <div class="corner-bottom-right-curve"></div>
             <div class="corner-bottom-left-overlay"></div>
@@ -69,17 +69,17 @@
             </div>
             <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
             <div class="panel panel-default d-none" id="re">
-            
+            @foreach($comment as $c)
             <div class="card" style="margin:0 10px 10px 10px">
             <div class="card-body">
-                <h5 class="card-title text-dark">Card title</h5>
+                <h5 class="card-title text-dark">{{$c->name}}</h5>
                 <p class="card-text"  style="
                 overflow: hidden;
                 text-overflow: ellipsis;
-                white-space: nowrap;" >  Facebook Messenger là một dịch vụ và ứng dụng phần mềm tin nhắn tức thời chia sẻ giao tiếp bằng ký tự và giọng nói. Được tích hợp trên ứng dụng Chat của Facebook và được xây dựng trên giao thức MQTT, Messenger cho phép người dùng Facebook trò chuyện với bạn bè trên cả di động và trang web chính</p>
+                white-space: nowrap;" > {{$c->content}}</p>
             </div>
             </div>
-
+            @endforeach
             </div>
             </div>
         </div>

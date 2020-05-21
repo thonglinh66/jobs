@@ -39,6 +39,8 @@ Route::prefix('home')->group(function () {
     Route::get('/business/{id}', 'HomeController@business')->name('business.id');
     Route::post('/overview/{id}', 'HomeController@overview')->name('post.overview');
     Route::post('/review/{id}', 'HomeController@review')->name('post.review');
+    Route::post('/addreview/{id}', 'HomeController@addreview')->name('post.addreview');
+
 
 
     
