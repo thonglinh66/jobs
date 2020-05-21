@@ -19,7 +19,7 @@
     </section>
 
     
-    
+    @yield('comment')
     @include('layouts/business/view')
 
     @include('layouts/blade_index_user/post')

@@ -8,12 +8,16 @@
 @section('button_like')
 <div class="col-lg-4">
             <div class="row">
-              <div class="col-6">
-                <a href="#" class="btn btn-block btn-primary btn-md">Nhận xét</a>
-              </div>
+            <div class="col-6">
+            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" style="padding:10%;" data-target="#exampleModalCenter">
+Nhận xét
+</button>
+
+            </div>
             </div>
           </div>
 @endsection
+
 @section('Conten_Post')
 
 <div class="row mb-5 justify-content-center">
@@ -65,4 +69,38 @@
     </div>
     </div>
 
+
 @endsection
+@section('comment')
+
+<script type="text/javascript">
+  $('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').trigger('focus')
+})
+</script>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog" style=" max-width:60%; margin: 10% auto;"   role="document">
+    <div class="modal-content">
+      <form  action="{{route('post.addreview',$acount->code)}} " class="p-4 p-md-5 border rounded" method="post" enctype="multipart/form-data">
+            @csrf
+              <h3 class="text-black my-5 border-bottom pb-2">Nhận xét</h3>
+              <div class="form-group">
+                <label for="company-website">Từ</label>
+                <input type="text" name="lang" class="form-control" id="company-website" disabled="true" value="{{$student->name}}">
+              </div>
+              <div class="form-group">
+                <label for="company-tagline">Nội dung</label>
+                <textarea id="editor-2" class="form-control editor"  rows="20" cols="50" name="content"></textarea>
+              </div>
+          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            <button type="submit" name="submit" class="btn btn-primary">Gửi</button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>  
+
+@endsection
+

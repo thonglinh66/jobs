@@ -17,14 +17,18 @@ class HomeController extends Controller
         return view('pages.users.post.index', compact('data','alldata','acount','business','trending'));
     }
   
-    public function business($id)
+    public function business(Request $request,$id)
     {
+        $comment_count = DB::table('comments')->where('code_BS','=',$id)->count();
+        $comment = DB::table('comments')->join('students','students.code','=','comments.code_SV')->where('code_BS','=',$id)->paginate(5);
+        $user = $request->session()->get('user');
+        $student = DB::table('students')->where('code','=',$user)->first();
         $acount = DB::table('acounts')->where('code','=',$id)->first();
         $language = DB::table('business')->join('languages','business.code','=','languages.code')->where('business.code','=',$id)->get();
         $data = DB::table('business')->where('code','=',$id)->first();
         $datacount = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->get();
         $datapost = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->orderBy('posts.id', 'DESC')->paginate(5);
-        return view('pages.users.post.business_infor', compact('data','language','datapost','datacount','acount'));
+        return view('pages.users.post.business_infor', compact('data','language','datapost','datacount','acount','student','comment','comment_count'));
     }
     public function post ()
     {       
@@ -426,6 +430,15 @@ class HomeController extends Controller
         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')->where('posts.id','=',$id)->first()    ;
         $count =  DB::table('likes')->where('PostID','=',$id)->count();
         return back()->with('color',$color)->with('colortext',$colortext)->with('count',$count);
+    }
+    public function addreview(Request $request)
+    {
+        $user = $request->session()->get('user');
+        $content = $request->get('content');
+        if($content != 'null'){
+            DB::table('comments')->insert(['code_SV' => $user, 'code_BS' => $request->id,'content' => $content ]);
+        }
+        return redirect()->back();
     }
     
 }
