@@ -7,14 +7,26 @@ use DB;
 
 class HomeController extends Controller
 {
-    public function index ($id)
+    public function indexhome (Request $request)
     {
+        $user = $request->session()->get('user');
         $trending = DB::table('trendings')->orderBy('count', 'DESC')->paginate(4);
+        $language = DB::table('trendings')->get();
+        $business = DB::table('business')->get();
+        $alldata = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->get();
+        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->orderBy('posts.id', 'DESC')->paginate(5);
+        return view('pages.users.post.index', compact('data','alldata','business','trending','language','user'));
+    }
+    public function index (Request $request,$id)
+    {
+        $user = $request->session()->get('user');
+        $trending = DB::table('trendings')->orderBy('count', 'DESC')->paginate(4);
+        $language = DB::table('trendings')->get();
         $acount = DB::table('acounts')->where('code','=',$id)->first();
         $business = DB::table('business')->get();
         $alldata = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->get();
         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->orderBy('posts.id', 'DESC')->paginate(5);
-        return view('pages.users.post.index', compact('data','alldata','acount','business','trending'));
+        return view('pages.users.post.index', compact('data','alldata','acount','business','trending','language','user'));
     }
   
     public function business(Request $request,$id)
@@ -28,17 +40,18 @@ class HomeController extends Controller
         $data = DB::table('business')->where('code','=',$id)->first();
         $datacount = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->get();
         $datapost = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->orderBy('posts.id', 'DESC')->paginate(5);
-        return view('pages.users.post.business_infor', compact('data','language','datapost','datacount','acount','student','comment','comment_count'));
+        return view('pages.users.post.business_infor', compact('user','data','language','datapost','datacount','acount','student','comment','comment_count'));
     }
-    public function post ()
+    public function post (Request $request)
     {       
+        $user = $request->session()->get('user');
         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->get();
-        return view('pages.users.post.infor_post', compact('data'));
+        return view('pages.users.post.infor_post', compact('data','user'));
     }
-    public function about ($id)
+    public function about (Request $request)
     {
-        $acount = DB::table('acounts')->where('code','=',$id)->first();
-        return view('pages.users.post.about',compact('acount'));
+        $user = $request->session()->get('user');
+        return view('pages.users.post.about',compact('user'));
     }
     public function jobsingle (Request $request, $id)
     {
@@ -57,24 +70,26 @@ class HomeController extends Controller
         $lang = DB::table('languages')->where('languages.PostID','=',$id)->get();
         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')->where('posts.id','=',$id)->first()    ;
         // dd($data);
-        return view('pages.users.post.jobsingle_U',compact('data','lang','acount'))->with('color',$color)->with('colortext',$colortext)->with('count',$count);
+        return view('pages.users.post.jobsingle_U',compact('data','lang','acount','user'))->with('color',$color)->with('colortext',$colortext)->with('count',$count);
     }
-    public function contact ($id)
+    public function contact (Request $request)
     {
-        $acount = DB::table('acounts')->where('code','=',$id)->first();
-        return view('pages.users.post.contact',compact('acount'));
+        $user = $request->session()->get('user');
+        return view('pages.users.post.contact',compact('user'));
     }
-    public function joblistings ($id)
+    public function joblistings (Request $request)
     {
-        
-        $acount = DB::table('acounts')->where('code','=',$id)->first();
+        $user = $request->session()->get('user');
+        $trending = DB::table('trendings')->orderBy('count', 'DESC')->paginate(4);
+        $language = DB::table('trendings')->get();
         $business = DB::table('business')->get();
         $alldata = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->get();
         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->orderBy('posts.id', 'DESC')->paginate(10);
-        return view('pages.users.post.joblistings', compact('data','alldata','acount','business'));
+        return view('pages.users.post.joblistings', compact('data','alldata','business','language','trending','user'));
     }
     public function searchtrend(Request $request){
         $trending = DB::table('trendings')->orderBy('count', 'DESC')->paginate(4);
+        $language = DB::table('trendings')->get();
         $user = $request->session()->get('user');
         $acount = DB::table('acounts')->where('code','=',$user)->first();
         $business = DB::table('business')->get();
@@ -83,29 +98,31 @@ class HomeController extends Controller
         // dd($checked);
         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->join('languages', 'languages.PostID','=', 'posts.id')->select('member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')
         ->where('name_l','like',$checked)->distinct()->paginate(5);
-        return view('pages.users.post.index', compact('data','alldata','acount','business','trending'));
+        return view('pages.users.post.index', compact('data','alldata','acount','business','trending','language','user'));
     }
     public function search (Request $request)
     {
         $trending = DB::table('trendings')->orderBy('count', 'DESC')->paginate(4);
+        $language = DB::table('trendings')->get();
         $user = $request->session()->get('user');
         $text = $request->get('searchtext');
         $acount = DB::table('acounts')->where('code','=',$user)->first();
         $business = DB::table('business')->get();
         $alldata = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->get();
         $checked = $request->get('searchcheck');
-        if($checked != 'Null'){
         $rank = DB::table('trendings')->select('count')->where('keyname','=',$checked)->first();
         // dd($rank->count);
-        if($rank->count != "null"){
-            $dem = (int)$rank->count ;
-            $dem ++;
-            DB::table('trendings')->where('keyname','=',$checked)->update([
-            'count' => $dem
-            ]);
-        }else{DB::table('trendings')->where('keyname','=',$checked)->update([
-            'count' => 1
-            ]);}
+        if(isset($rank)){
+            if($rank->count!= "null"){
+                $dem = (int)$rank->count ;
+                $dem ++;
+                DB::table('trendings')->where('keyname','=',$checked)->update([
+                'count' => $dem
+                ]);
+            }else{DB::table('trendings')->where('keyname','=',$checked)->update([
+                'count' => 1
+                ]);
+            }
         }
         $type = $request->get('type');
         $text = '%'.$text.'%';
@@ -252,10 +269,12 @@ class HomeController extends Controller
         }
         
        
-            return view('pages.users.post.index', compact('data','alldata','acount','business','trending'));
+            return view('pages.users.post.index', compact('data','alldata','acount','business','trending','language','user'));
     }
     public function search_list (Request $request)
     {
+        $trending = DB::table('trendings')->orderBy('count', 'DESC')->paginate(4);
+        $language = DB::table('trendings')->get();
         $user = $request->session()->get('user');
         $text = $request->get('searchtext');
         $acount = DB::table('acounts')->where('code','=',$user)->first();
@@ -407,7 +426,7 @@ class HomeController extends Controller
         }
         
        
-            return view('pages.users.post.joblistings', compact('data','alldata','acount','business'));
+            return view('pages.users.post.joblistings', compact('data','alldata','acount','business','trending','language','user'));
     }
 
    public function buttonlike(Request $request)

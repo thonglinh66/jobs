@@ -4,9 +4,9 @@
 @endsection
 @section('active')
 <li><a href="{{route('post.index.home')}}" >Trang chủ</a></li>
-              <li><a href="{{route('home.about',$acount->code)}}">Giới thiệu</a></li>
-              <li><a href="{{route('home.joblistings',$acount->code)}}" class="nav-link active">Danh sách công việc</a></li>
-              <li><a href="{{route('home.contact',$acount->code)}}" >Liên hệ</a></li>    
+              <li><a href="{{route('home.about')}}">Giới thiệu</a></li>
+              <li><a href="{{route('home.joblistings')}}" class="nav-link active">Danh sách công việc</a></li>
+              <li><a href="{{route('home.contact')}}" >Liên hệ</a></li>    
 @endsection
 @section('Conten_Post')
 
@@ -76,7 +76,7 @@
             <div class="mb-5 text-center">
               <h1 class="text-white font-weight-bold">Cách tốt nhất để tiếp cận đến công việc của bạn</h1>
             </div>
-            <form action="{{route('home.joblistings.search',$acount->code)}}" method="post" class="search-jobs-form">
+            <form action="{{route('home.joblistings.search')}}" method="post" class="search-jobs-form">
             @csrf
               <div class="row mb-5">
                 <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
@@ -84,17 +84,9 @@
                 </div>
                 <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                   <select name="searchcheck" class="selectpicker" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="Ngôn ngữ">
-                    <option value="C">C</option>
-                    <option value="C++">C++</option>
-                    <option value="C#">C#</option>
-                    <option value="Java">Java</option>
-                    <option value="JavaScript">JavaScript</option>
-                    <option value="Html">Html</option>
-                    <option value="Css">Css</option> 
-                    <option value="Php">Php</option>
-                    <option value="Asp.Net">Asp.Net</option>
-                    <option value="Python">Python</option>
-                    <option  selected value="Null">Chọn ngôn ngữ</option>
+                  @foreach($language as $lang)
+                    <option value="{{$lang->keyname}}">{{$lang->keyname}}</option>
+                  @endforeach
                   </select>
                 </div>
                 <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
@@ -112,10 +104,11 @@
                 <div class="col-md-12 popular-keywords">
                   <h3>Từ khóa phổ biến:</h3>
                   <ul class="keywords list-unstyled m-0 p-0">
-                  @yield('trending')
-                    <!-- <li><a href="#" class="">UI Designer</a></li>
-                    <li><a href="#" class="">Python</a></li>
+                  @foreach($trending as $tr)
+                    <li><a href="{{route('search.trend',$tr->keyname)}}" style="font-size:130%" class=""><img src="{{asset('UserView/images/'.$tr->image)}}" alt="Girl in a jacket" width="50" height="50"></a></li>
+                    <!-- <li><a href="#" class="">Python</a></li>
                     <li><a href="#" class="">Developer</a></li> -->
+                    @endforeach
                   </ul>
                 </div>
               </div>

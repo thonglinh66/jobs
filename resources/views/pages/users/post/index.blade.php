@@ -3,10 +3,10 @@
 <a href="{{route('logout')}}" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Log Out</a>
 @endsection
 @section('active')
-<li><a href="{{route('post.index.home')}}" class="nav-link active" >Trang chủ</a></li>
-              <li><a href="{{route('home.about',$acount->code)}}">Giới thiệu</a></li>
-              <li><a href="{{route('home.joblistings',$acount->code)}}" >Danh sách công việc</a></li>
-              <li><a href="{{route('home.contact',$acount->code)}}" >Liên hệ</a></li>    
+  <li><a href="{{route('post.index.home')}}" class="nav-link active" >Trang chủ</a></li>
+  <li><a href="{{route('home.about')}}">Giới thiệu</a></li>
+  <li><a href="{{route('home.joblistings')}}" >Danh sách công việc</a></li>
+  <li><a href="{{route('home.contact')}}" >Liên hệ</a></li> 
 @endsection
 @section('Conten_Post')
 
@@ -78,7 +78,7 @@
             <div class="mb-5 text-center">
               <h1 class="text-white font-weight-bold">Cách tốt nhất để tiếp cận đến công việc của bạn</h1>
             </div>
-            <form action="{{route('search',$acount->code)}}" method="post" class="search-jobs-form" >
+            <form action="{{route('search')}}" method="post" class="search-jobs-form" >
             @csrf
               <div class="row mb-5">
                 <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
@@ -86,7 +86,7 @@
                 </div>
                 <div class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 mb-lg-0">
                   <select name="searchcheck" class="selectpicker" data-style="btn-white btn-lg" data-width="100%" data-live-search="true" title="Ngôn ngữ">
-                  @foreach($trending as $lang)
+                  @foreach($language as $lang)
                     <option value="{{$lang->keyname}}">{{$lang->keyname}}</option>
                   @endforeach
                   </select>
@@ -106,7 +106,6 @@
                 <div class="col-md-12 popular-keywords" >
                   <h3 style="font-size:160%" >Phổ biến:</h3>
                   <ul class="keywords list-unstyled m-0 p-0">
-                  @yield('trending')
                   @foreach($trending as $tr)
                     <li><a href="{{route('search.trend',$tr->keyname)}}" style="font-size:130%" class=""><img src="{{asset('UserView/images/'.$tr->image)}}" alt="Girl in a jacket" width="50" height="50"></a></li>
                     <!-- <li><a href="#" class="">Python</a></li>

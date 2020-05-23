@@ -24,31 +24,7 @@ Route::prefix('account')->group(function () {
     Route::post('/update/{id}', 'AccountController@update')->name('account.update');
     Route::post('/delete/{id}', "AccountController@delete")->name('account.delete');
 });
-Route::prefix('home')->group(function () {
-    Route::get('/', 'HomeController@index')->middleware('checkUser')->name('post.index.home');// maked 
-    Route::get('/{id}', 'HomeController@index')->name('post.index');// maked 
-    Route::get('/inforpost', 'HomeController@post')->name('home.inforpost');// maked 
-    Route::get('/about/{id}', 'HomeController@about')->name('home.about');
-    Route::get('/jobsingle/{id}', 'HomeController@jobsingle')->name('home.jobsingle');
-    Route::post ('/jobsingle/{id}', 'HomeController@buttonlike')->name('home.jobsingle.like');
-    Route::get('/contact/{id}', 'HomeController@contact')->name('home.contact');
-    Route::get('/joblistings/{id}', 'HomeController@joblistings')->name('home.joblistings');
-    Route::post('/joblistings/{id}', 'HomeController@search_list')->name('home.joblistings.search');
-    Route::post('/{id}', 'HomeController@search')->name('search');
-    Route::get('/trend/{id}', 'HomeController@searchtrend')->name('search.trend');
-    Route::get('/business/{id}', 'HomeController@business')->name('business.id');
-    Route::post('/overview/{id}', 'HomeController@overview')->name('post.overview');
-    Route::post('/review/{id}', 'HomeController@review')->name('post.review');
-    Route::post('/addreview/{id}', 'HomeController@addreview')->name('post.addreview');
 
-
-
-    
-    // Route::post('/add_submit', 'AcountController@add_submit')->name('acount.add_submit');
-    // Route::get('/edit/{id}', 'AcountController@edit')->name('acount.edit');
-    // Route::post('/update/{id}', 'AcountController@update')->name('acount.update');
-    // Route::post('/delete/{id}', "AcountController@delete")->name('acount.delete');
-});
 Auth::routes();
 
     Route::prefix('business')->group(function () {
@@ -70,8 +46,36 @@ Auth::routes();
         
     });
 });
+Route::prefix('home')->group(function () {
+    Route::get('/', 'HomeController@indexhome')->name('post.index.home');// maked 
+    Route::get('/{id}', 'HomeController@index')->name('post.index');// maked 
+});
+    Route::get('/inforpost', 'HomeController@post')->name('home.inforpost');// maked 
+    Route::get('/about', 'HomeController@about')->name('home.about');
+    Route::get('/jobsingle/{id}', 'HomeController@jobsingle')->name('home.jobsingle');
+    Route::post ('/jobsingle/{id}', 'HomeController@buttonlike')->name('home.jobsingle.like');
+    Route::get('/contact', 'HomeController@contact')->name('home.contact');
+    Route::get('/joblistings', 'HomeController@joblistings')->name('home.joblistings');
+    Route::post('/joblistings', 'HomeController@search_list')->name('home.joblistings.search');
+    Route::post('/', 'HomeController@search')->name('search');
+    Route::get('/trend/{id}', 'HomeController@searchtrend')->name('search.trend');
+    Route::get('/business/{id}', 'HomeController@business')->name('business.id');
+    Route::post('/overview/{id}', 'HomeController@overview')->name('post.overview');
+    Route::post('/review/{id}', 'HomeController@review')->name('post.review');
+    Route::post('/addreview/{id}', 'HomeController@addreview')->name('post.addreview');
+
+
+
+    
+    // Route::post('/add_submit', 'AcountController@add_submit')->name('acount.add_submit');
+    // Route::get('/edit/{id}', 'AcountController@edit')->name('acount.edit');
+    // Route::post('/update/{id}', 'AcountController@update')->name('acount.update');
+    // Route::post('/delete/{id}', "AcountController@delete")->name('acount.delete');
+
 // Route::get('/business', 'BusinessController@index')->middleware('checkLogin');
 Auth::routes();
 Route::get('/login', 'LoginController@getAuthLogin')->middleware('checkUser');
 Route::post('/login', 'LoginController@postAuthLogin')->name('login');
 Route::get('/logout', 'LoginController@postAuthLogout')->name('logout');
+Route::get('/logout', 'LoginController@postAuthLogoutHome')->name('logout.Home');
+
