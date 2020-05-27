@@ -7,7 +7,7 @@
     <meta name="keywords" content="" />
     <meta name="author" content="Free-Template.co" />
     <link rel="shortcut icon" href="ftco-32x32.png">
-    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('UserView/css/custom-bs.css')}}">
     <link rel="stylesheet" href="{{asset('UserView/css/jquery.fancybox.min.css')}}">
     <link rel="stylesheet" href="{{asset('UserView/css/bootstrap-select.min.css')}}">

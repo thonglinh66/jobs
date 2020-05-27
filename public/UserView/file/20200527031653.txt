@@ -1,0 +1,15 @@
+Auth::routes();
+Route::group(['middleware' => ['checkLogin']], function () {
+    Route::prefix('business/username={id}')->group(function () {
+        Route::get('/', 'BusinessController@index')->name('business.index');
+        // Route::get('/add', 'AcountController@add')->name('acount.add');
+        // Route::post('/add_submit', 'AcountController@add_submit')->name('acount.add_submit');
+        Route::get('/upload', 'BusinessController@upload')->name('business.upload');
+        Route::post('/uploadpost', 'BusinessController@store')->name('addinfor');
+    });
+});
+// Route::get('/business', 'BusinessController@index')->middleware('checkLogin');
+Auth::routes();
+Route::get('/login', 'LoginController@getAuthLogin')->middleware('checkUser');
+Route::post('/login', 'LoginController@postAuthLogin')->name('login');
+Route::get('/logout', 'LoginController@postAuthLogout')->name('logout');

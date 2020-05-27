@@ -7,7 +7,7 @@
   @include('layouts/blade_index_user/mobile')
    <!-- .site-mobile-menu -->
     
-
+@yield('command')
     <!-- NAVBAR -->
     @include('layouts/blade_index_user/navbar')
     <!-- HOME -->
@@ -17,16 +17,12 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-6 mb-5 mb-lg-0">
-            <form action="#" class="">
-
+            <form action="{{route('home.contact.post')}}" method="post" >
+            @csrf
               <div class="row form-group">
-                <div class="col-md-6 mb-3 mb-md-0">
-                  <label class="text-black" for="fname">Tên</label>
-                  <input type="text" id="fname" class="form-control">
-                </div>
-                <div class="col-md-6">
-                  <label class="text-black" for="lname">Họ</label>
-                  <input type="text" id="lname" class="form-control">
+                <div class="col-md-12">
+                  <label class="text-black" for="lname">Họ và Tên</label>
+                  <input type="text" id="lname" name="fullname" class="form-control">
                 </div>
               </div>
 
@@ -34,28 +30,28 @@
                 
                 <div class="col-md-12">
                   <label class="text-black" for="email">Email</label> 
-                  <input type="email" id="email" class="form-control">
+                  <input type="email" id="email" name="mail" class="form-control">
                 </div>
               </div>
 
               <div class="row form-group">
                 
                 <div class="col-md-12">
-                  <label class="text-black" for="subject">Chuyên ngành</label> 
-                  <input type="subject" id="subject" class="form-control">
+                  <label class="text-black" for="subject">Học và làm việc tại</label> 
+                  <input type="subject" id="subject" name="jobsAt" class="form-control">
                 </div>
               </div>
 
               <div class="row form-group">
                 <div class="col-md-12">
                   <label class="text-black" for="message">Thông điệp</label> 
-                  <textarea name="message" id="message" cols="30" rows="7" class="form-control" placeholder="Viết ghi chú hoặc câu hỏi của bạn ở đây..."></textarea>
+                  <textarea id="editor-2" class="form-control editor"  rows="10" cols="50" name="decript"></textarea>
                 </div>
               </div>
 
               <div class="row form-group">
                 <div class="col-md-12">
-                  <input type="submit" value="Gửi" class="btn btn-primary btn-md text-white">
+                  <input type="submit" name="submit" value="Gửi" class="btn btn-primary btn-md text-white">
                 </div>
               </div>
 

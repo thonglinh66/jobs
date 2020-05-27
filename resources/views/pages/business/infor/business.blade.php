@@ -1,4 +1,12 @@
 @extends('layouts.Business_Home')
+@section('command')
+  @if(Session::has('name'))
+<script>
+      var msg = '{{Session::get('name')}}';
+        alert(msg);
+  </script>
+      @endif
+@endsection
 @section('title')
 @endsection
 @section('clicked')
