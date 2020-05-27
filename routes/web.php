@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Mail\SendMail;
+use Illuminate\Support\Facades\Mail;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,16 +55,20 @@ Route::prefix('home')->group(function () {
     Route::get('/inforpost', 'HomeController@post')->name('home.inforpost');// maked 
     Route::get('/about', 'HomeController@about')->name('home.about');
     Route::get('/jobsingle/{id}', 'HomeController@jobsingle')->name('home.jobsingle');
-    Route::post ('/jobsingle/{id}', 'HomeController@buttonlike')->name('home.jobsingle.like');
+    Route::post ('/jobsingle/{id}', 'HomeController@buttonlike')->name('home.jobsingle.like')->middleware('checkLogin');
     Route::get('/contact', 'HomeController@contact')->name('home.contact');
+    Route::post('/contact', 'HomeController@contactpost')->name('home.contact.post');
     Route::get('/joblistings', 'HomeController@joblistings')->name('home.joblistings');
     Route::post('/joblistings', 'HomeController@search_list')->name('home.joblistings.search');
-    Route::post('/', 'HomeController@search')->name('search');
+    Route::post('/home', 'HomeController@search')->name('search');
     Route::get('/trend/{id}', 'HomeController@searchtrend')->name('search.trend');
-    Route::get('/business/{id}', 'HomeController@business')->name('business.id');
+    Route::get('/businessinfor/{id}', 'HomeController@business')->name('business.id');
     Route::post('/overview/{id}', 'HomeController@overview')->name('post.overview');
     Route::post('/review/{id}', 'HomeController@review')->name('post.review');
     Route::post('/addreview/{id}', 'HomeController@addreview')->name('post.addreview');
+    Route::post('/sendMail/{id}', 'HomeController@sendMail')->name('post.sendMail');
+
+
 
 
 
@@ -77,5 +83,5 @@ Auth::routes();
 Route::get('/login', 'LoginController@getAuthLogin')->middleware('checkUser');
 Route::post('/login', 'LoginController@postAuthLogin')->name('login');
 Route::get('/logout', 'LoginController@postAuthLogout')->name('logout');
-Route::get('/logout', 'LoginController@postAuthLogoutHome')->name('logout.Home');
+Route::get('/logouthome', 'LoginController@postAuthLogoutHome')->name('logout.Home');
 

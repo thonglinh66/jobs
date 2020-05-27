@@ -11,7 +11,7 @@
 
 @include('layouts/blade_index_user/mobile')
     
-
+@yield('command')
     <!-- NAVBAR -->
     
     @include('layouts/business/navbar_business')

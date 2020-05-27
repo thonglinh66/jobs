@@ -1,5 +1,12 @@
 @extends('layouts.upload_post')
-
+@section('command')
+  @if(Session::has('name'))
+<script>
+      var msg = '{{Session::get('name')}}';
+        alert(msg);
+  </script>
+      @endif
+@endsection
 @section('clicked')
 <li><a href="{{route('business.index', $data->code)}}" >Trang Chủ</a></li>
               <li><a href="{{route('business.add.post',$data->code)}}" class="nav-link active">Đăng bài</a></li>

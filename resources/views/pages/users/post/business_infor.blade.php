@@ -1,4 +1,14 @@
 @extends('layouts.Business_infor')
+@section('command')
+<script>
+   function loginshow (){
+      var msg = '{{Session::get('user')}}';
+      if(msg == ''){
+        alert('Bạn cần đăng nhập để sử dụng tính năng này');
+      }
+    }
+  </script>
+@endsection
 @section('active')
 <li><a href="{{route('post.index.home')}}" class="nav-link active" >Trang chủ</a></li>
               <li><a href="{{route('home.about',$acount->code)}}">Giới thiệu</a></li>
@@ -9,7 +19,7 @@
 <div class="col-lg-4">
             <div class="row">
             <div class="col-6">
-            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" style="padding:10%;" data-target="#exampleModalCenter">
+            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" style="padding:10%;" onclick="loginshow()" data-target="#exampleModalCenter">
 Nhận xét
 </button>
 
@@ -78,6 +88,7 @@ Nhận xét
   $('#myInput').trigger('focus')
 })
 </script>
+@if(isset($student)){
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog" style=" max-width:60%; margin: 10% auto;"   role="document">
     <div class="modal-content">
@@ -101,6 +112,6 @@ Nhận xét
     </div>
   </div>
 </div>  
-
+@endif
 @endsection
 

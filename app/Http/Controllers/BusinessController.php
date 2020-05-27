@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Business;
 use App\Models\Language;
@@ -18,7 +18,7 @@ class BusinessController extends Controller
         $language = DB::table('business')->join('languages','business.code','=','languages.code')->where('business.code','=',$id)->get();
         $data = Business::where('code',$id)->first();
         $datacount = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->get();
-        $datapost = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->orderBy('posts.id', 'DESC')->paginate(5);
+        $datapost = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->where('posts.deadline', '>=', Carbon::now())->orderBy('posts.id', 'DESC')->paginate(5);
         return view('pages.business.infor.business', compact('data','language','datapost','datacount','comment','comment_count'));
     }
     public function jobsingle (Request $request,$id)
@@ -44,8 +44,6 @@ class BusinessController extends Controller
         $name = Str::random(5).'_'.$img->getClientOriginalName();
         $business->image = $name;
         $img->move($path,$name);
-       
-        
         }
         
         
@@ -73,7 +71,7 @@ class BusinessController extends Controller
         
        
         $business->save();
-        return redirect('business/'.$user)->with('success', 'Thêm thành công');
+        return redirect('business/'.$user)->with('name', 'Thêm thành công');
     }
     public function destroy (Request $request, $post){
         $user = $request->session()->get('user');
@@ -114,7 +112,7 @@ class BusinessController extends Controller
         
        
         $Post->save();
-        return redirect('business/updatepost/'.$id)->with('success', 'Thêm thành công');
+        return redirect('business/updatepost/'.$id)->with('name', 'Thêm thành công');
     }
 
     public function addpost ($id)
@@ -145,6 +143,6 @@ class BusinessController extends Controller
             $table_lang->PostID = $idpost;
             $table_lang->save();
         }
-        return redirect('business/addpost/'.$id)->with('success', 'Thêm thành công');
+        return redirect('business/addpost/'.$id)->with('name', 'Thêm thành công');
     }
 }

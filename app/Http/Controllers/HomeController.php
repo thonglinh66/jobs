@@ -1,7 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
+use App\Mail\SendMail;
+use App\Mail\Contact;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use DB;
 
@@ -14,7 +18,7 @@ class HomeController extends Controller
         $language = DB::table('trendings')->get();
         $business = DB::table('business')->get();
         $alldata = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->get();
-        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->orderBy('posts.id', 'DESC')->paginate(5);
+        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->where('posts.deadline', '>=', Carbon::now())->orderBy('posts.id', 'DESC')->paginate(5);
         return view('pages.users.post.index', compact('data','alldata','business','trending','language','user'));
     }
     public function index (Request $request,$id)
@@ -25,7 +29,7 @@ class HomeController extends Controller
         $acount = DB::table('acounts')->where('code','=',$id)->first();
         $business = DB::table('business')->get();
         $alldata = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->get();
-        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->orderBy('posts.id', 'DESC')->paginate(5);
+        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->where('posts.deadline', '>=', Carbon::now())->orderBy('posts.id', 'DESC')->paginate(5);
         return view('pages.users.post.index', compact('data','alldata','acount','business','trending','language','user'));
     }
   
@@ -39,7 +43,7 @@ class HomeController extends Controller
         $language = DB::table('business')->join('languages','business.code','=','languages.code')->where('business.code','=',$id)->get();
         $data = DB::table('business')->where('code','=',$id)->first();
         $datacount = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->get();
-        $datapost = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->orderBy('posts.id', 'DESC')->paginate(5);
+        $datapost = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->where('posts.deadline', '>=', Carbon::now())->orderBy('posts.id', 'DESC')->paginate(5);
         return view('pages.users.post.business_infor', compact('user','data','language','datapost','datacount','acount','student','comment','comment_count'));
     }
     public function post (Request $request)
@@ -66,9 +70,9 @@ class HomeController extends Controller
         $colortext ="text-light";
         }
         
-        $acount = DB::table('acounts')->where('code','=',$user)->first();
+        $acount = DB::table('students')->where('code','=',$user)->first();
         $lang = DB::table('languages')->where('languages.PostID','=',$id)->get();
-        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')->where('posts.id','=',$id)->first()    ;
+        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('mail','member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')->where('posts.id','=',$id)->first()    ;
         // dd($data);
         return view('pages.users.post.jobsingle_U',compact('data','lang','acount','user'))->with('color',$color)->with('colortext',$colortext)->with('count',$count);
     }
@@ -84,7 +88,7 @@ class HomeController extends Controller
         $language = DB::table('trendings')->get();
         $business = DB::table('business')->get();
         $alldata = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->get();
-        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->orderBy('posts.id', 'DESC')->paginate(10);
+        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->where('posts.deadline', '>=', Carbon::now())->orderBy('posts.id', 'DESC')->paginate(10);
         return view('pages.users.post.joblistings', compact('data','alldata','business','language','trending','user'));
     }
     public function searchtrend(Request $request){
@@ -97,7 +101,7 @@ class HomeController extends Controller
         $checked = $request->id.'%';
         // dd($checked);
         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->join('languages', 'languages.PostID','=', 'posts.id')->select('member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')
-        ->where('name_l','like',$checked)->distinct()->paginate(5);
+        ->where('name_l','like',$checked)->where('posts.deadline', '>=', Carbon::now())->distinct()->paginate(5);
         return view('pages.users.post.index', compact('data','alldata','acount','business','trending','language','user'));
     }
     public function search (Request $request)
@@ -132,6 +136,7 @@ class HomeController extends Controller
             if($checked != 'Null%'){
                 if($text == '%%'){
                     $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->join('languages', 'languages.PostID','=', 'posts.id')->select('member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')
+                    ->where('posts.deadline', '>=', Carbon::now())
                     ->where('name_l','like',$checked)
                     // dd($text)  ;
                     ->where('type','=',$type)
@@ -170,10 +175,10 @@ class HomeController extends Controller
                 if($text == '%%'){
                     // dd($type);
                     $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')
-                    ->where('type','=',$type)->orderBy('posts.id', 'DESC')->distinct()->paginate(5);
+                    ->where('posts.deadline', '>=', Carbon::now())->where('type','=',$type)->orderBy('posts.id', 'DESC')->distinct()->paginate(5);
                 }else{
                     $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')
-                    ->where('type','=',$type)
+                    ->where('posts.deadline', '>=', Carbon::now())->where('type','=',$type)
                     ->where(
                         'member', 'like', $text
                     )
@@ -202,14 +207,14 @@ class HomeController extends Controller
                 if($checked != 'Null%'){
                     if($text == '%%'){
                         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->join('languages', 'languages.PostID','=', 'posts.id')->select('member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')
-                        ->where('name_l','like',$checked)->orderBy('posts.id', 'DESC')->distinct()->paginate(5);
+                        ->where('name_l','like',$checked)->where('posts.deadline', '>=', Carbon::now())->orderBy('posts.id', 'DESC')->distinct()->paginate(5);
                         // dd($text)  ;
                     
                         
                         
                     }else{
                         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')
-                    
+                        ->where('posts.deadline', '>=', Carbon::now())
                         ->where(
                             'member', 'like', $text
                         )
@@ -239,9 +244,10 @@ class HomeController extends Controller
                 if($checked == 'Null%'){
                     if($text == '%%'){
                         // dd($type);
-                        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')->orderBy('posts.id', 'DESC')->distinct()->paginate(5);
+                        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')->where('posts.deadline', '>=', Carbon::now())->orderBy('posts.id', 'DESC')->distinct()->paginate(5);
                     }else{
                         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')
+                        ->where('posts.deadline', '>=', Carbon::now())
                         ->where(
                             'member', 'like', $text
                         )
@@ -289,6 +295,7 @@ class HomeController extends Controller
             if($checked != 'Null%'){
                 if($text == '%%'){
                     $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->join('languages', 'languages.PostID','=', 'posts.id')->select('member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')
+                    ->where('posts.deadline', '>=', Carbon::now())
                     ->where('name_l','like',$checked)
                     // dd($text)  ;
                     ->where('type','=',$type)
@@ -296,6 +303,7 @@ class HomeController extends Controller
                     
                 }else{
                     $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')
+                    ->where('posts.deadline', '>=', Carbon::now())
                     ->where('type','=',$type)
                     ->where(
                         'member', 'like', $text
@@ -327,10 +335,10 @@ class HomeController extends Controller
                 if($text == '%%'){
                     // dd($type);
                     $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')
-                    ->where('type','=',$type)->orderBy('posts.id', 'DESC')->paginate(10);
+                    ->where('posts.deadline', '>=', Carbon::now()) ->where('type','=',$type)->orderBy('posts.id', 'DESC')->paginate(10);
                 }else{
                     $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')
-                    ->where('type','=',$type)
+                    ->where('posts.deadline', '>=', Carbon::now())->where('type','=',$type)
                     ->where(
                         'member', 'like', $text
                     )
@@ -359,14 +367,14 @@ class HomeController extends Controller
                 if($checked != 'Null%'){
                     if($text == '%%'){
                         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->join('languages', 'languages.PostID','=', 'posts.id')->select('member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')
-                        ->where('name_l','like',$checked)->orderBy('posts.id', 'DESC')->paginate(10);
+                        ->where('posts.deadline', '>=', Carbon::now())->where('name_l','like',$checked)->orderBy('posts.id', 'DESC')->paginate(10);
                         // dd($text)  ;
                     
                         
                         
                     }else{
                         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')
-                    
+                        ->where('posts.deadline', '>=', Carbon::now())
                         ->where(
                             'member', 'like', $text
                         )
@@ -396,9 +404,10 @@ class HomeController extends Controller
                 if($checked == 'Null%'){
                     if($text == '%%'){
                         // dd($type);
-                        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')->orderBy('posts.id', 'DESC')->paginate(5);
+                        $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')->where('posts.deadline', '>=', Carbon::now())->orderBy('posts.id', 'DESC')->paginate(5);
                     }else{
                         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')
+                        ->where('posts.deadline', '>=', Carbon::now())
                         ->where(
                             'member', 'like', $text
                         )
@@ -459,5 +468,43 @@ class HomeController extends Controller
         }
         return redirect()->back();
     }
+    public function contactpost(Request $request)
+    {
+        $fullname = $request->get('fullname');
+        $mail = $request->get('mail');
+        $jobsAt = $request->get('jobsAt');
+        $decript = $request->get('decript');
+            // dd($fullname, $mail,$jobsAt,$decript);
+        DB::table('feedbacks')->insert([['name' => $fullname, 'mail' => $mail,'jobsAt' => $jobsAt,'decript' => $decript]]);
+        $data =  DB::table('feedbacks')->where('name' ,'=', $fullname)->where('mail','=',  $mail)->where('jobsAt' ,'=',  $jobsAt)->where('decript' ,'=',  $decript)->first();
+        Mail::mailer('mailgun')->to('thonglinh66@gmail.com')->send(new Contact($data));
+        return redirect()->back()->with(['name'=>'Gửi phản hồi thành công']);
+    }
+    public function sendMail(Request $request)
+    {
+        $user= $request->session()->get('user');
+        $content=$request->get('content');
+        $check = DB::table('applys')->join('posts','posts.id','=','applys.PostID')->join('students','students.code','=','applys.code_SV')->join('business','business.code','=','posts.code')->select('students.name','students.code','students.mail_SV','posts.title','applys.CV','applys.content_AP','posts.type','business.mail')->where('code_SV','=',$user)->where('PostID','=', $request->id)->first();
+        if(!isset($check)){
+            if ($files = $request->file('CV')) {
+                $destinationPath = 'UserView/file'; // upload path
+                $profilefile = date('YmdHis') . "." . $files->getClientOriginalExtension();
+                $files->move($destinationPath, $profilefile);
+            }
+            
+            DB::table('applys')->insert([
+                ['code_SV' => $user, 'PostID' => $request->id,'CV' => $profilefile,'content_AP' => $content],
+            ]);
+
+            $data = DB::table('applys')->join('posts','posts.id','=','applys.PostID')->join('students','students.code','=','applys.code_SV')->join('business','business.code','=','posts.code')->select('students.name','students.code','students.mail_SV','posts.title','applys.CV','applys.content_AP','posts.type','business.mail')->where('code_SV','=',$user)->where('PostID','=', $request->id)->first();
+            Mail::mailer('mailgun')->to('thonglinh66@gmail.com')->send(new SendMail( $data));
+            return redirect()->back()->with(['name' => 'Bạn đã nộp đơn thành công!']);
+        }else{
+            return redirect()->back()->with(['name' => 'Bạn đã nộp đơn trước đó!']);
+        }
+        
+           
+    }
+                        
     
 }
