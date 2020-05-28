@@ -1,6 +1,16 @@
 @extends('layouts.upload')
-@section('title')
- <li><a href="{{route('business.upload',$data->code)}}">Cập nhật thông tin</a></li>
+@section('command')
+  @if(Session::has('name'))
+<script>
+      var msg = '{{Session::get('name')}}';
+        alert(msg);
+  </script>
+      @endif
+@endsection
+@section('clicked')
+<li><a href="{{route('business.index', $data->code)}}" >Trang Chủ</a></li>
+              <li><a href="{{route('business.add.post',$data->code)}}" >Đăng bài</a></li>
+              <li><a href="{{route('business.upload',$data->code)}}" class="nav-link active">Cập nhập thông tin</a></li>
 @endsection
 @section('form')
 <div class="container">
@@ -21,12 +31,12 @@
               <h3 class="text-black my-5 border-bottom pb-2">Thông tin</h3>
               <div class="form-group">
                 <label for="company-name">Tên Công Ty</label>
-                <input type="text" name="name" class="form-control" id="company-name" placeholder="e.g. New York">
+                <input type="text" name="name" class="form-control" id="company-name" placeholder="e.g. New York" value="{{$data->name}}">
               </div>
 
               <div class="form-group">
                 <label for="company-tagline">Địa chỉ</label>
-                <input type="text" name="adress" class="form-control" id="company-tagline" placeholder="e.g. New York">
+                <input type="text" name="adress" class="form-control" id="company-tagline" placeholder="e.g. New York" value="{{$data->address}}">
               </div>
 
               <div class="form-group">
@@ -42,26 +52,26 @@
               
               <div class="form-group">
                 <label for="company-website">Website công ty</label>
-                <input type="text" name="website" class="form-control" id="company-website" placeholder="https://">
+                <input type="text" name="website" class="form-control" id="company-website" placeholder="https://" value="{{$data->website}}">
               </div>
 
               <div class="form-group">
                 <label for="company-website-fb">Facebook công ty</label>
-                <input type="text" name="face" class="form-control" id="company-website-fb" placeholder="@Facebook">
+                <input type="text" name="face" class="form-control" id="company-website-fb" placeholder="@Facebook" value="{{$data->facebook}}">
               </div>
 
               <div class="form-group">
                 <label for="company-website-mail">Mail Công ty</label>
-                <input type="text" name="mail" class="form-control" id="company-website-tw" placeholder="@Mail">
+                <input type="text" name="mail" class="form-control" id="company-website-tw" placeholder="@Mail" value="{{$data->mail}}">
               </div>
               <div class="form-group">
                 <label for="company-website-tw">Twitter Công ty</label>
-                <input type="text" name="twtter" class="form-control" id="company-website-tw" placeholder="@Twitter">
+                <input type="text" name="twtter" class="form-control" id="company-website-tw" placeholder="@Twitter" value="{{$data->twitter}}">
               </div>
 
               <div class="form-group">
                 <label for="company-website-tw">Điên thoại Công ty</label>
-                <input type="text" name="phone" class="form-control" id="company-website-tw" placeholder="070...">
+                <input type="text" name="phone" class="form-control" id="company-website-tw" placeholder="070..." value="{{$data->phone}}" >
               </div>
 
               <div class="form-group">

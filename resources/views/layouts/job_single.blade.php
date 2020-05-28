@@ -5,18 +5,23 @@
 
   @include('layouts/blade_index_user/load')
     
-
+@yield('command')
 <div class="site-wrap">
 
 @include('layouts/blade_index_user/mobile')
     
 
-    <!-- NAVBAR -->
-    
-    @yield('header')
-
-    <!-- HOME -->
-    <section class="section-hero overlay inner-page bg-image" style="background-image: url('images/hero_1.jpg');" id="home-section">
+@if(Session::has('type'))
+  @if(Session::get('type') == 1)
+  @include('layouts/business/navbar_business')
+  @else
+  @include('layouts/blade_index_user/navbar')
+  @endif
+  @else
+  @include('layouts/blade_index_user/navbar')
+@endif
+  @yield('header')
+    <section class="section-hero overlay inner-page bg-image" style="background-image: url({{asset('UserView/images/hero_1.jpg')}});" id="home-section">
       <div class="container">
         <div class="row">
           <!-- <div class="col-md-7">
@@ -99,7 +104,8 @@
 
           </div>
           <div class="col-lg-4">
-          @yield('sumary')
+          @yield('submit')
+          
             <!-- <div class="bg-light p-3 border rounded mb-4">
               <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Job Summary</h3>
               <ul class="list-unstyled pl-3 mb-0">
@@ -128,6 +134,7 @@
         </div>
       </div>
     </section>
+    @yield('sendmail')
     @include('layouts/blade_index_user/post')
 
     @include('layouts/blade_index_user/talk')
@@ -139,7 +146,7 @@
 
     <!-- SCRIPTS -->
     @include('layouts/blade_index_user/js')
-
+    @yield('script');
      
   </body>
 </html>

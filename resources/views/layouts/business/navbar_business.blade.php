@@ -2,12 +2,14 @@
 <header class="site-navbar mt-3">
       <div class="container-fluid">
         <div class="row align-items-center">
-          <div class="site-logo col-6"><a href="index.html">JobBoard</a></div>
+          <a href="{{route('business.index', $data->code)}}"><img src="{{asset('UserView/images/logoctu.png')}}" class="img-shadow" style="width:60%; height:60%; margin:5%" alt="Girl in a jacket"></a>
 
-          <nav class="mx-auto site-navigation">
+          <nav class="mx-auto site-navigation" style="font-size:150%">
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
-              <li><a href="{{route('business.index', $data->code)}}" class="nav-link active">Trang Chủ</a></li>
-              <li><a href="{{route('home.about')}}">Đăng bài</a></li>
+            @yield('clicked')
+              <!-- <li><a href="{{route('business.index', $data->code)}}" class="nav-link active">Trang Chủ</a></li>
+              <li><a href="{{route('business.add.post',$data->code)}}">Đăng bài</a></li>
+              <li><a href="{{route('business.upload',$data->code)}}">Cập nhập thông tin</a></li> -->
               @yield('title')
               <!-- <li><a href="{{route('business.upload',$data->code)}}">Cập nhật thông tin</a></li> -->
               <!-- <li class="has-children">
@@ -36,7 +38,7 @@
           
           <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
             <div class="ml-auto">
-            @yield('Login')
+            <a href="{{route('logout')}}" style="font-size:150%"  class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Log Out</a>
               <!-- <a href="post-job.html" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Post a Job</a>
               <a href="login.html" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Log In</a> -->
             </div>

@@ -29,7 +29,7 @@ class LoginController extends Controller
             }else if($type == '1'){
                 return redirect('business/'.$id);
             }else if($type == '2'){
-                return redirect('acount/'.$id);
+                return redirect('account');
             }
             //  
         }else{
@@ -41,6 +41,12 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->flush();
         return redirect('login');
+        
+    }
+    public function postAuthLogoutHome(Request $request){
+        Auth::logout();
+        $request->session()->flush();
+        return redirect('home');
         
     }
 }

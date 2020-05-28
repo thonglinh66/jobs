@@ -1,4 +1,19 @@
 @extends('layouts.Business_Home')
+@section('command')
+  @if(Session::has('name'))
+<script>
+      var msg = '{{Session::get('name')}}';
+        alert(msg);
+  </script>
+      @endif
+@endsection
+@section('title')
+@endsection
+@section('clicked')
+<li><a href="{{route('business.index', $data->code)}}" class="nav-link active">Trang Chủ</a></li>
+              <li><a href="{{route('business.add.post',$data->code)}}">Đăng bài</a></li>
+              <li><a href="{{route('business.upload',$data->code)}}">Cập nhập thông tin</a></li>
+@endsection
 @section('Login')
  <a href="{{route('business.upload',$data->code)}}" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Post a Job</a>
 <a href="{{route('logout')}}" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Log Out</a>
@@ -41,7 +56,7 @@
             @if($d->type == 1)
                 Tuyển dụng
             @endif
-            @if($d->type == 2)
+            @if($d->type == 0)
                 Thực tập
             @endif
             </span>

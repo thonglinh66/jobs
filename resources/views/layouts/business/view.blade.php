@@ -32,11 +32,10 @@
             <ul class="navigation">
             <li class="active_view navigation__item" id="Checke_1" onclick="Tranfer('Checke_1')">	
             <a data-controller="utm-tracking" href="#">Overview</a>
-            <div class="corner-bottom-right-overlay"></div>
-            <div class="corner-bottom-right-curve"></div>
+            <div class="corner-bottom-right-overlay d-none" ></div>
             </li>
             <li class="navigation__item review-tab" id="Checke_2" onclick="Tranfer('Checke_2')">
-            <a data-controller="utm-tracking" href="#">1 Review</a>
+            <a data-controller="utm-tracking" href="#">{{$comment_count}} Review</a>
             <div class="corner-bottom-right-overlay"></div>
             <div class="corner-bottom-right-curve"></div>
             <div class="corner-bottom-left-overlay"></div>
@@ -47,10 +46,10 @@
             
             <!-- Description - Tech stack -->
             <!-- Last updated: "2020-05-13 02:07:48 +0700"-->
-            <div class="panel panel-default">
-            <div class="panel-heading">
+            <div class="panel panel-default " id="over">
+            <div class="panel-heading ">
             <h3 class="panel-title headline">
-            Tổng quan sơ lượt về công ty :  {{$data->name}}
+            Tổng quan sơ lượt về công ty :
             </h3>
             </div>
             <div class="panel-body">
@@ -60,12 +59,27 @@
             <h3 class="panel-title">Chuyên:</h3>
             <ul class="employer-skills">
               @foreach($language as $lg)
-                <li class="employer-skills__item"><a target="_blank" data-controller="utm-tracking" href="/it-jobs/c++">{{$lg->name}}</a></li>
+                <li class="employer-skills__item"><a target="_blank" data-controller="utm-tracking" href="/it-jobs/c++">{{$lg->name_l}}</a></li>
                 @endforeach
             </ul>
             <div class="paragraph">
             <p></p>
             </div>
+            </div>
+            </div>
+            <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
+            <div class="panel panel-default d-none" id="re">
+            @foreach($comment as $c)
+            <div class="card" style="margin:0 10px 10px 10px">
+            <div class="card-body">
+                <h5 class="card-title text-dark">{{$c->name}}</h5>
+                <p class="card-text"  style="
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;" > {{$c->content}}</p>
+            </div>
+            </div>
+            @endforeach
             </div>
             </div>
         </div>

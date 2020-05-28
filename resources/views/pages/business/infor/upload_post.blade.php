@@ -1,6 +1,16 @@
 @extends('layouts.upload_post')
-@section('title')
- <li><a href="{{route('business.upload',$data->code)}}">Cập nhật Bài Đăng</a></li>
+@section('command')
+  @if(Session::has('name'))
+<script>
+      var msg = '{{Session::get('name')}}';
+        alert(msg);
+  </script>
+      @endif
+@endsection
+@section('clicked')
+<li><a href="{{route('business.index', $data->code)}}" >Trang Chủ</a></li>
+              <li><a href="{{route('business.add.post',$data->code)}}" class="nav-link active">Đăng bài</a></li>
+              <li><a href="{{route('business.upload',$data->code)}}">Cập nhập thông tin</a></li>
 @endsection
 @section('form')
 <div class="container">
@@ -16,7 +26,7 @@
         </div>
         <div class="row mb-5">
           <div class="col-lg-12">
-        <form  action="{{route('business.post.upload')}} " class="p-4 p-md-5 border rounded" method="post" enctype="multipart/form-data">
+        <form  action="{{route('business.post.update.post',$data->id)}} " class="p-4 p-md-5 border rounded" method="post" enctype="multipart/form-data">
             @csrf
               <h3 class="text-black my-5 border-bottom pb-2">Thông tin</h3>
               <div class="form-group">
@@ -31,23 +41,23 @@
 
               <div class="form-group">
                 <label for="company-website">loại tuyển dụng</label>
-                <select class="browser-default custom-select">
+                <select name="type" class="browser-default custom-select">
                     <option selected value="0">Tuyển dụng</option>
                     <option value="1">Thực tập</option>
                 </select>
               </div>
-              
+
               <div class="form-group">
-                <label for="company-website">Chuyên về Ngôn Ngữ</label>
+                <label for="company-website">Ngôn Ngữ cần</label>
                 <input type="text" name="lang" class="form-control" id="company-website" placeholder="C,C#">
               </div>
 
               <div class="form-group">
                 <label for="job-description">Mức lương</label>
                     <label for="job-description">Thấp nhất</label>
-                    <input type="text" name="website" class="form-control" id="company-website" placeholder="0">
+                    <input type="text" name="min-sala" class="form-control" id="company-website" placeholder="0">
                     <label for="job-description">Cao nhất</label>
-                    <input type="text" name="website" class="form-control" id="company-website" placeholder="1000$">
+                    <input type="text" name="max-sala" class="form-control" id="company-website" placeholder="1000$">
 
               </div>
               

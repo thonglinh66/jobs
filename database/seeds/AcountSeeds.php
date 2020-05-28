@@ -14,8 +14,8 @@ class AcountSeeds extends Seeder
     {
         $data =  [
             [
-                'code' => 'admin',
-                'password' => bcrypt('admin'),
+                'code' => 'CP1998',
+                'password' => bcrypt('123456'),
                 'type'=>2,
     
             ],
