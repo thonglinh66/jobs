@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('active')
 <li class="nav-item has-treeview menu-open">
-<a href="#" class="nav-link active">
+<a href="#" class="nav-link ">
 <i class="nav-icon fas fa-tachometer-alt"></i>
 <p>
 Thông tin căn bản
@@ -31,8 +31,8 @@ Thông tin căn bản
 </li>
          
          
-          <li class="nav-item has-treeview">
-            <a href="./analyst" class="nav-link">
+          <li class="nav-item has-treeview active">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Danh sách thống kê
@@ -87,19 +87,20 @@ Thông tin căn bản
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Mã ID</th>
-                                            <th>Loại TK</th>
-                                            {{-- @if (Auth::user()->hasRole('Admin')) --}}
-                                                <th>Chức năng</th>
-                                            {{-- @else --}}
-                                                {{-- <th></th> --}}
-                                            {{-- @endif --}}
+                                            <th>ID Công Ty</th>
+                                            <th>Số lượng sinh viên ứng tuyển</th>
+                                            <th>Số lượng nhân viên trúng tuyển</th>
+                                            <th>Phần trăm thành công ứng tuyển</th>
                                         </tr>
                                     </thead>
                                     <tbody  style="font-size: 12px">
                                         @foreach ($data as $item)
+                                            $applys = 0
                                             <tr>
-                                                <td>{{$item->id}}</td>
+                                                <td>{{$item->code}}</td>
+                                                @foreach ( $data as $temp)
+                                                @if($temp == $item->code) 
+                                                    $applys ++
                                                 <td>{{$item->code}}</td>
                                                 @if($item->type == 0) 
                                                 <td>Sinh viên</td>

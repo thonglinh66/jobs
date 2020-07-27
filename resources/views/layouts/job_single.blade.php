@@ -21,17 +21,10 @@
   @include('layouts/blade_index_user/navbar')
 @endif
   @yield('header')
+    <!-- HOME -->
     <section class="section-hero overlay inner-page bg-image" style="background-image: url({{asset('UserView/images/hero_1.jpg')}});" id="home-section">
       <div class="container">
         <div class="row">
-          <!-- <div class="col-md-7">
-            <h1 class="text-white font-weight-bold">Product Designer</h1>
-            <div class="custom-breadcrumbs">
-              <a href="#">Home</a> <span class="mx-2 slash">/</span>
-              <a href="#">Job</a> <span class="mx-2 slash">/</span>
-              <span class="text-white"><strong>Product Designer</strong></span>
-            </div>
-          </div> -->
         </div>
       </div>
     </section>
@@ -135,13 +128,14 @@
       </div>
     </section>
     @yield('sendmail')
+    @yield('comment')
     @include('layouts/blade_index_user/post')
 
     @include('layouts/blade_index_user/talk')
 
     @include('layouts/blade_index_user/bottom')
    
-  
+
   </div>
 
     <!-- SCRIPTS -->

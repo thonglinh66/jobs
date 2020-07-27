@@ -18,17 +18,18 @@ class BusinessController extends Controller
         $language = DB::table('business')->join('languages','business.code','=','languages.code')->where('business.code','=',$id)->get();
         $data = Business::where('code',$id)->first();
         $datacount = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->get();
-        $datapost = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->where('posts.deadline', '>=', Carbon::now())->orderBy('posts.id', 'DESC')->paginate(5);
+        $datapost = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->orderBy('posts.id', 'DESC')->paginate(5);
         return view('pages.business.infor.business', compact('data','language','datapost','datacount','comment','comment_count'));
     }
     public function jobsingle (Request $request,$id)
     {
+        $applied = DB::table('applys')->where('PostID','=',$id)->get();
         $count =  DB::table('likes')->where('PostID','=',$id)->count();
         $user = $request->session()->get('user');
         $acount = DB::table('acounts')->where('code','=',$user)->first();
         $lang = DB::table('languages')->where('languages.PostID','=',$id)->get();
         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('member','posts.created_at','name','posts.id','posts.code','title','name','deadline','image','pdecription','address','type','min_salary','max_salary')->where('posts.id','=',$id)->first()    ;
-        return view('pages.business.infor.jobsingle',compact('data','lang','acount'))->with('count',$count);
+        return view('pages.business.infor.jobsingle',compact('data','lang','acount','applied'))->with('count',$count);
     }
     public function upload ($id)
     {    $data = DB::table('business')->where('code','=',$id)->first();
@@ -144,5 +145,11 @@ class BusinessController extends Controller
             $table_lang->save();
         }
         return redirect('business/addpost/'.$id)->with('name', 'Thêm thành công');
+    }
+    public function addmember(Request $request){
+        DB::table('posts')->where('id','=',$request->id)->update([
+            'success' => $request->amount
+            ]);
+        return redirect()->back()->with(['name'=>'cập nhập thành công']);
     }
 }

@@ -6,7 +6,8 @@
 <li><a href="{{route('post.index.home')}}" >Trang chủ</a></li>
               <li><a href="{{route('home.about')}}">Giới thiệu</a></li>
               <li><a href="{{route('home.joblistings')}}" class="nav-link active">Danh sách công việc</a></li>
-              <li><a href="{{route('home.contact')}}" >Liên hệ</a></li>    
+              <li><a href="{{route('home.contact')}}" >Liên hệ</a></li>  
+             
 @endsection
 @section('Conten_Post')
 
