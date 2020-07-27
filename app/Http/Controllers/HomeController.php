@@ -18,19 +18,22 @@ class HomeController extends Controller
         $language = DB::table('trendings')->get();
         $business = DB::table('business')->get();
         $alldata = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->get();
+        $student = DB::table('students')->where('code','=',$user)->first();
         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->where('posts.deadline', '>=', Carbon::now())->orderBy('posts.id', 'DESC')->paginate(5);
-        return view('pages.users.post.index', compact('data','alldata','business','trending','language','user'));
+        return view('pages.users.post.index', compact('data','alldata','business','trending','language','user','student'));
     }
     public function index (Request $request,$id)
-    {
+    {   
+
         $user = $request->session()->get('user');
+        $student = DB::table('students')->where('code','=',$user)->first();
         $trending = DB::table('trendings')->orderBy('count', 'DESC')->paginate(4);
         $language = DB::table('trendings')->get();
         $acount = DB::table('acounts')->where('code','=',$id)->first();
         $business = DB::table('business')->get();
         $alldata = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->get();
         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->where('posts.deadline', '>=', Carbon::now())->orderBy('posts.id', 'DESC')->paginate(5);
-        return view('pages.users.post.index', compact('data','alldata','acount','business','trending','language','user'));
+        return view('pages.users.post.index', compact('data','alldata','acount','business','trending','language','user','student'));
     }
   
     public function business(Request $request,$id)
@@ -53,14 +56,19 @@ class HomeController extends Controller
         return view('pages.users.post.infor_post', compact('data','user'));
     }
     public function about (Request $request)
-    {
+    {   
         $user = $request->session()->get('user');
-        return view('pages.users.post.about',compact('user'));
+        $student = DB::table('students')->where('code','=',$user)->first();
+        return view('pages.users.post.about',compact('user','student'));
     }
     public function jobsingle (Request $request, $id)
     {
+        $applied = DB::table('applys')->where('PostID','=',$id)->get();
+        
         $count =  DB::table('likes')->where('PostID','=',$id)->count();
         $user = $request->session()->get('user');
+        $checkap = DB::table('applys')->where('PostID','=',$id)->where('code_SV','=',$user)->first();
+        $student = DB::table('students')->where('code','=',$user)->first();
         $likes =  DB::table('likes')->where('code' ,'=',$user)->where('PostID','=',$id)->first();
         if(!isset($likes)){
             $color = "btn-light";
@@ -74,27 +82,30 @@ class HomeController extends Controller
         $lang = DB::table('languages')->where('languages.PostID','=',$id)->get();
         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('mail','member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')->where('posts.id','=',$id)->first()    ;
         // dd($data);
-        return view('pages.users.post.jobsingle_U',compact('data','lang','acount','user'))->with('color',$color)->with('colortext',$colortext)->with('count',$count);
+        return view('pages.users.post.jobsingle_U',compact('data','lang','acount','user','applied','student','checkap'))->with('color',$color)->with('colortext',$colortext)->with('count',$count);
     }
     public function contact (Request $request)
     {
         $user = $request->session()->get('user');
-        return view('pages.users.post.contact',compact('user'));
+        $student = DB::table('students')->where('code','=',$user)->first();
+        return view('pages.users.post.contact',compact('user','student'));
     }
     public function joblistings (Request $request)
     {
         $user = $request->session()->get('user');
+        $student = DB::table('students')->where('code','=',$user)->first();
         $trending = DB::table('trendings')->orderBy('count', 'DESC')->paginate(4);
         $language = DB::table('trendings')->get();
         $business = DB::table('business')->get();
         $alldata = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->get();
         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->where('posts.deadline', '>=', Carbon::now())->orderBy('posts.id', 'DESC')->paginate(10);
-        return view('pages.users.post.joblistings', compact('data','alldata','business','language','trending','user'));
+        return view('pages.users.post.joblistings', compact('data','alldata','business','language','trending','user','student'));
     }
     public function searchtrend(Request $request){
         $trending = DB::table('trendings')->orderBy('count', 'DESC')->paginate(4);
         $language = DB::table('trendings')->get();
         $user = $request->session()->get('user');
+        $student = DB::table('students')->where('code','=',$user)->first();
         $acount = DB::table('acounts')->where('code','=',$user)->first();
         $business = DB::table('business')->get();
         $alldata = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->get();
@@ -102,13 +113,14 @@ class HomeController extends Controller
         // dd($checked);
         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->join('languages', 'languages.PostID','=', 'posts.id')->select('member','posts.created_at','name','posts.id','posts.code','title','deadline','image','pdecription','address','type','min_salary','max_salary')
         ->where('name_l','like',$checked)->where('posts.deadline', '>=', Carbon::now())->distinct()->paginate(5);
-        return view('pages.users.post.index', compact('data','alldata','acount','business','trending','language','user'));
+        return view('pages.users.post.index', compact('data','alldata','acount','business','trending','language','user','student'));
     }
     public function search (Request $request)
     {
         $trending = DB::table('trendings')->orderBy('count', 'DESC')->paginate(4);
         $language = DB::table('trendings')->get();
         $user = $request->session()->get('user');
+        $student = DB::table('students')->where('code','=',$user)->first();
         $text = $request->get('searchtext');
         $acount = DB::table('acounts')->where('code','=',$user)->first();
         $business = DB::table('business')->get();
@@ -275,13 +287,14 @@ class HomeController extends Controller
         }
         
        
-            return view('pages.users.post.index', compact('data','alldata','acount','business','trending','language','user'));
+            return view('pages.users.post.index', compact('data','alldata','acount','business','trending','language','user','student'));
     }
     public function search_list (Request $request)
     {
         $trending = DB::table('trendings')->orderBy('count', 'DESC')->paginate(4);
         $language = DB::table('trendings')->get();
         $user = $request->session()->get('user');
+        $student = DB::table('students')->where('code','=',$user)->first();
         $text = $request->get('searchtext');
         $acount = DB::table('acounts')->where('code','=',$user)->first();
         $business = DB::table('business')->get();
@@ -435,7 +448,7 @@ class HomeController extends Controller
         }
         
        
-            return view('pages.users.post.joblistings', compact('data','alldata','acount','business','trending','language','user'));
+            return view('pages.users.post.joblistings', compact('data','alldata','acount','business','trending','language','user','student'));
     }
 
    public function buttonlike(Request $request)
@@ -484,6 +497,7 @@ class HomeController extends Controller
     {
         $user= $request->session()->get('user');
         $content=$request->get('content');
+        $code = $request->get('code');
         $check = DB::table('applys')->join('posts','posts.id','=','applys.PostID')->join('students','students.code','=','applys.code_SV')->join('business','business.code','=','posts.code')->select('students.name','students.code','students.mail_SV','posts.title','applys.CV','applys.content_AP','posts.type','business.mail')->where('code_SV','=',$user)->where('PostID','=', $request->id)->first();
         if(!isset($check)){
             if ($files = $request->file('CV')) {
@@ -493,7 +507,7 @@ class HomeController extends Controller
             }
             
             DB::table('applys')->insert([
-                ['code_SV' => $user, 'PostID' => $request->id,'CV' => $profilefile,'content_AP' => $content],
+                ['code' => $code,'code_SV' => $user, 'PostID' => $request->id,'CV' => $profilefile,'content_AP' => $content],
             ]);
 
             $data = DB::table('applys')->join('posts','posts.id','=','applys.PostID')->join('students','students.code','=','applys.code_SV')->join('business','business.code','=','posts.code')->select('students.name','students.code','students.mail_SV','posts.title','applys.CV','applys.content_AP','posts.type','business.mail')->where('code_SV','=',$user)->where('PostID','=', $request->id)->first();

@@ -8,6 +8,9 @@
         alert('Bạn cần đăng nhập để sử dụng tính năng này');
       }
     }
+    function showcheckap(){
+        alert('Bạn đã ứng tuyển');
+    }
   </script>
   @if(Session::has('name'))
 <script>
@@ -23,7 +26,8 @@
 <li><a href="{{route('post.index.home')}}" >Trang chủ</a></li>
               <li><a href="{{route('home.about')}}">Giới thiệu</a></li>
               <li><a href="{{route('home.joblistings')}}" class="nav-link active">Danh sách công việc</a></li>
-              <li><a href="{{route('home.contact')}}" >Liên hệ</a></li>    
+              <li><a href="{{route('home.contact')}}" >Liên hệ</a></li>  
+               
 @endsection
 @endsection
 
@@ -56,7 +60,7 @@
     <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>{{$data->pdecription}}</span></li>
     
 @endsection
-@section('sumary')
+@section('submit')
     <div class="bg-light p-3 border rounded mb-4">
         <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Tóm tắt công việc</h3>
         <ul class="list-unstyled pl-3 mb-0">
@@ -69,6 +73,7 @@
                   @endif</li>
             <li class="mb-2"><strong class="text-black">Lương:</strong> {{$data->min_salary}}$ - {{$data->max_salary}}$</li>
             <li class="mb-2"><strong class="text-black">Hạn chót:</strong> {{ date('d-m-Y', strtotime($data->deadline)) }}</li>
+            <li class="mb-2"><strong class="text-black">Số lượng đã ứng tuyển:</strong> {{$applied->count()}}</li>
         </ul>
     </div>
 @endsection
@@ -80,9 +85,16 @@
       <button type="submit" class="btn btn-block border-danger {{$color}} btn-md"><span class="  icon-heart-o mr-2 {{$colortext}}"></span>Thích</button>
     </div>
     <div class="col-6">
-       <button type="button" class="btn btn-primary btn-block btn-md" data-toggle="modal" Onclick="loginshow()" data-target="#exampleModalCenter">
-Ứng tuyển
-</button>
+    @if(isset($checkap))
+    <button type="button" class="btn btn-primary btn-block btn-md btn-danger" Onclick="showcheckap()" data-target="#exampleModalCenter">
+    Đã ứng tuyển
+    </button>
+    @else
+     <button type="button" class="btn btn-primary btn-block btn-md" data-toggle="modal" Onclick="loginshow()" data-target="#exampleModalCenter">
+    Ứng tuyển
+    </button>
+    @endif
+
 
     </div>
   </form>
@@ -107,6 +119,7 @@
               <div class="form-group">
                 <label for="company-website">Từ</label>
                 <input type="text" name="from" class="form-control" id="company-website" disabled="true" value="{{$acount->mail_SV}}">
+                <input name="code" type="text" value="{{$data->code}}" hidden >
               </div>
               <div class="form-group">
                 <label for="company-website">Đến</label>
@@ -144,5 +157,6 @@
 });
 </script>
 @endsection
+
 
  

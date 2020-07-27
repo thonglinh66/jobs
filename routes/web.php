@@ -26,6 +26,18 @@ Route::prefix('account')->group(function () {
     Route::post('/update/{id}', 'AccountController@update')->name('account.update');
     Route::post('/delete/{id}', "AccountController@delete")->name('account.delete');
 });
+Route::prefix('listpost')->group(function () {
+    Route::get('/', 'AccountController@post')->name('post.index');// maked  
+    Route::post('/delete/{id}', "AccountController@deletepost")->name('post.delete');  
+});
+Route::prefix('listcontact')->group(function () {
+    Route::get('/', 'AccountController@contact')->name('contact.index');// maked  
+    Route::post('/delete/{id}', "AccountController@deletecontact")->name('contact.delete');  
+});
+Route::prefix('analyst')->group(function () {
+    Route::get('/', 'AccountController@analyst')->name('analyst.index');// maked  
+    // Route::post('/delete/{id}', "AccountController@deletecontact")->name('analyst.delete');  
+});
 
 Auth::routes();
 
@@ -39,6 +51,7 @@ Auth::routes();
         Route::delete('/delete/{id}', 'BusinessController@destroy')->name('business.post.delete');;
         Route::get('/jobsingle/{id}', 'BusinessController@jobsingle')->name('business.jobsingle');
         Route::get('/update/{id}', 'BusinessController@update')->name('business.post.update');
+        Route::post('/addmember/{id}', 'BusinessController@addmember')->name('post.addmember');
         Route::get('/updatepost/{id}', 'BusinessController@updatepost')->name('business.update.post');
         Route::post('/updatepost/{id}', 'BusinessController@postupdatepost')->name('business.post.update.post');
         Route::get('/addpost/{id}', 'BusinessController@addpost')->name('business.add.post');

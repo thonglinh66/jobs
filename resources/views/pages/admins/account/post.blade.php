@@ -1,36 +1,35 @@
 @extends('layouts.admin')
 @section('active')
 <li class="nav-item has-treeview menu-open">
-<a href="#" class="nav-link active">
-<i class="nav-icon fas fa-tachometer-alt"></i>
-<p>
-Thông tin căn bản
-<i class="right fas fa-angle-left"></i>
-</p>
-</a>
-<ul class="nav nav-treeview">
-<li class="nav-item">
-<a href="./account" class="nav-link active">
-<i class="far fa-circle nav-icon"></i>
-<p>Danh sách tài khoản</p>
-</a>
-</li>
-<li class="nav-item">
-<a href="./listpost" class="nav-link">
-<i class="far fa-circle nav-icon"></i>
-<p>Danh sách bài đăng</p>
-</a>
-</li>
-<li class="nav-item">
-<a href="./listcontact" class="nav-link">
-<i class="far fa-circle nav-icon"></i>
-<p>Danh sách phản hồi</p>
-</a>
-</li>
-</ul>
-</li>
-         
-         
+          <a href="#" class="nav-link active">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Thông tin căn bản
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="./account" class="nav-link ">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh sách tài khoản</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./listpost" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh sách bài đăng</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./listcontact" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh sách phản hồi</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          
           <li class="nav-item has-treeview">
             <a href="./analyst" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
@@ -40,18 +39,16 @@ Thông tin căn bản
               </p>
             </a>
           </li>
-
 @endsection
-
 @section('content-header')
 <div class="row mb-2">
     <div class="col-sm-6">
-      <h1 class="m-0 text-dark">Tài khoản</h1>
+      <h1 class="m-0 text-dark">Bài đăng</h1>
     </div><!-- /.col -->
     <div class="col-sm-6">
       <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a href="#">admin</a></li>
-        <li class="breadcrumb-item"><a href="{{route('account.index')}}">account</a></li>
+        <li class="breadcrumb-item"><a href="{{route('account.index')}}">post</a></li>
       </ol>
     </div><!-- /.col -->
   </div><!-- /.row -->
@@ -76,9 +73,6 @@ Thông tin căn bản
                     <div class="col-sm-12">
                         <div class="white-box">
                             <br>
-                            {{-- @if (Auth::user()->hasRole('Admin')) --}}
-                                <a style="width:80px" href="{{route('account.add')}}" class="btn btn-success waves-effect waves-light m-r-10">Thêm</a>
-                            {{-- @endif --}}
                             <br>
                             <br>
                             <br>
@@ -87,8 +81,13 @@ Thông tin căn bản
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Mã ID</th>
-                                            <th>Loại TK</th>
+                                            <th>Mã CP</th>
+                                            <th>Loại Tuyển dụng</th>
+                                            <th>Tiêu đề</th>
+                                            <th>Số lượng</th>
+                                            <th>Mức lương</th>
+                                            <th>Hạn chót</th>
+                                            <th>Ngày đăng</th>
                                             {{-- @if (Auth::user()->hasRole('Admin')) --}}
                                                 <th>Chức năng</th>
                                             {{-- @else --}}
@@ -102,16 +101,20 @@ Thông tin căn bản
                                                 <td>{{$item->id}}</td>
                                                 <td>{{$item->code}}</td>
                                                 @if($item->type == 0) 
-                                                <td>Sinh viên</td>
+                                                <td>Thực tập</td>
                                                 @elseif ($item->type == 1) 
-                                                <td>Doanh nghiệp</td>
+                                                <td>Tuyển dụng</td>
                                                 @else 
-                                                <td>Admin</td>
+                                                <td>Null</td>
                                                 @endif
+                                                <td>{{$item->title}}</td>
+                                                <td>{{$item->member}}</td>
+                                                <td>{{$item->min_salary}}-{{$item->max_salary}}</td>
+                                                <td>{{$item->deadline}}</td>
+                                                <td>{{$item->created_at}}</td>
                                                 {{-- @if (Auth::user()->hasRole('Admin')) --}}
                                                     <td>
-                                                        <form action="{{ route('account.delete', $item->id) }}" method="post" class="delete_form">
-                                                            <a  href="{{ action('AccountController@edit',$item->id) }}" data-toggle="toolytip" data-placement="top" title="Chỉnh sửa">&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil text-inverse m-r-10 fa-lg"></i></a>
+                                                        <form action="{{ route('post.delete', $item->id) }}" method="post" class="delete_form">
                                                             @csrf
                                                             <button type="submit" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fal fa-trash-alt fa-lg"></i></button>
                                                         </form>
@@ -152,7 +155,7 @@ Thông tin căn bản
         // Họp thoại cảnh báo xóa
         $(document).ready(function () {
             $('.delete_form').on('submit',function(){
-                if(confirm('Bạn có muốn xóa tài khoản này không?'))
+                if(confirm('Bạn có muốn xóa bài đăng này không?'))
                 {
                     return true;
                 }
