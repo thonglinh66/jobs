@@ -19,13 +19,12 @@
   </script>
       @endif
 @endsection
+
 @section('header')
-
-
 @section('active')
 <li><a href="{{route('post.index.home')}}" >Trang chủ</a></li>
               <li><a href="{{route('home.about')}}">Giới thiệu</a></li>
-              <li><a href="{{route('home.joblistings')}}" class="nav-link active">Danh sách công việc</a></li>
+              <li><a href="{{route('home.joblistings')}}" class="nav-link active">Công việc</a></li>
               <li><a href="{{route('home.contact')}}" >Liên hệ</a></li>  
                
 @endsection
@@ -52,14 +51,15 @@
 @endsection
 
 @section('List_Language')
-@foreach($lang as $l)
-<li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>{{$l->name_l}}</span></li>
-@endforeach
+  @foreach($lang as $l)
+  <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>{{$l->name_l}}</span></li>
+  @endforeach
 @endsection
+
 @section('content')
-    <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>{{$data->pdecription}}</span></li>
-    
+    <li class="d-flex align-items-start mb-2"><span class="icon-check_circle mr-2 text-muted"></span><span>{{$data->pdecription}}</span></li>    
 @endsection
+
 @section('submit')
     <div class="bg-light p-3 border rounded mb-4">
         <h3 class="text-primary  mt-3 h5 pl-3 mb-3 ">Tóm tắt công việc</h3>
@@ -77,8 +77,8 @@
         </ul>
     </div>
 @endsection
-@section('button_Apply')
 
+@section('button_Apply')
 <form action="{{route('home.jobsingle.like',$data->id)}}" class="row mb-5" method="post">
 @csrf
     <div class="col-6">
@@ -99,6 +99,8 @@
     </div>
   </form>
 @endsection
+
+
 @section('sendmail')
 <script type="text/javascript">
     

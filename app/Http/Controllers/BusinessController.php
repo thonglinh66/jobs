@@ -19,17 +19,33 @@ class BusinessController extends Controller
         $data = Business::where('code',$id)->first();
         $datacount = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->get();
         $datapost = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->orderBy('posts.id', 'DESC')->paginate(5);
-        return view('pages.business.infor.business', compact('data','language','datapost','datacount','comment','comment_count'));
+
+
+        $datacs = DB::table('business')->join('posts','posts.code','=','business.code')
+        ->where('business.code', '=',$id)
+        ->select('business.code','business.name','posts.success',DB::raw('sum(posts.success) as countts'))
+        
+        ->groupBy('business.code')
+        ->first();
+        $databs = DB::table('business')->join('applys','applys.code','=','business.code')
+        ->where('business.code', '=',$id)
+        ->select('business.code','business.name',DB::raw('count(business.code) as countt'))
+         ->groupBy('business.code')
+        ->first();
+        
+        return view('pages.business.infor.business', compact('data','language','datapost','datacount','comment','comment_count','databs','datacs' ));
     }
     public function jobsingle (Request $request,$id)
     {
+        $datenow = Carbon::now();
         $applied = DB::table('applys')->where('PostID','=',$id)->get();
         $count =  DB::table('likes')->where('PostID','=',$id)->count();
         $user = $request->session()->get('user');
         $acount = DB::table('acounts')->where('code','=',$user)->first();
         $lang = DB::table('languages')->where('languages.PostID','=',$id)->get();
+        
         $data = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->select('member','posts.created_at','name','posts.id','posts.code','title','name','deadline','image','pdecription','address','type','min_salary','max_salary')->where('posts.id','=',$id)->first()    ;
-        return view('pages.business.infor.jobsingle',compact('data','lang','acount','applied'))->with('count',$count);
+        return view('pages.business.infor.jobsingle',compact('data','lang','acount','applied','datenow'))->with('count',$count);
     }
     public function upload ($id)
     {    $data = DB::table('business')->where('code','=',$id)->first();

@@ -15,12 +15,14 @@ Thông tin căn bản
 <p>Danh sách tài khoản</p>
 </a>
 </li>
+
 <li class="nav-item">
 <a href="./listpost" class="nav-link">
 <i class="far fa-circle nav-icon"></i>
 <p>Danh sách bài đăng</p>
 </a>
 </li>
+
 <li class="nav-item">
 <a href="./listcontact" class="nav-link">
 <i class="far fa-circle nav-icon"></i>
@@ -50,8 +52,8 @@ Thông tin căn bản
     </div><!-- /.col -->
     <div class="col-sm-6">
       <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="#">admin</a></li>
-        <li class="breadcrumb-item"><a href="{{route('account.index')}}">account</a></li>
+        <li class="breadcrumb-item"><a href="#">Admin</a></li>
+        <li class="breadcrumb-item"><a href="{{route('account.index')}}">Tài khoản</a></li>
       </ol>
     </div><!-- /.col -->
   </div><!-- /.row -->
@@ -86,7 +88,7 @@ Thông tin căn bản
                                 <table style="font-size:12px" id="myTable" class="table table-striped dataTable no-footer">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
+                                            <th>STT-ID</th>
                                             <th>Mã ID</th>
                                             <th>Loại TK</th>
                                             {{-- @if (Auth::user()->hasRole('Admin')) --}}

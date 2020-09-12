@@ -9,19 +9,18 @@
 
 <div class="site-wrap">
 
-@include('layouts/blade_index_user/mobile')
+   @include('layouts/blade_index_user/mobile')
+        <!-- NAVBAR -->
+    @include('layouts/blade_index_user/navbar')
     
-
     <!-- NAVBAR -->
-    
-    <!-- NAVBAR -->
-<header class="site-navbar mt-3">
+<!-- <header class="site-navbar mt-3">
       <div class="container-fluid">
         <div class="row align-items-center">
           <a href="login"><img src="{{asset('UserView/images/logoctu.png')}}" class="img-shadow" style="width:50%; height:50%; margin:5%" alt="Girl in a jacket"></a>
         </div>
       </div>
-    </header>
+    </header> -->
 
 
     <!-- HOME -->
@@ -33,12 +32,12 @@
       </div>
     </section>
 
-    <section class="site-section">
+    <section class="site-section"  >
       <div class="container">
-        <div class="row">
-          <div class="col-lg-6">
+        <div class="row" >
+          <div class="col-lg-6" style="margin: 0 auto;">
          
-            <h2 class="mb-4">Đăng nhập</h2>
+            <h2 class="mb-4" style="margin-left: 35%;" >Đăng nhập</h2>
             @if(isset($fails))
               <div class="alert alert-success" role="alert" id="showMessage">
                   <p>{{$fails}}</p>
@@ -62,7 +61,7 @@
 
               <div class="row form-group">
                 <div class="col-md-12">
-                  <input type="submit" value="Log In" class="btn px-4 btn-primary text-white">
+                  <input type="submit" value="Đăng nhập" class="btn px-4 btn-primary text-white">
                 </div>
               </div>
 
