@@ -11,7 +11,7 @@
     <!-- NAVBAR -->
     @include('layouts/blade_index_user/navbar')
     <!-- HOME -->
-    @include('layouts/blade_index_user/navbar_about_us')
+    @yield('navbar_about_us')
 
     <section class="site-section" id="next-section">
       <div class="container">

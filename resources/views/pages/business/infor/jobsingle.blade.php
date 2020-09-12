@@ -9,6 +9,7 @@
             <li><a href="{{route('business.upload',$data->code)}}">Cập nhập thông tin</a></li>
 @endsection
 @section('button_like')
+@if ( $datenow > $data->deadline )
  <div class="col-lg-4">
             <div class="row">
                 <div class="col-6">
@@ -17,6 +18,8 @@ Cập nhập số lượng trúng tuyển
 </button>              </div>
             </div>
           </div> 
+  
+          @endif
 @endsection
 @section('button_Apply')
 <form method="POST" action="{{route('business.post.delete',$data->id)}}" onsubmit="return ConfirmDelete( this )">

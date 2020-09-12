@@ -18,7 +18,7 @@
 @section('content')
     <div class="row">
         <div class="col-sm-6 m-auto">
-            <form action="{{route('account.update', $account->id)}}" method="POST">
+            <form action="{{route('account.update', $account->code)}}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="id" class="control-label">ID</label>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group">
                         <label for="password" class="control-label">Mật khẩu</label>
-                        <input type="text" class="form-control" id="password" name="password" placeholder="@ps!">
+                        <input type="text" class="form-control" id="password" name="password" placeholder="Mật khẩu mới">
                 </div>
                 <div class="form-group">
                         <button type="submit" class="btn btn-primary">Lưu</button>

@@ -47,7 +47,19 @@ class HomeController extends Controller
         $data = DB::table('business')->where('code','=',$id)->first();
         $datacount = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->get();
         $datapost = DB::table('posts')->join('business', 'business.code','=', 'posts.code')->where('business.code', '=',$id)->select('name','posts.id','posts.code','title','image','pdecription','address','type','min_salary','max_salary')->where('posts.deadline', '>=', Carbon::now())->orderBy('posts.id', 'DESC')->paginate(5);
-        return view('pages.users.post.business_infor', compact('user','data','language','datapost','datacount','acount','student','comment','comment_count'));
+        $datacs = DB::table('business')->join('posts','posts.code','=','business.code')
+        ->where('business.code', '=',$id)
+        ->select('business.code','business.name','posts.success',DB::raw('sum(posts.success) as countts'))
+        
+        ->groupBy('business.code')
+        ->first();
+        $databs = DB::table('business')->join('applys','applys.code','=','business.code')
+        ->where('business.code', '=',$id)
+        ->select('business.code','business.name',DB::raw('count(business.code) as countt'))
+         ->groupBy('business.code')
+        ->first();
+        
+        return view('pages.users.post.business_infor', compact('user','data','language','datapost','datacount','acount','student','comment','comment_count','databs','datacs'));
     }
     public function post (Request $request)
     {       

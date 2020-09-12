@@ -14,7 +14,11 @@
 
             <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
             <div class="ml-auto">
-            <a href="{{route('logout')}}"style="font-size:150%" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Log Out</a>
+            <@if(isset($user))
+            <a href="{{route('logout.Home')}}" style="font-size:150%" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Đăng xuất</a>
+            @else
+            <a href="{{route('login')}}" style="font-size:150%" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Đăng nhập</a>
+            @endif
                 <!-- <a href="post-job.html" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Post a Job</a>
                 <a href="login.html" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Log In</a> -->
             </div>

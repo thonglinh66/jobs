@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Account;
 use DB;
+use Illuminate\Database\QueryException;
 
 class AccountController extends Controller
 {
@@ -56,7 +57,7 @@ class AccountController extends Controller
         // dd($data);
         return back()->with('success', 'Xóa thành công!');
     }
-
+//---------------------------------------------------------List_post
     public function post(){
         $data = DB::table('posts')->get();
         return view('pages.admins.account.post', ['data' => $data]);
@@ -77,8 +78,25 @@ class AccountController extends Controller
         // dd($data);
         return back()->with('success', 'Xóa thành công!');
     }
+    // public function analyst(){
+    //     $data = DB::table('business')->join('applys','applys.code','=','business.code')
+    //     ->select('business.code','business.name',DB::raw('count(business.code) as countt'))
+    //     ->groupBy('business.code')
+    //     ->get();
+
+    //     return view('pages.admins.account.analyst', ['data' => $data]);
+    // }
     public function analyst(){
-        $data = DB::table('applys')->join('business','business.code','=','applys.code')->get();
-        return view('pages.admins.account.analyst', ['data' => $data]);
+        $datacs = DB::table('business')->join('posts','posts.code','=','business.code')
+        ->select('business.code','business.name','posts.success',DB::raw('sum(posts.success) as countts'))
+        ->groupBy('business.code')
+        ->get();
+        $databs = DB::table('business')->join('applys','applys.code','=','business.code')
+        ->select('business.code','business.name',DB::raw('count(business.code) as countt'))
+         ->groupBy('business.code')
+        ->get();
+        
+
+        return view('pages.admins.account.analyst', ['databs' => $databs],['datacs' => $datacs]);
     }
 }

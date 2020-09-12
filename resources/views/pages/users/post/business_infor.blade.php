@@ -12,7 +12,7 @@
 @section('active')
 <li><a href="{{route('post.index.home')}}" class="nav-link active" >Trang chủ</a></li>
               <li><a href="{{route('home.about',$acount->code)}}">Giới thiệu</a></li>
-              <li><a href="{{route('home.joblistings',$acount->code)}}" >Danh sách công việc</a></li>
+              <li><a href="{{route('home.joblistings',$acount->code)}}" >Công việc</a></li>
               <li><a href="{{route('home.contact',$acount->code)}}" >Liên hệ</a></li>  
            
 @endsection
@@ -33,7 +33,7 @@ Nhận xét
 
 <div class="row mb-5 justify-content-center">
           <div class="col-md-7 text-center">
-            <h2 class="section-title mb-2">Bao gồm {{count($datacount)}} bài đăng</h2>
+            <h2 class="section-title mb-2">Các bài đăng tuyển dụng  </h2>
           </div>
         </div>
 <ul class="job-listings mb-5">
