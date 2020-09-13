@@ -42,6 +42,15 @@ Thông tin căn bản
               </p>
             </a>
           </li>
+          <li class="nav-item has-treeview ">
+            <a href="./charts" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Danh sách thống kê
+               
+              </p>
+            </a>
+          </li>
 
 @endsection
 

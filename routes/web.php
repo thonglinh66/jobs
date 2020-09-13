@@ -38,6 +38,10 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/', 'AccountController@analyst')->name('analyst.index');// maked  
         // Route::post('/delete/{id}', "AccountController@deletecontact")->name('analyst.delete');  
     });
+    Route::prefix('charts')->group(function () {
+        Route::get('/', 'AccountController@drawcharts')->name('charts.index');// maked  
+        // Route::post('/delete/{id}', "AccountController@deletecontact")->name('analyst.delete');  
+    });
 
 Auth::routes();
 

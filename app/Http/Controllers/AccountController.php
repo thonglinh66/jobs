@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Charts\UserChart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use App\Models\Account;
 use DB;
 use Illuminate\Database\QueryException;
+
 
 class AccountController extends Controller
 {
@@ -98,5 +100,18 @@ class AccountController extends Controller
         
 
         return view('pages.admins.account.analyst', ['databs' => $databs],['datacs' => $datacs]);
+    }
+    public function drawcharts (){
+        $chart = new UserChart;
+        $chart->labels(['Jan', 'Feb', 'Mar']);
+        $chart->dataset('Users by trimester', 'line', [10, 25, 13])
+            ->color("rgb(05, 99, 0)")
+            ->backgroundcolor("rgb(255, 99, 132)");
+            return view('pages.admins.account.charts', [ 'chart' => $chart ] );
+        
+     
+       
+                        
+
     }
 }

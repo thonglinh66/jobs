@@ -5,9 +5,10 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Business;
 use App\Models\Language;
-use App\Models\Post;
+use App\Models\Posts;
 use Illuminate\Support\Str;
 use DB;
+use Illuminate\Database\QueryException;
 
 class BusinessController extends Controller
 {
@@ -140,7 +141,7 @@ class BusinessController extends Controller
     }
     public function postaddpost(Request $request,$id){
         $user = $request->session()->get('user');
-        $Post = new Post();
+        $Post = new Posts();
         $Post->code = $user;
         $Post->title = $request->get('name');
        
