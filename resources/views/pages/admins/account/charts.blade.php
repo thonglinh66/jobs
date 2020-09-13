@@ -32,7 +32,7 @@ Thông tin căn bản
          
          
           <li class="nav-item has-treeview ">
-            <a href="#" class="nav-link">
+            <a href="./analyst" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Danh sách thống kê
@@ -64,11 +64,19 @@ Thông tin căn bản
    
                             
                            
-                            {!! $chart->container() !!}
+<h1>Sales Graphs</h1>
+
+<div style="width: 50%">
+    {!! $usersChart->container() !!}
+</div>
                         
 @endsection
     
-@section('script')    
+@section('script') 
+{{-- ChartScript --}}
+    @if($usersChart)
+    {!! $usersChart->script() !!}
+    @endif   
     <script>
         // Sắp xếp
         $(document).ready(function() {

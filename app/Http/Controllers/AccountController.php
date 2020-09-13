@@ -102,12 +102,21 @@ class AccountController extends Controller
         return view('pages.admins.account.analyst', ['databs' => $databs],['datacs' => $datacs]);
     }
     public function drawcharts (){
-        $chart = new UserChart;
-        $chart->labels(['Jan', 'Feb', 'Mar']);
-        $chart->dataset('Users by trimester', 'line', [10, 25, 13])
-            ->color("rgb(05, 99, 0)")
-            ->backgroundcolor("rgb(255, 99, 132)");
-            return view('pages.admins.account.charts', [ 'chart' => $chart ] );
+        $datacs = DB::table('business')->join('posts','posts.code','=','business.code')
+        ->select('business.name',DB::raw('sum(posts.success) as countts'))
+        ->groupBy('business.code')->get()->toArray();
+        $count = [];
+        $name = [];
+        foreach($datacs as $data){
+            $count[] = $data->countts;
+            $name[] = $data->name;
+        }
+        // dd($count);
+        $usersChart = new UserChart;
+        $usersChart->labels($name);
+        $usersChart->dataset('Users by trimester', 'bar', $count);
+        return view('pages.admins.account.charts', [ 'usersChart' => $usersChart ] );
+           
         
      
        
