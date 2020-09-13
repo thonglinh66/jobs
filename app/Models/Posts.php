@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Models;
 
+
+namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+
+class Posts extends Model
 {
     protected $table = 'posts';
 
@@ -14,18 +16,19 @@ class Post extends Model
 
     protected $fillable = [
         'id',
-        'codePC',
+        'code',
+        'member',
         'title',
-        'decription',
-        'location',
+        'pdecription',
         'type',
         'min_salary',
         'max_salary',
-        'language',
         'deadline',
         'created_at',
         'updated_at',
-        'deleted_at',
+        'deleted_at', 
     ];
     public $timestamps = true;
+   
 }
+
