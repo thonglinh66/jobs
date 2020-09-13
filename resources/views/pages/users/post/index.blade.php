@@ -5,14 +5,14 @@
 @section('active')
   <li><a href="{{route('post.index.home')}}" class="nav-link active" >Trang chủ</a></li>
   <li><a href="{{route('home.about')}}">Giới thiệu</a></li>
-  <li><a href="{{route('home.joblistings')}}" >Danh sách công việc</a></li>
+  <li><a href="{{route('home.joblistings')}}" >Công việc</a></li>
   <li><a href="{{route('home.contact')}}" >Liên hệ</a></li> 
 @endsection
 @section('Conten_Post')
 
 <div class="row mb-5 justify-content-center">
           <div class="col-md-7 text-center">
-            <h2 class="section-title mb-2">Showing {{count($data)}} Posts</h2>
+            <h2 class="section-title mb-2">Bao gồm {{count($data)}} bài đăng </h2>
           </div>
         </div>
 <ul class="job-listings mb-5">

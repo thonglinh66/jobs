@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Account;
+use DB;
+use Illuminate\Database\QueryException;
 
 class AccountController extends Controller
 {
@@ -54,5 +56,47 @@ class AccountController extends Controller
         $data->delete();
         // dd($data);
         return back()->with('success', 'Xóa thành công!');
+    }
+//---------------------------------------------------------List_post
+    public function post(){
+        $data = DB::table('posts')->get();
+        return view('pages.admins.account.post', ['data' => $data]);
+    }
+
+    public function deletepost ($id){
+        $data = DB::table('posts')->where('id','=',$id)->delete();
+        // dd($data);
+        return back()->with('success', 'Xóa thành công!');
+    }
+    public function contact(){
+        $data = DB::table('feedbacks')->get();
+        return view('pages.admins.account.contact', ['data' => $data]);
+    }
+
+    public function deletecontact ($id){
+        $data = DB::table('feedbacks')->where('id','=',$id)->delete();
+        // dd($data);
+        return back()->with('success', 'Xóa thành công!');
+    }
+    // public function analyst(){
+    //     $data = DB::table('business')->join('applys','applys.code','=','business.code')
+    //     ->select('business.code','business.name',DB::raw('count(business.code) as countt'))
+    //     ->groupBy('business.code')
+    //     ->get();
+
+    //     return view('pages.admins.account.analyst', ['data' => $data]);
+    // }
+    public function analyst(){
+        $datacs = DB::table('business')->join('posts','posts.code','=','business.code')
+        ->select('business.code','business.name','posts.success',DB::raw('sum(posts.success) as countts'))
+        ->groupBy('business.code')
+        ->get();
+        $databs = DB::table('business')->join('applys','applys.code','=','business.code')
+        ->select('business.code','business.name',DB::raw('count(business.code) as countt'))
+         ->groupBy('business.code')
+        ->get();
+        
+
+        return view('pages.admins.account.analyst', ['databs' => $databs],['datacs' => $datacs]);
     }
 }

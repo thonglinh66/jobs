@@ -54,7 +54,7 @@
               <div class="form-group">
                 <label for="company-website-tw d-block">Cập nhật ảnh</label> <br>
                 <label class="btn btn-primary btn-md btn-file">
-                  Lấy Từ<input name="Img" type="file" hidden>
+                  Chọn ảnh đại diện <input name="Img" type="file" hidden>
                 </label>
               </div>
 

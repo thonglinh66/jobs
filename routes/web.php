@@ -18,14 +18,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::group(['middleware' => ['checkLogin']], function () {
-Route::prefix('account')->group(function () {
-    Route::get('/', 'AccountController@index')->name('account.index');// maked    
-    Route::get('/add', 'AccountController@add')->name('account.add');// maked     
-    Route::post('/add_submit', 'AccountController@add_submit')->name('account.add_submit');
-    Route::get('/edit/{id}', 'AccountController@edit')->name('account.edit');
-    Route::post('/update/{id}', 'AccountController@update')->name('account.update');
-    Route::post('/delete/{id}', "AccountController@delete")->name('account.delete');
-});
+    Route::prefix('account')->group(function () {
+        Route::get('/', 'AccountController@index')->name('account.index');// maked    
+        Route::get('/add', 'AccountController@add')->name('account.add');// maked     
+        Route::post('/add_submit', 'AccountController@add_submit')->name('account.add_submit');
+        Route::get('/edit/{id}', 'AccountController@edit')->name('account.edit');
+        Route::post('/update/{id}', 'AccountController@update')->name('account.update');
+        Route::post('/delete/{id}', "AccountController@delete")->name('account.delete');
+        });
+    Route::prefix('listpost')->group(function () {
+        Route::get('/', 'AccountController@post')->name('post.index');// maked  
+        Route::post('/delete/{id}', "AccountController@deletepost")->name('post.delete');  
+    });
+    Route::prefix('listcontact')->group(function () {
+        Route::get('/', 'AccountController@contact')->name('contact.index');// maked  
+        Route::post('/delete/{id}', "AccountController@deletecontact")->name('contact.delete');  
+    });
+    Route::prefix('analyst')->group(function () {
+        Route::get('/', 'AccountController@analyst')->name('analyst.index');// maked  
+        // Route::post('/delete/{id}', "AccountController@deletecontact")->name('analyst.delete');  
+    });
 
 Auth::routes();
 
@@ -39,6 +51,7 @@ Auth::routes();
         Route::delete('/delete/{id}', 'BusinessController@destroy')->name('business.post.delete');;
         Route::get('/jobsingle/{id}', 'BusinessController@jobsingle')->name('business.jobsingle');
         Route::get('/update/{id}', 'BusinessController@update')->name('business.post.update');
+        Route::post('/addmember/{id}', 'BusinessController@addmember')->name('post.addmember');
         Route::get('/updatepost/{id}', 'BusinessController@updatepost')->name('business.update.post');
         Route::post('/updatepost/{id}', 'BusinessController@postupdatepost')->name('business.post.update.post');
         Route::get('/addpost/{id}', 'BusinessController@addpost')->name('business.add.post');
@@ -52,19 +65,19 @@ Route::prefix('home')->group(function () {
     Route::get('/', 'HomeController@indexhome')->name('post.index.home');// maked 
     Route::get('/{id}', 'HomeController@index')->name('post.index');// maked 
 });
-    Route::get('/inforpost', 'HomeController@post')->name('home.inforpost');// maked 
-    Route::get('/about', 'HomeController@about')->name('home.about');
+    // Route::get('/inforpost', 'HomeController@post')->name('home.inforpost');// done 
+    Route::get('/about', 'HomeController@about')->name('home.about');// maked 
     Route::get('/jobsingle/{id}', 'HomeController@jobsingle')->name('home.jobsingle');
     Route::post ('/jobsingle/{id}', 'HomeController@buttonlike')->name('home.jobsingle.like')->middleware('checkLogin');
-    Route::get('/contact', 'HomeController@contact')->name('home.contact');
-    Route::post('/contact', 'HomeController@contactpost')->name('home.contact.post');
+    Route::get('/contact', 'HomeController@contact')->name('home.contact');// maked 
+    Route::post('/contact', 'HomeController@contactpost')->name('home.contact.post');// maked 
     Route::get('/joblistings', 'HomeController@joblistings')->name('home.joblistings');
     Route::post('/joblistings', 'HomeController@search_list')->name('home.joblistings.search');
     Route::post('/home', 'HomeController@search')->name('search');
     Route::get('/trend/{id}', 'HomeController@searchtrend')->name('search.trend');
     Route::get('/businessinfor/{id}', 'HomeController@business')->name('business.id');
-    Route::post('/overview/{id}', 'HomeController@overview')->name('post.overview');
-    Route::post('/review/{id}', 'HomeController@review')->name('post.review');
+    // Route::post('/overview/{id}', 'HomeController@overview')->name('post.overview');
+    // Route::post('/review/{id}', 'HomeController@review')->name('post.review');
     Route::post('/addreview/{id}', 'HomeController@addreview')->name('post.addreview');
     Route::post('/sendMail/{id}', 'HomeController@sendMail')->name('post.sendMail');
 

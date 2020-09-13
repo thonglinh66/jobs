@@ -48,24 +48,46 @@
             <!-- Last updated: "2020-05-13 02:07:48 +0700"-->
             <div class="panel panel-default " id="over">
             <div class="panel-heading ">
-            <h3 class="panel-title headline">
-            Tổng quan sơ lượt về công ty :
+            <h3 class="panel-title headline" style="margin-left: 40%;">
+            Tổng quan về công ty :
             </h3>
             </div>
-            <div class="panel-body">
-            <div class="paragraph">
-            <p></p><p> {{$data->decription}}<br>&nbsp;</p><p></p>
+
+            <div class="panel-body" style=" display: flex; width: 100%; " >
+            <div class="paragraph" style="width: 50%; border-right: 1px solid; padding: 30px;" >
+            <span style="font-weight: bold;"> Tên công ty :</span><span> {{$data->name}}&nbsp;</span><p></p>
+            <span style="font-weight: bold;"> Địa chỉ :</span><span> {{$data->address}}&nbsp;</span><p></p>
+            <span style="font-weight: bold;"> Mail :</span><span> {{$data->mail}}&nbsp;</span>
+            <span style="font-weight: bold;">/ Điện thoại :</span><span> {{$data->phone}}&nbsp;</span><p></p>
+            <span style="font-weight: bold;"> Website :</span><span> {{$data->website}}&nbsp;</span><p></p>
+            <span style="font-weight: bold;"> Liên lạc  : </span><p></p>
+            <div class="footer-social" >
+            <a href="{{$data->facebook}}"><span class="icon-facebook"></span>&nbsp;</a>
+            <a style="margin-left:10px" href="{{$data->twitter}}"><span class="icon-twitter"></span>&nbsp;</a><p></p>
             </div>
+            <span style="font-weight: bold;"> Mô tả:</span><span> {{$data->decription}}&nbsp;</span><p></p>
+            </div>
+           
+            <div class="paragraph" style="padding: 30px;" >
+            <span style="font-weight: bold;"> Ngày gia nhập :</span><span> {{$data->created_at}}&nbsp;</span><p></p>
+            <span style="font-weight: bold;"> Tổng số lượng bài đăng :</span><span> {{count($datacount)}}&nbsp;</span><p></p>
+            <span style="font-weight: bold;"> Số lượng ứng tuyển :</span><span> {{$databs->countt}}&nbsp;</span><p></p>
+            <span style="font-weight: bold;"> Số lượng trúng tuyển :</span><span> {{$datacs->countts}}&nbsp;</span>
+            </div>
+            </div>
+
+
+            <div class="panel-body">
+            <div class="paragraph" >
             <h3 class="panel-title">Chuyên:</h3>
             <ul class="employer-skills">
               @foreach($language as $lg)
                 <li class="employer-skills__item"><a target="_blank" data-controller="utm-tracking" href="/it-jobs/c++">{{$lg->name_l}}</a></li>
                 @endforeach
             </ul>
-            <div class="paragraph">
-            <p></p>
+           </div>
             </div>
-            </div>
+            
             </div>
             <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
             <div class="panel panel-default d-none" id="re">

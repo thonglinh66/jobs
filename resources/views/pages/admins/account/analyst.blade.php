@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('active')
 <li class="nav-item has-treeview menu-open">
-<a href="#" class="nav-link active">
+<a href="#" class="nav-link ">
 <i class="nav-icon fas fa-tachometer-alt"></i>
 <p>
 Thông tin căn bản
@@ -15,14 +15,12 @@ Thông tin căn bản
 <p>Danh sách tài khoản</p>
 </a>
 </li>
-
 <li class="nav-item">
 <a href="./listpost" class="nav-link">
 <i class="far fa-circle nav-icon"></i>
 <p>Danh sách bài đăng</p>
 </a>
 </li>
-
 <li class="nav-item">
 <a href="./listcontact" class="nav-link">
 <i class="far fa-circle nav-icon"></i>
@@ -33,8 +31,8 @@ Thông tin căn bản
 </li>
          
          
-          <li class="nav-item has-treeview">
-            <a href="./analyst" class="nav-link">
+          <li class="nav-item has-treeview active">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Danh sách thống kê
@@ -52,8 +50,8 @@ Thông tin căn bản
     </div><!-- /.col -->
     <div class="col-sm-6">
       <ol class="breadcrumb float-sm-right">
-        <li class="breadcrumb-item"><a href="#">Admin</a></li>
-        <li class="breadcrumb-item"><a href="{{route('account.index')}}">Tài khoản</a></li>
+        <li class="breadcrumb-item"><a href="#">admin</a></li>
+        <li class="breadcrumb-item"><a href="{{route('account.index')}}">account</a></li>
       </ol>
     </div><!-- /.col -->
   </div><!-- /.row -->
@@ -88,39 +86,26 @@ Thông tin căn bản
                                 <table style="font-size:12px" id="myTable" class="table table-striped dataTable no-footer">
                                     <thead>
                                         <tr>
-                                            <th>STT-ID</th>
-                                            <th>Mã ID</th>
-                                            <th>Loại TK</th>
-                                            {{-- @if (Auth::user()->hasRole('Admin')) --}}
-                                                <th>Chức năng</th>
-                                            {{-- @else --}}
-                                                {{-- <th></th> --}}
-                                            {{-- @endif --}}
+                                            <th>ID Công ty</th>
+                                            <th>Tên Công Ty</th>
+                                            <th>Số lượng sinh viên ứng tuyển</th>
+                                            <th>Số lượng nhân viên trúng tuyển</th>
+                                            <th>Phần trăm trúng tuyển</th>
                                         </tr>
                                     </thead>
                                     <tbody  style="font-size: 12px">
-                                        @foreach ($data as $item)
+                                        @foreach ($databs as $item)
                                             <tr>
-                                                <td>{{$item->id}}</td>
                                                 <td>{{$item->code}}</td>
-                                                @if($item->type == 0) 
-                                                <td>Sinh viên</td>
-                                                @elseif ($item->type == 1) 
-                                                <td>Doanh nghiệp</td>
-                                                @else 
-                                                <td>Admin</td>
-                                                @endif
-                                                {{-- @if (Auth::user()->hasRole('Admin')) --}}
-                                                    <td>
-                                                        <form action="{{ route('account.delete', $item->id) }}" method="post" class="delete_form">
-                                                            <a  href="{{ action('AccountController@edit',$item->id) }}" data-toggle="toolytip" data-placement="top" title="Chỉnh sửa">&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil text-inverse m-r-10 fa-lg"></i></a>
-                                                            @csrf
-                                                            <button type="submit" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fal fa-trash-alt fa-lg"></i></button>
-                                                        </form>
-                                                    </td>
-                                                {{-- @else --}}
-                                                    {{-- <td></td> --}}
-                                                {{-- @endif --}}
+                                                <td>{{$item->name}}</td>
+                                                <td>{{$item->countt}}</td>
+                                                @foreach ($datacs as $items)
+                                                @if($items->code == $item->code)
+                                                 <td>{{$items->countts}}</td> 
+                                                 <td>{{($items->countts / $item->countt)*100}} %</td>
+                                                 @endif
+                                                 @endforeach
+                                                  
                                             </tr>
                                         @endforeach
                                     </tbody>

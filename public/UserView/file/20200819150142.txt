@@ -1,0 +1,49 @@
+<table style="font-size:12px" id="myTable" class="table table-striped dataTable no-footer">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Tên Công Ty</th>
+                                            <th>Số lượng sinh viên ứng tuyển</th>
+                                            <th>Số lượng nhân viên trúng tuyển</th>
+                                            <th>Phần trăm thành công ứng tuyển</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody  style="font-size: 12px">
+                                        @foreach ($data as $item)
+                                            $applys = 0
+                                            <tr>
+                                                <td>{{$item->code}}</td>
+                                                @foreach ( $data as $temp)
+                                                @if($temp == $item->code) 
+                                                    $applys ++
+
+
+                                                <td>{{$item->code}}</td>
+                                                @if($item->type == 0) 
+
+
+                                                <td>Sinh viên</td>
+                                                @elseif ($item->type == 1) 
+                                                <td>Doanh nghiệp</td>
+
+
+                                                @else 
+                                                <td>Admin</td>
+
+
+                                                @endif
+                                                {{-- @if (Auth::user()->hasRole('Admin')) --}}
+                                                    <td>
+                                                        <form action="{{ route('account.delete', $item->id) }}" method="post" class="delete_form">
+                                                            <a  href="{{ action('AccountController@edit',$item->id) }}" data-toggle="toolytip" data-placement="top" title="Chỉnh sửa">&nbsp;&nbsp;&nbsp;<i class="fa fa-pencil text-inverse m-r-10 fa-lg"></i></a>
+                                                            @csrf
+                                                            <button type="submit" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn" data-toggle="tooltip" data-placement="top" title="Xóa"><i class="fal fa-trash-alt fa-lg"></i></button>
+                                                        </form>
+                                                    </td>
+                                                {{-- @else --}}
+                                                    {{-- <td></td> --}}
+                                                {{-- @endif --}}
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>

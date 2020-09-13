@@ -2,43 +2,20 @@
 <header class="site-navbar mt-3">
       <div class="container-fluid">
         <div class="row align-items-center">
-          <a href="{{route('business.index', $data->code)}}"><img src="{{asset('UserView/images/logoctu.png')}}" class="img-shadow" style="width:60%; height:60%; margin:5%" alt="Girl in a jacket"></a>
+          <a href="{{route('business.index', $data->code)}}"><img src="{{asset('UserView/images/logoctu.png')}}" class="img-shadow" style="width:60%; height:60%; margin-top:-12%; margin-left:-10%; " alt="Girl in a jacket"></a>
 
           <nav class="mx-auto site-navigation" style="font-size:150%">
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
             @yield('clicked')
-              <!-- <li><a href="{{route('business.index', $data->code)}}" class="nav-link active">Trang Chủ</a></li>
-              <li><a href="{{route('business.add.post',$data->code)}}">Đăng bài</a></li>
-              <li><a href="{{route('business.upload',$data->code)}}">Cập nhập thông tin</a></li> -->
+            
               @yield('title')
-              <!-- <li><a href="{{route('business.upload',$data->code)}}">Cập nhật thông tin</a></li> -->
-              <!-- <li class="has-children">
-                <a href="job-listings.html">Job Listings</a>
-                <ul class="dropdown">
-                  <li><a href="job-single.html">Job Single</a></li>
-                  <li><a href="post-job.html">Post a Job</a></li>
-                </ul>
-              </li> -->
-              <!-- <li class="has-children">
-                <a href="services.html">Pages</a>
-                <ul class="dropdown">
-                  <li><a href="services.html">Services</a></li>
-                  <li><a href="service-single.html">Service Single</a></li>
-                  <li><a href="blog-single.html">Blog Single</a></li>
-                  <li><a href="portfolio.html">Portfolio</a></li>
-                  <li><a href="portfolio-single.html">Portfolio Single</a></li>
-                  <li><a href="testimonials.html">Testimonials</a></li>
-                  <li><a href="faq.html">Frequently Ask Questions</a></li>
-                  <li><a href="gallery.html">Gallery</a></li>
-                </ul>
-              </li> -->
-              <!-- <li><a href="blog.html">Blog</a></li> -->
+             
             </ul>
           </nav>
           
           <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
             <div class="ml-auto">
-            <a href="{{route('logout')}}" style="font-size:150%"  class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Log Out</a>
+            <a href="{{route('logout')}}" style="font-size:150%"  class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Đăng xuất</a>
               <!-- <a href="post-job.html" class="btn btn-outline-white border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-add"></span>Post a Job</a>
               <a href="login.html" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Log In</a> -->
             </div>

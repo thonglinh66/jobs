@@ -5,7 +5,7 @@
         <div class="row align-items-center">
         <a href="{{route('post.index.home')}}"><img src="{{asset('UserView/images/logoctu.png')}}" class="img-shadow" style="width:60%; height:60%; margin:5%" alt="Girl in a jacket"></a>
 
-          <nav class="mx-auto site-navigation" style="font-size:150%">
+          <nav class="mx-auto site-navigation" style="font-size:150%;">
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
             @yield('active')
              

@@ -11,41 +11,6 @@
     @include('layouts/blade_index_user/navbar')
     <!-- HOME -->
     @include('layouts/blade_index_user/navbar_about_us')
-    <!-- <section class="site-section pb-0">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-6 mb-5 mb-lg-0">
-            <a data-fancybox data-ratio="2" href="https://vimeo.com/317571768" class="block__96788">
-              <span class="play-icon"><span class="icon-play"></span></span>
-              <img src="{{asset('UserView/images/UserTu.jpg')}}" alt="Image" class="img-fluid img-shadow">
-            </a>
-          </div>
-          <div class="col-lg-5 ml-auto">
-            <h2 class="section-title mb-3">Sinh viên lựa chọn nơi thực tập</h2>
-            <p class="lead">abcxyz</p>
-            <p>zyxcba</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="site-section pt-0">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-6 mb-5 mb-lg-0 order-md-2">
-             <a data-fancybox data-ratio="2" href="https://vimeo.com/317571768" class="block__96788">
-              <span class="play-icon"><span class="icon-play"></span></span> -->
-              <!-- <img src="{{asset('UserView/images/Co_Tuyen.png')}}" alt="Image" class="img-fluid img-shadow">  
-            </a> 
-          </div>
-          <div class="col-lg-5 mr-auto order-md-1  mb-5 mb-lg-0">
-            <h2 class="section-title mb-3">Chủ Nhiệm đề tài</h2>
-            <p class="lead">Cô: Trương Thị Thanh Tuyền</p>
-            <p>zyxcba</p>
-          </div>
-        </div>
-      </div>
-    </section>  -->
 
     <section class="site-section">
       <div class="container">
