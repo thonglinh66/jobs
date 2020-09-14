@@ -42,7 +42,14 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/', 'AccountController@drawcharts')->name('charts.index');// maked  
         // Route::post('/delete/{id}', "AccountController@deletecontact")->name('analyst.delete');  
     });
-
+    Route::prefix('language')->group(function () {
+        Route::get('/', 'AccountController@drawlanguage')->name('language.index');// maked  
+        // Route::post('/delete/{id}', "AccountController@deletecontact")->name('analyst.delete');  
+    });
+    Route::prefix('line')->group(function () {
+        Route::get('/', 'AccountController@drawline')->name('line.index');// maked  
+        // Route::post('/delete/{id}', "AccountController@deletecontact")->name('analyst.delete');  
+    });
 Auth::routes();
 
     Route::prefix('business')->group(function () {

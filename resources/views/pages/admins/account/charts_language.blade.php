@@ -42,7 +42,7 @@ Thông tin căn bản
          
           
           <li class="nav-item has-treeview ">
-            <a href="#" class="nav-link  active">
+            <a href="./charts" class="nav-link ">
               <i class="nav-icon fas fa-chart-bar"></i>
               <p>
                 Biểu đồ thống kê ứng tuyển
@@ -51,7 +51,7 @@ Thông tin căn bản
             </a>
           </li>
           <li class="nav-item has-treeview ">
-            <a href="./language" class="nav-link">
+            <a href="#" class="nav-link  active">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Biểu đồ thống kê ngôn ngữ

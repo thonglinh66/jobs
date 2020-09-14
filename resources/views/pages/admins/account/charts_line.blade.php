@@ -42,7 +42,7 @@ Thông tin căn bản
          
           
           <li class="nav-item has-treeview ">
-            <a href="#" class="nav-link  active">
+            <a href="#" class="nav-link ">
               <i class="nav-icon fas fa-chart-bar"></i>
               <p>
                 Biểu đồ thống kê ứng tuyển
@@ -60,7 +60,7 @@ Thông tin căn bản
             </a>
           </li>
           <li class="nav-item has-treeview ">
-            <a href="./line" class="nav-link  ">
+            <a href="#" class="nav-link  ">
               <i class="nav-icon fas fa-chart-line"></i>
               <p>
                 Biểu đồ thống kê bài đăng
@@ -82,7 +82,7 @@ Thông tin căn bản
    
                             
                            
-<h1>Biểu đồ thống kê số lượng ứng tuyển và trúng tuyển của các công ty</h1>
+<h1>Biểu đồ thống kê số lượng bài đăng qua các tháng</h1>
 
 <div style="width: 80%">
     {!! $usersChart->container() !!}

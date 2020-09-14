@@ -27,29 +27,47 @@ Thông tin căn bản
 <p>Danh sách phản hồi</p>
 </a>
 </li>
+<li class="nav-item active">
+            <a href="#" class="nav-link">
+              <i class="far fa-circle nav-icon"></i>
+              <p>
+                Danh sách thống kê
+               
+              </p>
+            </a>
+          </li>
 </ul>
 </li>
          
          
-          <li class="nav-item has-treeview active">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+         
+          <li class="nav-item has-treeview ">
+            <a href="./charts" class="nav-link">
+              <i class="nav-icon fas fa-chart-bar"></i>
               <p>
-                Danh sách thống kê
+              Biểu đồ thống kê ứng tuyển
                
               </p>
             </a>
           </li>
           <li class="nav-item has-treeview ">
-            <a href="./charts" class="nav-link">
+            <a href="./language" class="nav-link  active">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
-                Danh sách thống kê
+                Biểu đồ thống kê ngôn ngữ
                
               </p>
             </a>
           </li>
-
+          <li class="nav-item has-treeview ">
+            <a href="./line" class="nav-link  ">
+              <i class="nav-icon fas fa-chart-line"></i>
+              <p>
+                Biểu đồ thống kê bài đăng
+               
+              </p>
+            </a>
+          </li>
 @endsection
 
 @section('content-header')
