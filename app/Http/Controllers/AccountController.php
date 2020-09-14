@@ -200,7 +200,7 @@ class AccountController extends Controller
         $name = [];
         foreach($post as $data){
             $count[] = $data->countt;
-            $name[] =  Carbon::parse($data->created_at)->format('Y-m-d'); ;
+            $name[] =  Carbon::parse($data->created_at)->format('Y-m'); ;
         }
         
         $color = [
