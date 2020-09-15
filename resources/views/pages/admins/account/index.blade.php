@@ -53,7 +53,7 @@ Thông tin căn bản
             </a>
           </li>
           <li class="nav-item has-treeview ">
-            <a href="./language" class="nav-link  active">
+            <a href="./language" class="nav-link ">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Biểu đồ thống kê ngôn ngữ
