@@ -10,7 +10,7 @@ Thông tin căn bản
 </a>
 <ul class="nav nav-treeview">
 <li class="nav-item">
-<a href="./account" class="nav-link active">
+<a href="./account" class="nav-link ">
 <i class="far fa-circle nav-icon"></i>
 <p>Danh sách tài khoản</p>
 </a>
@@ -28,7 +28,7 @@ Thông tin căn bản
 </a>
 </li>
 <li class="nav-item active">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link active">
               <i class="far fa-circle nav-icon"></i>
               <p>
                 Danh sách thống kê
@@ -51,7 +51,7 @@ Thông tin căn bản
             </a>
           </li>
           <li class="nav-item has-treeview ">
-            <a href="./language" class="nav-link  active">
+            <a href="./language" class="nav-link  ">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Biểu đồ thống kê ngôn ngữ
