@@ -1,5 +1,5 @@
 <section class="section-hero overlay inner-page bg-image" style="background-image: url({{asset('UserView/images/hero_1.jpg')}});" id="home-section">
-      <div class="container" style="margin-right: 30px; margin-top: 20px;">
+      <div class="container" style=" margin-top: 20px;">
         <div class="row">
           <div class="col-md-7">
             <h1 class="text-white font-weight-bold">Giới thiệu</h1>

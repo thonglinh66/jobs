@@ -6,7 +6,9 @@
             <nav class="mx-auto site-navigation">
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0" style="font-size:150%">
             @yield('active')
-                
+           
+             
+             
                 
                 <!-- <li class="d-lg-none"><a href="login.html" >Đăng nhập</a></li> -->
             </ul>

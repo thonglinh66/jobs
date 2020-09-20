@@ -531,6 +531,18 @@ class HomeController extends Controller
         
            
     }
+    public function listappling (Request $request)
+    {
+        $user= $request->session()->get('user');
+        $data = DB::table('posts')
+        ->join('applys', 'applys.PostID','=', 'posts.id')
+        ->join('business','business.code','=','posts.code')
+        ->select('business.name','posts.id','posts.code','posts.title','business.image','posts.pdecription','business.address','posts.type','posts.min_salary','posts.max_salary')
+        ->where('applys.code_SV','=',$user)->paginate(5);
+        // dd($data);
+        return view('pages.users.post.appling',compact('data','user'));
+
+    }
                         
     
 }
