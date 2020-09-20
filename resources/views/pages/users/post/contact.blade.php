@@ -11,13 +11,16 @@
 <li><a href="{{route('post.index.home')}}" >Trang chủ</a></li>
               <li><a href="{{route('home.about')}}">Giới thiệu</a></li>
               <li><a href="{{route('home.joblistings')}}">Công việc</a></li>
-              <li><a href="{{route('home.contact')}}" class="nav-link active">Liên hệ</a></li>    
+              <li><a href="{{route('home.contact')}}" class="nav-link active">Liên hệ</a></li>   
+              @if(isset($user))
+             <li><a href="{{route('home.appling')}}" >Ứng tuyển</a></li>    
+             @endif  
              
 @endsection
  
 @section('navbar_about_us')
 <section class="section-hero overlay inner-page bg-image" style="background-image: url({{asset('UserView/images/hero_1.jpg')}});" id="home-section">
-      <div class="container" style="margin-right: 30px; margin-top: 20px;">
+      <div class="container" style=" margin-top: 20px;">
         <div class="row">
           <div class="col-md-7">
             <h1 class="text-white font-weight-bold">Giới thiệu</h1>

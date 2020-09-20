@@ -7,6 +7,9 @@
               <li><a href="{{route('home.about')}}">Giới thiệu</a></li>
               <li><a href="{{route('home.joblistings')}}" class="nav-link active">Công việc</a></li>
               <li><a href="{{route('home.contact')}}" >Liên hệ</a></li>  
+              @if(isset($user))
+             <li><a href="{{route('home.appling')}}">Ứng tuyển</a></li>    
+             @endif  
              
 @endsection
 

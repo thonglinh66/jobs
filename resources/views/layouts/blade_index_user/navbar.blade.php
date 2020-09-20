@@ -9,7 +9,7 @@
             <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
             @yield('active')
              
-                        
+                 
             </ul>
           </nav>
           

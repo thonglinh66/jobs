@@ -78,6 +78,7 @@ Route::prefix('home')->group(function () {
 });
     // Route::get('/inforpost', 'HomeController@post')->name('home.inforpost');// done 
     Route::get('/about', 'HomeController@about')->name('home.about');// maked 
+    Route::get('/appling', 'HomeController@listappling')->name('home.appling');// maked 
     Route::get('/jobsingle/{id}', 'HomeController@jobsingle')->name('home.jobsingle');
     Route::post ('/jobsingle/{id}', 'HomeController@buttonlike')->name('home.jobsingle.like')->middleware('checkLogin');
     Route::get('/contact', 'HomeController@contact')->name('home.contact');// maked 
