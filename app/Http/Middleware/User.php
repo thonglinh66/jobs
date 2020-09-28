@@ -22,9 +22,7 @@ class User
             if($type == '0'){
                 return redirect('home/'.$id);
             }else if($type == '1'){
-                return redirect('business/'.$id);
-            }else if($type == '2'){
-                return redirect('account');
+                return redirect('account/'.$id);
             }
             return redirect('business/'.$id);
         }

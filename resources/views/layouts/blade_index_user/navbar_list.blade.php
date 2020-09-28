@@ -14,7 +14,7 @@
             </ul>
             </nav>
 
-            <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
+          <div class="right-cta-menu text-right d-flex aligin-items-center col-6">
             <div class="ml-auto">
             <@if(isset($user))
             <a href="{{route('logout.Home')}}" style="font-size:150%" class="btn btn-primary border-width-2 d-none d-lg-inline-block"><span class="mr-2 icon-lock_outline"></span>Đăng xuất</a>
