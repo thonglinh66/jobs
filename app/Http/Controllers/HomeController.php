@@ -502,7 +502,7 @@ class HomeController extends Controller
             // dd($fullname, $mail,$jobsAt,$decript);
         DB::table('feedbacks')->insert([['name' => $fullname, 'mail' => $mail,'jobsAt' => $jobsAt,'decript' => $decript]]);
         $data =  DB::table('feedbacks')->where('name' ,'=', $fullname)->where('mail','=',  $mail)->where('jobsAt' ,'=',  $jobsAt)->where('decript' ,'=',  $decript)->first();
-        Mail::mailer('mailgun')->to('thonglinh66@gmail.com')->send(new Contact($data));
+        Mail::to('thonglinh66@gmail.com')->send(new Contact($data));
         return redirect()->back()->with(['name'=>'Gửi phản hồi thành công']);
     }
     public function sendMail(Request $request)
